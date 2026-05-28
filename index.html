@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PickStay - 专注于帮助旅行者根据个人喜好（安全度、便利度、咖啡馆密度、安静度等）挑选最合适的住宿区域，而不是具体酒店。">
+  <title>PickStay | 挑选你的旅行落脚点</title>
+  <!-- 引入 Google Fonts (Outfit 和 Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <!-- 引入自定义样式 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- 顶部导航栏 -->
+    <header>
+      <div class="logo-section">
+        <h1>PickStay <span>📍</span></h1>
+        <p>探索最适合你的住宿街区，开启惬意旅程</p>
+      </div>
+      <div class="api-widget-container">
+        <div id="api-status-indicator" class="status-badge status-mock">
+          <span class="status-dot"></span>
+          <span id="api-status-text">本地 Mock 数据分析模式</span>
+        </div>
+        <button id="toggle-api-settings" class="btn-secondary">⚙️ 地图 API 配置</button>
+      </div>
+    </header>
+
+    <!-- 地图 API 动态解析提示横幅 -->
+    <div id="api-status-banner" class="api-banner"></div>
+
+    <!-- 左右布局主内容区 -->
+    <main class="main-layout">
+      
+      <!-- 左边栏：控制面板 -->
+      <section class="sidebar-panel">
+        
+        <!-- 1. 城市选择 -->
+        <div>
+          <h3 class="section-title">选择目的地</h3>
+          <div class="cities-grid">
+            <div class="city-card active" data-city="tokyo">
+              <h4>东京</h4>
+              <span>Tokyo</span>
+            </div>
+            <div class="city-card" data-city="beijing">
+              <h4>北京</h4>
+              <span>Beijing</span>
+            </div>
+            <div class="city-card" data-city="paris">
+              <h4>巴黎</h4>
+              <span>Paris</span>
+            </div>
+            <div class="city-card" data-city="melbourne">
+              <h4>墨尔本</h4>
+              <span>Melbourne</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 旅行偏好预设 -->
+        <div>
+          <h3 class="section-title">快速旅行预设</h3>
+          <div class="presets-container">
+            <button class="preset-btn" data-preset="firstTime">🎒 初旅探索</button>
+            <button class="preset-btn" data-preset="backpacker">🪙 特种背包</button>
+            <button class="preset-btn" data-preset="family">👨‍👩‍👧 家庭出行</button>
+            <button class="preset-btn" data-preset="chill">☕ 文艺/咖啡控</button>
+            <button class="preset-btn" data-preset="nightOwl">🦉 夜猫一族</button>
+          </div>
+        </div>
+
+        <!-- 3. 多维度权重微调 -->
+        <div>
+          <h3 class="section-title">调整你的侧重点</h3>
+          <div class="sliders-group">
+            
+            <div class="slider-container">
+              <div class="slider-header">
+                <strong>🛡️ 安全与环境</strong>
+                <span id="safety-val">5</span>
+              </div>
+              <input type="range" class="preference-slider" min="0" max="10" value="5" data-key="safety">
+            </div>
+            
+            <div class="slider-container">
+              <div class="slider-header">
+                <strong>🚇 交通便利度</strong>
+                <span id="transit-val">5</span>
+              </div>
+              <input type="range" class="preference-slider" min="0" max="10" value="5" data-key="transit">
+            </div>
+
+            <div class="slider-container">
+              <div class="slider-header">
+                <strong>🛍️ 美食与购物</strong>
+                <span id="shopping-val">5</span>
+              </div>
+              <input type="range" class="preference-slider" min="0" max="10" value="5" data-key="shopping">
+            </div>
+
+            <div class="slider-container special-slider">
+              <div class="slider-header">
+                <strong>☕ 咖啡与Chill氛围</strong>
+                <span id="cafe-val">5</span>
+              </div>
+              <input type="range" class="preference-slider" min="0" max="10" value="5" data-key="cafe">
+            </div>
+
+            <div class="slider-container">
+              <div class="slider-header">
+                <strong>🤫 安静与舒适</strong>
+                <span id="quiet-val">5</span>
+              </div>
+              <input type="range" class="preference-slider" min="0" max="10" value="5" data-key="quiet">
+            </div>
+
+            <div class="slider-container">
+              <div class="slider-header">
+                <strong>✨ 夜生活与娱乐</strong>
+                <span id="nightlife-val">5</span>
+              </div>
+              <input type="range" class="preference-slider" min="0" max="10" value="5" data-key="nightlife">
+            </div>
+
+            <div class="slider-container">
+              <div class="slider-header">
+                <strong>💰 预算友好度</strong>
+                <span id="budget-val">5</span>
+              </div>
+              <input type="range" class="preference-slider" min="0" max="10" value="5" data-key="budget">
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+      
+      <!-- 右侧主要内容区：推荐街区列表 -->
+      <section class="results-container">
+        
+        <div class="results-header">
+          <h2>街区契合度排行</h2>
+          <p class="text-muted" style="font-size: 0.9rem;">根据偏好实时自动重排</p>
+        </div>
+
+        <div id="recommendations-list" class="recommendations-grid">
+          <!-- 卡片将通过 JavaScript 动态填充 -->
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- 底部对比抽屉 (Drawer) -->
+  <div id="compare-drawer" class="compare-drawer">
+    <div id="compare-drawer-header" class="compare-drawer-header">
+      <div class="compare-drawer-title">
+        ⚖️ 街区对比栏
+        <span id="compare-count-badge" class="compare-count-badge">0</span>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <span style="font-size: 0.82rem; color:var(--text-muted);">点击展开/折叠进行详细指标大PK</span>
+        <button id="close-compare-drawer" class="btn-compare-remove" style="padding: 1px 6px;">收起</button>
+      </div>
+    </div>
+    <div id="compare-drawer-body" class="compare-drawer-body">
+      <!-- 动态填充对比表格 -->
+    </div>
+  </div>
+
+  <!-- 街区详情弹窗 (Modal) -->
+  <div id="detail-modal" class="modal">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <div>
+          <h2 id="modal-title">新宿 (Shinjuku)</h2>
+          <p id="modal-tagline">“霓虹闪烁的繁华不夜城”</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <span id="modal-match-percent" class="match-badge score-high">契合度 95%</span>
+          <button id="close-detail-modal" class="close-btn">&times;</button>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- 左侧文本分析 -->
+        <div class="detail-left">
+          
+          <div>
+            <h4 class="detail-section-title">街区画像</h4>
+            <p id="modal-desc" class="text-block">
+              新宿是东京最著名的商业与娱乐中心...
+            </p>
+          </div>
+
+          <div>
+            <h4 class="detail-section-title">消费水平与合适人群</h4>
+            <div style="display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 0.6rem;">
+              <span>平均消费: <strong id="modal-price" style="color:var(--text-main)">中等偏高</strong></span>
+            </div>
+            <p id="modal-best-for" class="text-block" style="font-style: italic; border-left: 2px solid var(--accent-purple); padding-left: 0.5rem;"></p>
+          </div>
+
+          <!-- 动态 API 详情挂载区 -->
+          <div id="modal-api-status" style="display: none;"></div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;">
+            <div>
+              <h4 class="detail-section-title" style="color:var(--accent-teal)">优点 Pros</h4>
+              <ul id="modal-pros" class="feature-list text-block">
+                <!-- 动态填充 -->
+              </ul>
+            </div>
+            <div>
+              <h4 class="detail-section-title" style="color:#fca5a5">缺点 Cons</h4>
+              <ul id="modal-cons" class="feature-list text-block">
+                <!-- 动态填充 -->
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 右侧雷达图分析 -->
+        <div class="detail-right">
+          <h4 class="detail-section-title">多维画像大沙盘</h4>
+          <p style="font-size: 0.78rem; color:var(--text-muted); text-align: center; margin-top:-0.5rem; margin-bottom: 0.5rem;">
+            <span style="color:#a855f7">■</span> 街区实际评分 &nbsp; <span style="color:#14b8a6">╎</span> 您的偏好权重
+          </p>
+          <div id="radar-chart-container" class="radar-container">
+            <!-- 动态生成 SVG 雷达图 -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- API 设置配置弹窗 -->
+  <div id="api-settings-modal" class="modal api-input-modal">
+    <div class="modal-content" style="padding: 1.5rem 2rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-glass); padding-bottom:0.8rem; margin-bottom:1.2rem;">
+        <h3 style="font-family: var(--font-display); font-size:1.3rem; font-weight:700;">🌐 第三方地图 API 配置</h3>
+        <button id="close-api-modal" class="close-btn" style="line-height:1;">&times;</button>
+      </div>
+
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1.2rem; line-height:1.5;">
+        如果您填入对应的开发者 API 秘钥，本应用将在选定城市时**动态分析该街区 1.5km 范围内的咖啡馆数量、地铁枢纽数和餐饮商圈密度**进行二次打分。密钥仅在浏览器本地 (localStorage) 存储。
+      </p>
+
+      <!-- 服务商选择 -->
+      <div class="form-group">
+        <label for="api-provider">选择数据源 / API 服务商</label>
+        <select id="api-provider" class="form-input">
+          <option value="mock">本地深度预置评分模式 (无需 API Key)</option>
+          <option value="amap">高德地图 API (适用于北京等国内城市)</option>
+          <option value="google">Google Maps API (适用于东京、巴黎等海外城市)</option>
+        </select>
+      </div>
+
+      <!-- 高德 API 输入组 -->
+      <div id="amap-keys-group" style="display: none;">
+        <div class="form-group">
+          <label for="amap-key">高德地图 Web端 API Key</label>
+          <input type="text" id="amap-key" class="form-input" placeholder="输入 AMap Web JS API Key">
+        </div>
+        <div class="form-group">
+          <label for="amap-security">高德地图 安全密钥 (Security Code)</label>
+          <input type="text" id="amap-security" class="form-input" placeholder="输入配套的安全密钥">
+        </div>
+      </div>
+
+      <!-- Google API 输入组 -->
+      <div id="google-keys-group" style="display: none;">
+        <div class="form-group">
+          <label for="google-key">Google Maps Places API Key</label>
+          <input type="text" id="google-key" class="form-input" placeholder="输入 Google Maps JavaScript API API Key">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button id="save-api-keys" class="btn-primary">保存配置</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 引入逻辑脚本 -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
