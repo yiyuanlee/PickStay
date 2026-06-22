@@ -3,6 +3,7 @@
 // 全局状态管理
 const state = {
   currentCityId: "tokyo",
+  activePreset: null,
   weights: {
     budget: 5,
     safety: 5,
@@ -33,16 +34,23 @@ const PERSONA_PRESETS = {
 document.addEventListener("DOMContentLoaded", () => {
   // 从 localStorage 读取 API 配置
   loadMapConfigFromStorage();
+  loadPreferencesFromStorage();
+  applyHashToState();
   
   // 初始化界面事件监听
   initCitySelector();
+  applyRestoredCityUI();
   initSliders();
   initPresetButtons();
+  applyRestoredPresetUI();
   initApiSettings();
   initComparisonDrawer();
   
+  syncHashFromState();
+  
   // 执行首次计算和渲染
   calculateRecommendations();
+  showProviderSuggestion();
 });
 
 // 加载 localStorage 中的 API 密钥配置
@@ -62,6 +70,109 @@ function saveMapConfigToStorage() {
   localStorage.setItem("pickstay_map_config", JSON.stringify(window.MAP_CONFIG));
 }
 
+const PREFERENCES_STORAGE_KEY = "pickstay_preferences";
+
+// 从 localStorage 恢复用户偏好
+function loadPreferencesFromStorage() {
+  const saved = localStorage.getItem(PREFERENCES_STORAGE_KEY);
+  if (!saved) return;
+  try {
+    const prefs = JSON.parse(saved);
+    if (prefs.currentCityId && window.CITIES_DATA[prefs.currentCityId]) {
+      state.currentCityId = prefs.currentCityId;
+    }
+    if (prefs.weights && typeof prefs.weights === "object") {
+      state.weights = { ...state.weights, ...prefs.weights };
+    }
+    if (prefs.activePreset && PERSONA_PRESETS[prefs.activePreset]) {
+      state.activePreset = prefs.activePreset;
+    }
+  } catch (e) {
+    console.error("解析本地存储的偏好配置失败", e);
+  }
+}
+
+// 保存用户偏好到 localStorage
+function savePreferencesToStorage() {
+  localStorage.setItem(PREFERENCES_STORAGE_KEY, JSON.stringify({
+    currentCityId: state.currentCityId,
+    weights: state.weights,
+    activePreset: state.activePreset
+  }));
+  syncHashFromState();
+}
+
+// 从 URL hash 恢复状态（优先级高于 localStorage）
+function applyHashToState() {
+  const hash = window.location.hash.replace(/^#/, "");
+  if (!hash) return;
+  const params = new URLSearchParams(hash);
+  const cityId = params.get("city");
+  const preset = params.get("preset");
+  if (cityId && window.CITIES_DATA[cityId]) {
+    state.currentCityId = cityId;
+  }
+  if (preset && PERSONA_PRESETS[preset]) {
+    state.activePreset = preset;
+    state.weights = { ...PERSONA_PRESETS[preset] };
+  }
+}
+
+// 将当前状态同步到 URL hash
+function syncHashFromState() {
+  const params = new URLSearchParams();
+  params.set("city", state.currentCityId);
+  if (state.activePreset) {
+    params.set("preset", state.activePreset);
+  }
+  const newHash = `#${params.toString()}`;
+  if (window.location.hash !== newHash) {
+    history.replaceState(null, "", newHash);
+  }
+}
+
+// 恢复城市选择 UI
+function applyRestoredCityUI() {
+  document.querySelectorAll(".city-card").forEach(card => {
+    card.classList.toggle("active", card.dataset.city === state.currentCityId);
+  });
+}
+
+// 恢复预设按钮 UI
+function applyRestoredPresetUI() {
+  document.querySelectorAll(".preset-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.preset === state.activePreset);
+  });
+}
+
+// 根据当前地图 provider 或城市偏好生成地图链接
+function getEffectiveMapProvider() {
+  const active = window.MAP_CONFIG.activeProvider;
+  if (active === "amap" || active === "google") return active;
+  const cityData = window.CITIES_DATA[state.currentCityId];
+  return cityData?.preferredProvider || "google";
+}
+
+function buildMapUrl(center, provider) {
+  if (!center) return "#";
+  if (provider === "amap") {
+    return `https://uri.amap.com/marker?position=${center.lng},${center.lat}`;
+  }
+  return `https://www.google.com/maps/search/?api=1&query=${center.lat},${center.lng}`;
+}
+
+// 切换城市时提示建议的地图服务商
+function showProviderSuggestion() {
+  const cityData = window.CITIES_DATA[state.currentCityId];
+  if (!cityData?.preferredProvider) return;
+  const preferred = cityData.preferredProvider;
+  const active = window.MAP_CONFIG.activeProvider;
+  if (active === "mock" || active !== preferred) {
+    const providerName = preferred === "amap" ? "高德地图" : "Google Maps";
+    showApiStatusMessage(`建议切换为 ${providerName}，以获得 ${cityData.name} 的最佳地图体验`, "warning");
+  }
+}
+
 // 1. 城市选择器初始化
 function initCitySelector() {
   const cityCards = document.querySelectorAll(".city-card");
@@ -76,6 +187,9 @@ function initCitySelector() {
       // 清空对比和动态打分（切换城市时）
       state.comparisonList = [];
       updateComparisonDrawer();
+      
+      savePreferencesToStorage();
+      showProviderSuggestion();
       
       // 如果配置了 API，尝试自动获取该城市街区的动态数据
       triggerDynamicApiAnalysis();
@@ -105,7 +219,9 @@ function initSliders() {
       calculateRecommendations();
       
       // 移除 Preset 按钮的 active 状态（因为用户手动改了）
+      state.activePreset = null;
       document.querySelectorAll(".preset-btn").forEach(btn => btn.classList.remove("active"));
+      savePreferencesToStorage();
     });
   });
 }
@@ -121,6 +237,7 @@ function initPresetButtons() {
       const presetName = btn.dataset.preset;
       const targetWeights = PERSONA_PRESETS[presetName];
       if (targetWeights) {
+        state.activePreset = presetName;
         // 更新全局状态权重
         state.weights = { ...targetWeights };
         
@@ -132,6 +249,7 @@ function initPresetButtons() {
           if (valueDisplay) valueDisplay.textContent = state.weights[key];
         });
         
+        savePreferencesToStorage();
         calculateRecommendations();
       }
     });
@@ -301,6 +419,9 @@ function renderNeighborhoodList(neighborhoods) {
     else if (item.matchScore < 80) scoreClass = "score-med";
     
     // 生成卡片 HTML
+    const mapProvider = getEffectiveMapProvider();
+    const mapUrl = buildMapUrl(item.center, mapProvider);
+    const mapLabel = mapProvider === "amap" ? "高德" : "Google";
     card.innerHTML = `
       <div class="card-header-bar">
         <span class="rank-badge">#${index + 1}</span>
@@ -326,6 +447,7 @@ function renderNeighborhoodList(neighborhoods) {
         <div class="card-footer">
           <span class="price-indicator">${item.priceLevel}</span>
           <div class="card-actions">
+            <a class="btn-map-link" href="${mapUrl}" target="_blank" rel="noopener noreferrer" title="在${mapLabel}地图中打开">🗺️ 地图</a>
             <button class="btn-secondary btn-compare" data-id="${item.id}">
               ${isCompared ? "取消对比" : "加入对比"}
             </button>
@@ -390,6 +512,13 @@ function showNeighborhoodDetails(id) {
   modalBestFor.textContent = neighborhood.bestFor;
   modalPrice.textContent = neighborhood.priceLevel;
   matchPercent.textContent = `契合度 ${matchScore}%`;
+  
+  const mapProvider = getEffectiveMapProvider();
+  const modalMapLink = document.getElementById("modal-map-link");
+  if (modalMapLink) {
+    modalMapLink.href = buildMapUrl(neighborhood.center, mapProvider);
+    modalMapLink.textContent = mapProvider === "amap" ? "🗺️ 在高德地图中打开" : "🗺️ 在 Google 地图中打开";
+  }
   
   // 渲染优势与劣势
   modalPros.innerHTML = neighborhood.pros.map(pro => `<li>✅ ${pro}</li>`).join("");
@@ -543,16 +672,19 @@ function drawRadarChart(containerId, scores, weights) {
 
 // 9. 对比栏功能逻辑
 function initComparisonDrawer() {
-  const toggleBtn = document.getElementById("toggle-compare-drawer");
+  const drawerHeader = document.getElementById("compare-drawer-header");
   const drawer = document.getElementById("compare-drawer");
   
-  toggleBtn.addEventListener("click", () => {
-    drawer.classList.toggle("open");
-  });
+  if (drawerHeader && drawer) {
+    drawerHeader.addEventListener("click", () => {
+      drawer.classList.toggle("open");
+    });
+  }
   
   const closeBtn = document.getElementById("close-compare-drawer");
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
+  if (closeBtn && drawer) {
+    closeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
       drawer.classList.remove("open");
     });
   }

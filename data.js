@@ -17,6 +17,7 @@ window.CITIES_DATA = {
   tokyo: {
     name: "东京 (Tokyo)",
     description: "传统与现代交织的超级大都市",
+    preferredProvider: "google",
     center: { lat: 35.6762, lng: 139.6503 },
     neighborhoods: [
       {
@@ -120,6 +121,7 @@ window.CITIES_DATA = {
   beijing: {
     name: "北京 (Beijing)",
     description: "帝都气象与胡同烟火的交融",
+    preferredProvider: "amap",
     center: { lat: 39.9042, lng: 116.4074 },
     neighborhoods: [
       {
@@ -211,6 +213,7 @@ window.CITIES_DATA = {
   paris: {
     name: "巴黎 (Paris)",
     description: "浪漫塞纳河畔的流动的盛宴",
+    preferredProvider: "google",
     center: { lat: 48.8566, lng: 2.3522 },
     neighborhoods: [
       {
@@ -302,6 +305,7 @@ window.CITIES_DATA = {
   melbourne: {
     name: "墨尔本 (Melbourne)",
     description: "全球咖啡之都，充满街头艺术与慢节奏巷弄的文化之城",
+    preferredProvider: "google",
     center: { lat: -37.8136, lng: 144.9631 },
     neighborhoods: [
       {
@@ -387,6 +391,98 @@ window.CITIES_DATA = {
         priceLevel: "中等 (¥¥¥)",
         bestFor: "亚洲美食家、运动观赛爱好者、喜欢工厂店淘折扣的旅行者",
         detailText: "里士满是一个充满了反差萌的街区。这里既有大型的运动和折扣工厂店，又有北京/亚洲旅人最爱的“墨尔本小西贡”。这里的咖啡馆（如 Top Paddock）是墨尔本创意 Brunch 界的神话。里士满保留了工人阶级街区的质朴与如今雅皮互联网企业的交融风情。"
+      }
+    ]
+  },
+  queenstown: {
+    name: "皇后镇 (Queenstown)",
+    description: "南阿尔卑斯山脚下的极限运动与湖光山色之都",
+    preferredProvider: "google",
+    center: { lat: -45.0312, lng: 168.6626 },
+    neighborhoods: [
+      {
+        id: "queenstown-central",
+        name: "皇后镇中心 (Queenstown Central)",
+        tagline: "瓦卡蒂普湖畔的冒险枢纽与美食夜生活中心",
+        center: { lat: -45.0312, lng: 168.6626 },
+        scores: { budget: 4, safety: 9, transit: 9, shopping: 9, nightlife: 9, quiet: 4, cafe: 8 },
+        pros: ["步行即可抵达湖畔步道、餐厅与冒险项目预订中心", "Orbus 巴士与水上 taxi 接驳便利，信息咨询点密集", "Fergburger 等网红美食与精酿酒吧林立，夜生活活跃"],
+        cons: ["旅游旺季人潮拥挤，核心街区停车与住宿价格偏高", "部分酒吧街深夜较喧闹，湖畔高端酒店一房难求"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "初次到访、喜欢湖畔漫步与丰富餐饮夜生活的旅行者",
+        detailText: "皇后镇中心是南岛最炙手可热的旅行枢纽。瓦卡蒂普湖（Lake Wakatipu）沿岸步道串联起精品酒店、冒险运动预订柜台与各式西餐厅。清晨在湖边慢跑，傍晚找一家 lakeside 餐厅看日落，是体验皇后镇都市 Chill 感的经典方式。"
+      },
+      {
+        id: "frankton",
+        name: "弗兰顿 (Frankton)",
+        tagline: "机场旁的高性价比实用落脚点",
+        center: { lat: -45.0214, lng: 168.7392 },
+        scores: { budget: 7, safety: 9, transit: 8, shopping: 6, nightlife: 4, quiet: 8, cafe: 6 },
+        pros: ["紧邻皇后镇机场，抵达与离境极其便利", "Five Mile 购物中心与超市配套完善，生活成本相对中心更低", "Orbus 巴士 10 分钟直达镇中心，适合自驾中转"],
+        cons: ["缺乏皇后镇标志性的湖畔核心景观", "夜生活与精品餐饮选择远少于市中心"],
+        priceLevel: "中等 (¥¥)",
+        bestFor: "注重机场交通效率、自驾中转或预算有限的旅行者",
+        detailText: "弗兰顿是皇后镇的门户区，许多自驾旅客选择在此取还车或短暂停留。Five Mile 商圈提供超市、连锁餐饮与基础购物，性价比优于镇中心。虽然少了些「明信片风景」，但作为实用型住宿基地非常高效。"
+      },
+      {
+        id: "arrowtown",
+        name: "箭镇 (Arrowtown)",
+        tagline: "淘金时代遗风与秋意枫林的慢节奏古镇",
+        center: { lat: -44.9386, lng: 168.8108 },
+        scores: { budget: 6, safety: 10, transit: 5, shopping: 7, nightlife: 3, quiet: 10, cafe: 9 },
+        pros: ["保留完整的维多利亚式淘金小镇风貌，治安极佳", "四月金秋枫叶季是全新西兰最上镜的赏叶圣地之一", "独立咖啡馆、画廊与精品民宿密度高，文艺 Chill 氛围浓厚"],
+        cons: ["距皇后镇中心约 20 分钟车程，依赖自驾或巴士", "餐饮与夜生活以日间为主，晚间店铺较早打烊"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "情侣、摄影爱好者、追求慢节奏古镇生活与高品质咖啡文化的旅行者",
+        detailText: "箭镇是皇后镇周边最迷人的历史卫星城。巴克利街（Buckingham Street）两旁林立着百年石砌建筑、手作面包房与精品酒庄。这里远离镇中心的喧嚣，却能在 20 分钟内回到冒险运动现场，是「白天古镇发呆、傍晚回皇后镇嗨」的理想组合。"
+      },
+      {
+        id: "fernhill",
+        name: "芬山 (Fernhill)",
+        tagline: "俯瞰瓦卡蒂普湖的山坡静谧住宅区",
+        center: { lat: -45.0186, lng: 168.6486 },
+        scores: { budget: 5, safety: 10, transit: 6, shopping: 5, nightlife: 3, quiet: 9, cafe: 7 },
+        pros: ["多数住宿可俯瞰瓦卡蒂普湖与 Remarkables 山脉全景", "远离酒吧街喧嚣，夜间极其安静，安全系数极高", "Skyline Gondola 缆车与 luge 赛道近在咫尺"],
+        cons: ["地势较陡，部分民宿需驾车或步行上下坡", "步行至镇中心需 15–20 分钟，公交班次相对有限"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "家庭出行、追求湖景与安静环境的旅行者",
+        detailText: "芬山是皇后镇本地人最爱的 hillside 居住区之一。这里的民宿与公寓普遍拥有开阔湖景，Skyline 缆车从山脚直达 Bob's Peak 观景台。适合不想住在闹市区、又希望随时俯瞰皇后镇全景的旅人。"
+      },
+      {
+        id: "kelvin-heights",
+        name: "开尔文高地 (Kelvin Heights)",
+        tagline: "半岛尖端上的高端湖景度假秘境",
+        center: { lat: -45.0458, lng: 168.6786 },
+        scores: { budget: 3, safety: 10, transit: 5, shopping: 5, nightlife: 3, quiet: 10, cafe: 7 },
+        pros: ["瓦卡蒂普湖半岛尖端，360° 湖山景观极为震撼", "Kelvin Heights 高尔夫球场与高端度假公寓林立", "环境优雅私密，适合蜜月与高品质家庭度假"],
+        cons: ["住宿与餐饮价格高昂，平价选择极少", "距镇中心需驾车或巴士，不适合无车且频繁外出的旅客"],
+        priceLevel: "高档奢华 (¥¥¥¥)",
+        bestFor: "蜜月情侣、高预算旅行者、追求极致湖景与私密度假感的家庭",
+        detailText: "开尔文高地是皇后镇最顶级的 lakeside 半岛。这里远离游客人潮，却拥有全区域最开阔的瓦卡蒂普湖 vista。许多高端度假公寓与精品 B&B 坐拥私人湖岸通道，清晨在半岛步道慢跑、傍晚看雪山镀金，是皇后镇最 Chill 的奢华体验。"
+      },
+      {
+        id: "glenorchy",
+        name: "格莱诺基 (Glenorchy)",
+        tagline: "魔戒取景地与中土世界般的原始湖光",
+        center: { lat: -44.8506, lng: 168.3889 },
+        scores: { budget: 6, safety: 9, transit: 3, shopping: 3, nightlife: 1, quiet: 10, cafe: 6 },
+        pros: ["《指环王》与《纳尼亚》系列经典取景地，原始自然震撼", "达特河（Dart River）与 Routeburn Track 徒步起点", "远离旅游团，体验最纯粹的南阿尔卑斯山湖风光"],
+        cons: ["距皇后镇约 45 分钟车程，无公共交通，必须自驾", "餐饮、购物与夜生活配套极为有限，以小型咖啡馆和旅社为主"],
+        priceLevel: "中等 (¥¥)",
+        bestFor: "徒步爱好者、摄影发烧友、追求原始自然与《魔戒》朝圣体验的旅行者",
+        detailText: "格莱诺基被《孤独星球》誉为「全球最上镜公路终点之一」。从皇后镇沿瓦卡蒂普湖北端驱车北上，两侧雪山与翡翠色湖水交织成中土世界般的画卷。这里适合作为 1–2 晚的深度自然停留点，或当日往返的摄影与徒步圣地。"
+      },
+      {
+        id: "arthur-point",
+        name: "亚瑟角/肖托弗 (Arthur's Point)",
+        tagline: "峡谷激流与蹦极冒险的极限运动大本营",
+        center: { lat: -45.0136, lng: 168.6364 },
+        scores: { budget: 6, safety: 8, transit: 7, shopping: 5, nightlife: 6, quiet: 6, cafe: 6 },
+        pros: ["Shotover Jet 喷射快艇、峡谷秋千与蹦极项目集中区", "距镇中心仅 5 分钟车程，却保留峡谷自然氛围", "多家冒险主题 lodge 与青年旅舍，年轻旅行者聚集"],
+        cons: ["峡谷地带部分路段夜间照明不足，需注意行车安全", "非冒险爱好者可能觉得周边略显「太刺激」而缺乏文艺气息"],
+        priceLevel: "中等 (¥¥)",
+        bestFor: "极限运动爱好者、年轻背包客、追求刺激与独特住宿体验的冒险型旅行者",
+        detailText: "亚瑟角位于肖托弗河（Shotover River）峡谷入口，是皇后镇冒险运动的地理心脏。从这里出发可体验世界闻名的 Shotover Jet 与 Nevis 高空蹦极。住宿以冒险 lodge 与性价比民宿为主，适合把「玩极限运动」当作旅行主题的旅人。"
       }
     ]
   }

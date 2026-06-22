@@ -918,6 +918,32 @@ header {
   color: #dc2626;
 }
 
+.map-link-btn,
+.btn-map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.78rem;
+  color: var(--accent-teal);
+  text-decoration: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  background: rgba(13, 148, 136, 0.05);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.map-link-btn:hover,
+.btn-map-link:hover {
+  background: rgba(13, 148, 136, 0.12);
+  border-color: rgba(13, 148, 136, 0.35);
+}
+
+.map-link-btn {
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+}
+
 /* 动效关键帧 */
 @keyframes slideDown {
   from {
