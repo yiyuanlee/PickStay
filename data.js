@@ -485,5 +485,281 @@ window.CITIES_DATA = {
         detailText: "亚瑟角位于肖托弗河（Shotover River）峡谷入口，是皇后镇冒险运动的地理心脏。从这里出发可体验世界闻名的 Shotover Jet 与 Nevis 高空蹦极。住宿以冒险 lodge 与性价比民宿为主，适合把「玩极限运动」当作旅行主题的旅人。"
       }
     ]
+  },
+  sydney: {
+    name: "悉尼 (Sydney)",
+    description: "海港大桥与阳光海滩交织的南半球都会",
+    preferredProvider: "google",
+    center: { lat: -33.8688, lng: 151.2093 },
+    neighborhoods: [
+      {
+        id: "surry-hills",
+        name: "萨里山 (Surry Hills)",
+        tagline: "精品咖啡与创意餐饮的文艺高地",
+        center: { lat: -33.8847, lng: 151.2098 },
+        scores: { budget: 5, safety: 9, transit: 9, shopping: 8, nightlife: 8, quiet: 7, cafe: 10 },
+        pros: ["全悉尼密度最高的独立咖啡馆与早午餐餐厅聚集区", "步行可达 CBD，Central 火车站近在咫尺", "维多利亚式排屋街景优美，文艺画廊与买手店林立"],
+        cons: ["周末 Crown St 一带餐饮排队较长", "精品民宿与公寓为主，大型连锁酒店较少"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "咖啡控、美食爱好者、追求文艺慢节奏都市生活的旅行者",
+        detailText: "萨里山是悉尼公认的 Brunch 与咖啡圣地。Crown Street 与 Bourke Street 两旁开满了水准极高的独立咖啡馆（如 Single O、Bourke Street Bakery）。这里保留了大量维多利亚时代排屋，街角涂鸦与精品买手店交织，距离 CBD 仅数站公交，是体验悉尼 Chill 都市感的最佳落脚点之一。"
+      },
+      {
+        id: "sydney-cbd",
+        name: "悉尼 CBD/岩石区 (Sydney CBD & The Rocks)",
+        tagline: "歌剧院与环形码头旁的经典枢纽",
+        center: { lat: -33.8651, lng: 151.2099 },
+        scores: { budget: 4, safety: 9, transit: 10, shopping: 10, nightlife: 7, quiet: 4, cafe: 8 },
+        pros: ["步行可达悉尼歌剧院、海港大桥与岩石区周末市集", "火车、轻轨、渡轮枢纽密集，出行效率极高", "高端酒店与精品公寓选择丰富，服务业配套顶级"],
+        cons: ["工作日通勤人流密集，部分路段较为喧闹", "住宿价格偏高，平价选择相对有限"],
+        priceLevel: "高档奢华 (¥¥¥¥)",
+        bestFor: "初次到访、商务出行、追求地标步行距离与极致交通便利的旅行者",
+        detailText: "悉尼 CBD 与历史悠久的岩石区（The Rocks）构成了城市最核心的旅行枢纽。清晨在 Circular Quay 看歌剧院日出，傍晚漫步岩石区 cobblestone 小巷，周末逛周末市集。虽然节奏偏快、人流较多，但这里是把悉尼经典地标一网打尽的最优基地。"
+      },
+      {
+        id: "bondi",
+        name: "邦迪海滩 (Bondi Beach)",
+        tagline: "冲浪文化与海岸慢生活的代名词",
+        center: { lat: -33.8915, lng: 151.2767 },
+        scores: { budget: 5, safety: 8, transit: 7, shopping: 7, nightlife: 7, quiet: 6, cafe: 9 },
+        pros: ["澳洲最具标志性的金色沙滩，冲浪与日光浴体验一流", "Campbell Parade 沿岸咖啡馆与海鲜餐厅密度极高", "邦迪至库吉（Coogee）六公里海岸步道风景绝美"],
+        cons: ["夏季周末人潮拥挤，停车位极为紧张", "距 CBD 约 30–40 分钟公交，不在免费轻轨区内"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "海滩爱好者、冲浪新手、追求阳光海岸度假感的旅行者",
+        detailText: "邦迪海滩是悉尼乃至全澳洲的海滩文化图腾。Campbell Parade 上开满了面朝大海的咖啡馆与早午餐店，Icebergs 泳池悬于悬崖之上是经典打卡点。清晨在 Bondi to Bronte 步道慢跑、下午冲浪、傍晚看日落，是南半球最 Chill 的海滨生活方式。"
+      },
+      {
+        id: "newtown",
+        name: "纽镇 (Newtown)",
+        tagline: "朋克涂鸦与多元亚文化的活力街区",
+        center: { lat: -33.8989, lng: 151.1794 },
+        scores: { budget: 7, safety: 8, transit: 9, shopping: 9, nightlife: 9, quiet: 5, cafe: 9 },
+        pros: ["King Street 是全悉尼最长的独立零售与餐饮街之一", "二手唱片店、古着屋、Livehouse 与 LGBTQ+ 友好酒吧云集", "火车直达 Central，餐饮性价比远高于 CBD"],
+        cons: ["周末 King Street 人流与噪音较大", "以特色民宿与青年旅舍为主，豪华酒店极少"],
+        priceLevel: "经济实惠 (¥¥)",
+        bestFor: "年轻背包客、亚文化爱好者、追求在地生活感与夜生活的旅行者",
+        detailText: "纽镇是悉尼最具叛逆精神的 inner-west 街区。King Street 绵延数公里，两侧遍布越南粉店、精酿酒吧、独立唱片店与街头涂鸦。这里的氛围自由包容，Live 演出与二手淘货文化极为活跃，是体验「非明信片式悉尼」的最佳选择。"
+      },
+      {
+        id: "manly",
+        name: "曼利 (Manly)",
+        tagline: "北岸渡轮港湾与双面海滩的度假秘境",
+        center: { lat: -33.7970, lng: 151.2880 },
+        scores: { budget: 5, safety: 9, transit: 7, shopping: 7, nightlife: 6, quiet: 8, cafe: 8 },
+        pros: ["从 Circular Quay 乘渡轮 30 分钟直达，航程本身即是经典体验", "Manly Beach 与 Shelly Beach 一动一静，浮潜条件佳", "Corso 步行街餐饮与精品店齐全，度假感极强"],
+        cons: ["依赖渡轮或长途公交，深夜返程班次有限", "旺季住宿价格随海景品质波动较大"],
+        priceLevel: "中等 (¥¥¥)",
+        bestFor: "家庭出游、情侣度假、追求「渡轮通勤+海滩生活」的慢节奏旅行者",
+        detailText: "曼利位于悉尼北岸半岛尖端，是本地人周末逃离 CBD 的首选。从环形码头乘渡轮穿越海港，抵达 Manly Wharf 后步行即可到主海滩。Corso 步行街两旁咖啡馆与海鲜餐厅林立，Shelly Beach 适合浮潜与皮划艇，整体氛围比邦迪更悠闲私密。"
+      },
+      {
+        id: "darlinghurst",
+        name: "达令赫斯特 (Darlinghurst)",
+        tagline: "牛津街夜生活与东端画廊的交汇",
+        center: { lat: -33.8794, lng: 151.2193 },
+        scores: { budget: 5, safety: 8, transit: 9, shopping: 8, nightlife: 10, quiet: 5, cafe: 8 },
+        pros: ["Oxford Street 是悉尼 LGBTQ+ 文化与夜生活的核心地带", "邻近 Potts Point 精品餐饮与东端画廊区", "火车与公交接驳 CBD 与 Bondi Junction 极为便利"],
+        cons: ["周末深夜 Oxford Street 较为喧闹", "部分老旧公寓隔音一般，停车困难"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "夜生活爱好者、艺术迷、喜欢多元包容都市氛围的旅行者",
+        detailText: "达令赫斯特与 Potts Point 构成悉尼东区的文化心脏。Oxford Street 上酒吧、俱乐部与深夜餐饮营业至凌晨，白天则可步行至东端画廊（Paddington Galleries）或维多利亚公园。这里兼具都市活力与艺术气质，是悉尼夜生活最 vibrant 的落脚点。"
+      },
+      {
+        id: "paddington",
+        name: "帕丁顿 (Paddington)",
+        tagline: "维多利亚排屋与精品买手店的优雅街区",
+        center: { lat: -33.8841, lng: 151.2300 },
+        scores: { budget: 4, safety: 10, transit: 8, shopping: 10, nightlife: 5, quiet: 9, cafe: 9 },
+        pros: ["Oxford Street Paddington 段汇聚顶级设计师买手店与画廊", "五街（Five Ways）周边精品咖啡馆与早午餐水准极高", "治安极佳，维多利亚式排屋街景是悉尼最美之一"],
+        cons: ["物价偏高，平价住宿选择有限", "夜生活以精致小酒吧为主，缺乏大型夜店"],
+        priceLevel: "高档奢华 (¥¥¥¥)",
+        bestFor: "时尚达人、艺术爱好者、追求高品质安静住宿的旅行者",
+        detailText: "帕丁顿是悉尼最优雅的 inner-east 街区之一。Oxford Street 在此段从夜生活转向高端时装与画廊，Five Ways  roundabout 周围开满了精品 Brunch 与手冲咖啡馆。周末可逛 Paddington Markets，在绿树成荫的排屋街道散步，感受悉尼最具质感的慢生活。"
+      }
+    ]
+  },
+  guangzhou: {
+    name: "广州 (Guangzhou)",
+    description: "千年商都的骑楼烟火与早茶文化",
+    preferredProvider: "amap",
+    center: { lat: 23.1291, lng: 113.2644 },
+    neighborhoods: [
+      {
+        id: "tianhe",
+        name: "天河/体育西 (Tianhe)",
+        tagline: "地铁枢纽与摩登商圈交织的都市核心",
+        center: { lat: 23.1375, lng: 113.3300 },
+        scores: { budget: 5, safety: 9, transit: 10, shopping: 10, nightlife: 8, quiet: 5, cafe: 8 },
+        pros: ["体育西路、珠江新城多条地铁线交汇，全城出行极便利", "正佳广场、天河城、太古汇等顶级商圈步行可达", "餐饮选择从平价粤菜到黑珍珠餐厅一应俱全"],
+        cons: ["早晚高峰地铁极其拥挤", "周末商圈人流密集，部分路段较为喧闹"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "初次来穗、追求交通便利与购物便利的旅行者",
+        detailText: "天河区是广州现代都市生活的缩影。体育西路站是地铁 1/3 号线枢纽，步行即可抵达天河路商圈。这里既有天河城的平民购物，也有太古汇的精品体验，周边早茶、粤菜、咖啡与茶饮密度极高，是兼顾效率与品质的万能落脚点。"
+      },
+      {
+        id: "zhujiang-new-town",
+        name: "珠江新城 (Zhujiang New Town)",
+        tagline: "小蛮腰天际线下的高端商务新中轴",
+        center: { lat: 23.1195, lng: 113.3215 },
+        scores: { budget: 3, safety: 10, transit: 10, shopping: 9, nightlife: 7, quiet: 7, cafe: 8 },
+        pros: ["广州塔、花城广场、广东省博物馆等地标步行可达", "高星级酒店与 serviced apartment 林立，治安与服务水准顶级", "APM 线与多条地铁交汇，前往白云机场与广州南站高效"],
+        cons: ["住宿与餐饮价格高昂", "工作日商务感重，部分区域夜间缺乏市井烟火气"],
+        priceLevel: "高档奢华 (¥¥¥¥)",
+        bestFor: "商务出行、高预算旅行者、追求地标景观与现代酒店服务的游客",
+        detailText: "珠江新城是广州新世纪的城市名片。花城广场正对广州塔（小蛮腰），广东省博物馆与广州图书馆环绕两侧。这里的酒店普遍拥有江景或塔景，咖啡馆与高端餐饮集中在 K11、IGC 等商场内，适合追求现代都市质感与极致安全的旅行者。"
+      },
+      {
+        id: "beijing-road",
+        name: "北京路/越秀 (Beijing Road)",
+        tagline: "千年古道与骑楼商街的岭南记忆",
+        center: { lat: 23.1255, lng: 113.2675 },
+        scores: { budget: 7, safety: 9, transit: 10, shopping: 9, nightlife: 6, quiet: 6, cafe: 7 },
+        pros: ["北京路步行街汇聚老字号与潮流首店，步行游览极为方便", "地铁 1/2/6 号线交汇，前往沙面、陈家祠等景点便捷", "周边平价住宿与连锁酒店选择丰富，性价比突出"],
+        cons: ["白天游客密集，部分老字号口味偏游客化", "夜间以餐饮为主，酒吧娱乐相对保守"],
+        priceLevel: "经济实惠 (¥¥)",
+        bestFor: "初次来穗看景点、家庭出游、预算有限的旅行者",
+        detailText: "北京路是广州历史最悠久的商业中轴，地下考古遗址展示千年古道原貌。步行街两旁骑楼林立，既有莲香楼、陶陶居等老字号，也有新兴潮流品牌。毗邻海珠广场与越秀公园，住宿性价比远高于天河，是体验老广州商业记忆的经典落脚点。"
+      },
+      {
+        id: "shamian-liwan",
+        name: "沙面/永庆坊 (Shamian & Yongqingfang)",
+        tagline: "欧陆风情岛与西关骑楼的文艺慢游",
+        center: { lat: 23.1080, lng: 113.2430 },
+        scores: { budget: 6, safety: 9, transit: 7, shopping: 7, nightlife: 5, quiet: 9, cafe: 9 },
+        pros: ["沙面岛保留完整殖民时期欧式建筑群，拍照极为出片", "永庆坊、恩宁路粤剧艺术博物馆与老字号汇聚，西关风情浓郁", "独立咖啡馆、文创小店与精品民宿密度高，文艺 Chill 氛围浓厚"],
+        cons: ["地铁需步行 10–15 分钟，部分区域公交为主", "大型商场较少，购物以文创与小众为主"],
+        priceLevel: "中等 (¥¥¥)",
+        bestFor: "文艺青年、摄影爱好者、喜欢老建筑与慢节奏散步的旅行者",
+        detailText: "沙面是珠江上的欧式小岛，榕树成荫的街道两旁是领事馆旧址改造的咖啡馆与餐厅。步行过桥即可到永庆坊——广州旧城微改造的标杆，粤剧博物馆、钟书阁与各种手作工坊藏身在骑楼深处。这里节奏缓慢，是广州最具 Chill 气质的文艺街区。"
+      },
+      {
+        id: "dongshankou",
+        name: "东山口 (Dongshankou)",
+        tagline: "红砖洋楼与独立咖啡的新潮老钱区",
+        center: { lat: 23.1250, lng: 113.2970 },
+        scores: { budget: 5, safety: 9, transit: 8, shopping: 8, nightlife: 6, quiet: 8, cafe: 10 },
+        pros: ["新河浦一带保留大量 1920 年代红砖洋楼与名人故居", "广州独立咖啡馆密度最高的区域之一，Brunch 文化领先全城", "地铁 1/6 号线东山口站，前往天河与越秀均便利"],
+        cons: ["部分洋楼改造民宿价格偏高", "商业以小型精品为主，缺乏大型购物中心"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "咖啡控、文艺青年、喜欢历史建筑与精品小店的旅行者",
+        detailText: "东山口是广州「东山少爷」文化的发源地。培正路、恤孤院路两旁的红砖洋楼如今被改造成独立咖啡馆、买手店与艺术空间。周末在庙前西街散步，找一家手冲咖啡馆坐一下午，是广州年轻人最钟爱的 Chill 方式。这里既有历史沉淀，又不乏当代潮流感。"
+      },
+      {
+        id: "chimelong",
+        name: "长隆/番禺 (Chimelong)",
+        tagline: "主题乐园与野生动物世界的亲子天堂",
+        center: { lat: 22.9980, lng: 113.3290 },
+        scores: { budget: 6, safety: 10, transit: 6, shopping: 6, nightlife: 3, quiet: 7, cafe: 5 },
+        pros: ["长隆野生动物世界、欢乐世界、水上乐园一站式亲子体验", "园区配套酒店可提前入园，家庭出行极为便利", "番禺区餐饮性价比高于市中心，粤菜选择丰富"],
+        cons: ["距市中心约 30–40 分钟地铁，日常城市探索不便", "周边以主题乐园为主，缺乏深度城市文化体验"],
+        priceLevel: "中等 (¥¥¥)",
+        bestFor: "亲子家庭、主题乐园爱好者、多日停留专注长隆的旅行者",
+        detailText: "长隆旅游度假区是华南地区规模最大的主题乐园集群。番禺区地铁 3/7 号线可直达，园区酒店提供与动物共眠、优先入园等特色体验。若行程以亲子游乐为主，住在此区域可最大化游玩时间，避免每日长途通勤的疲惫。"
+      },
+      {
+        id: "jiangnanxi",
+        name: "江南西/海珠 (Jiangnanxi)",
+        tagline: "本地食街与市井烟火的性价比之选",
+        center: { lat: 23.0970, lng: 113.2720 },
+        scores: { budget: 8, safety: 9, transit: 8, shopping: 7, nightlife: 7, quiet: 6, cafe: 7 },
+        pros: ["江南新地、富力海珠城周边食肆林立，粤菜小馆性价比极高", "地铁 2/8 号线江南西站，前往北京路、琶洲均方便", "本地居民为主，游客较少，生活气息真实"],
+        cons: ["缺乏顶级地标与豪华酒店", "部分老旧社区环境较为市井，拍照出片率一般"],
+        priceLevel: "经济实惠 (¥¥)",
+        bestFor: "美食爱好者、背包客、追求本地生活感与高性价比的旅行者",
+        detailText: "江南西是广州海珠区的本地生活中心。这里不是典型旅游区，却藏着无数口碑粤菜小馆、牛杂档与糖水铺。江南新地商圈满足日常购物，地铁接驳便利。若想体验「广州人真正在吃什么、怎么生活」，江南西是比北京路更接地气的选择。"
+      }
+    ]
+  },
+  osaka: {
+    name: "大阪 (Osaka)",
+    description: "关西食都的章鱼烧香气与下町人情",
+    preferredProvider: "google",
+    center: { lat: 34.6937, lng: 135.5023 },
+    neighborhoods: [
+      {
+        id: "namba",
+        name: "难波/道顿堀 (Namba & Dotonbori)",
+        tagline: "霓虹食街与关西美食的绝对中心",
+        center: { lat: 34.6686, lng: 135.5028 },
+        scores: { budget: 7, safety: 7, transit: 10, shopping: 9, nightlife: 10, quiet: 3, cafe: 6 },
+        pros: ["道顿堀、心斋桥筋商店街步行可达，关西美食密度全日本顶尖", "难波站汇聚南海、近铁与多条地铁线，前往奈良、和歌山极便", "夜生活极其丰富，居酒屋与串炸店营业至深夜"],
+        cons: ["深夜道顿堀人流嘈杂，部分区域需注意扒手", "住宿多为商务酒店，安静度普遍一般"],
+        priceLevel: "经济实惠 (¥¥)",
+        bestFor: "美食爱好者、初次到访关西、喜欢夜生活与市井烟火的旅行者",
+        detailText: "难波与道顿堀是大阪的代名词。格力高跑男看板、蟹道乐招牌与章鱼烧、大阪烧、串炸店铺林立的食街，构成了最原汁原味的关西体验。南海难波站可直达关西机场，是大多数旅行者落地后的第一选择。虽然喧闹，但这里是「吃在大阪」的终极基地。"
+      },
+      {
+        id: "umeda",
+        name: "梅田 (Umeda)",
+        tagline: "北区枢纽与天空庭院的现代都会",
+        center: { lat: 34.7024, lng: 135.4959 },
+        scores: { budget: 5, safety: 9, transit: 10, shopping: 10, nightlife: 7, quiet: 6, cafe: 8 },
+        pros: ["大阪站、梅田站是全关西最大铁路枢纽，前往京都、神户极便", "Grand Front、Lucua、阪急百货等超大型商厦林立", "梅田蓝天大厦空中庭园可俯瞰大阪夜景，治安极佳"],
+        cons: ["工作日通勤人流巨大，部分时段极为拥挤", "住宿价格偏高，缺乏传统下町风情"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "需要频繁往返京都/神户、追求购物便利与交通枢纽的旅行者",
+        detailText: "梅田是大阪北部的商业与交通心脏。大阪站周边地下街绵延数公里，从平价药妆到奢侈品牌一应俱全。梅田蓝天大厦的空中庭园是经典夜景打卡点。若行程需要多次搭乘新干线或前往京都，住梅田可节省大量通勤时间。"
+      },
+      {
+        id: "shinsaibashi",
+        name: "心斋桥 (Shinsaibashi)",
+        tagline: "拱廊商店街与潮流购物的步行天堂",
+        center: { lat: 34.6727, lng: 135.5013 },
+        scores: { budget: 6, safety: 8, transit: 9, shopping: 10, nightlife: 8, quiet: 4, cafe: 7 },
+        pros: ["心斋桥筋商店街全长 580 米，拱廊设计雨天亦可漫步购物", "美国村、堀江一带潮流买手店与古着店密集", "长堀桥站、心斋桥站地铁交汇，前往环球影城方便"],
+        cons: ["周末与节假日人潮拥挤，购物街较为喧闹", "平价连锁酒店为主，特色民宿较少"],
+        priceLevel: "中等 (¥¥¥)",
+        bestFor: "购物达人、年轻潮流爱好者、以心斋桥为活动半径的旅行者",
+        detailText: "心斋桥是大阪最经典的购物动脉。拱廊商店街两旁从药妆、快时尚到本土设计师品牌应有尽有。向北延伸的美国村（Amerikamura）是大阪的「原宿」，聚集潮牌与二手店。这里与难波无缝衔接，步行即可覆盖大阪最繁华的商业带。"
+      },
+      {
+        id: "tennoji",
+        name: "天王寺/阿倍野 (Tennoji & Abeno)",
+        tagline: "通天阁与阿倍野 Harukas 的南大阪门户",
+        center: { lat: 34.6462, lng: 135.5066 },
+        scores: { budget: 7, safety: 8, transit: 9, shopping: 8, nightlife: 6, quiet: 7, cafe: 7 },
+        pros: ["阿倍野 Harukas 是日本最高楼之一，展望台与百货一体", "通天阁、新世界筋串炸与下町风情步行可达", "JR 天王寺站可直达关西机场与奈良，性价比高于梅田"],
+        cons: ["部分区域保留昭和下町风貌，与北区现代感形成反差", "高端精品酒店选择少于梅田与难波"],
+        priceLevel: "经济实惠 (¥¥)",
+        bestFor: "预算有限、需要机场直达、喜爱下町风情与通天阁的旅行者",
+        detailText: "天王寺是大阪南区的枢纽。阿倍野 Harukas 300 展望台提供 360° 大阪全景，新世界区域的通天阁与串炸店保留着浓厚的昭和下町氛围。JR 天王寺站可搭乘 Haruka 直达关西机场，住宿性价比优于梅田，适合注重交通效率的务实型旅行者。"
+      },
+      {
+        id: "osaka-castle",
+        name: "大阪城/京桥 (Osaka Castle & Kyobashi)",
+        tagline: "天守阁绿荫与京桥居酒屋街的平衡之选",
+        center: { lat: 34.6873, lng: 135.5262 },
+        scores: { budget: 7, safety: 9, transit: 8, shopping: 7, nightlife: 6, quiet: 8, cafe: 6 },
+        pros: ["大阪城公园四季皆宜，樱花季与红叶季尤为出片", "京桥站周边居酒屋与本地食肆林立，物价亲民", "环境安静，家庭友好，距梅田仅数站地铁"],
+        cons: ["缺乏心斋桥级别的潮流购物与夜生活", "部分区域以本地居民为主，英文标识相对有限"],
+        priceLevel: "中等 (¥¥¥)",
+        bestFor: "家庭出行、历史爱好者、追求安静与绿化的旅行者",
+        detailText: "大阪城公园是大阪的绿色心脏。天守阁复建建筑与宽阔护城河构成经典景观，清晨慢跑与傍晚散步极为舒适。邻近的京桥是本地上班族的居酒屋聚集地，物价远低于道顿堀。这里兼顾历史、自然与便利，是带长辈或孩子出行的稳妥选择。"
+      },
+      {
+        id: "amerikamura",
+        name: "美国村/堀江 (Amerikamura & Horie)",
+        tagline: "关西原宿与二手潮牌的青年文化区",
+        center: { lat: 34.6720, lng: 135.4970 },
+        scores: { budget: 7, safety: 8, transit: 8, shopping: 9, nightlife: 8, quiet: 5, cafe: 9 },
+        pros: ["美国村是大阪潮流与街头文化的发源地，古着与潮牌店密集", "堀江一带独立咖啡馆与精酿酒吧水准极高", "步行可达心斋桥，年轻旅行者聚集，氛围活跃"],
+        cons: ["周末美国村三角公园周边较为嘈杂", "以小型酒店与 guesthouse 为主，大型连锁酒店较少"],
+        priceLevel: "经济实惠 (¥¥)",
+        bestFor: "年轻背包客、古着爱好者、追求关西亚文化与咖啡文化的旅行者",
+        detailText: "美国村（アメ村）是大阪的潮流心脏，三角公园旁的二手店与潮牌买手店吸引着全关西的年轻人。向西延伸的堀江（Horie）则更为精致，独立咖啡馆与设计师小店藏在小巷深处。这里的心斋桥站步行 5 分钟，却保留着与主街不同的亚文化气质，是大阪最 Chill 的青年街区之一。"
+      },
+      {
+        id: "tenma",
+        name: "天满/天神桥筋 (Tenma & Tenjinbashisuji)",
+        tagline: "日本最长商店街与本地居酒屋的深夜食堂",
+        center: { lat: 34.7040, lng: 135.5110 },
+        scores: { budget: 8, safety: 8, transit: 8, shopping: 8, nightlife: 7, quiet: 7, cafe: 6 },
+        pros: ["天神桥筋商店街全长 2.6 公里，是日本最长的拱廊商店街", "天满站周边居酒屋与立饮酒吧密度极高，本地食客为主", "距梅田仅两站，住宿性价比优于北区核心"],
+        cons: ["缺乏英文服务与国际化配套", "旅游知名度低，不适合以打卡地标为主的行程"],
+        priceLevel: "经济实惠 (¥¥)",
+        bestFor: "深度游爱好者、美食探索者、追求本地生活感与性价比的旅行者",
+        detailText: "天满与天神桥筋是大阪人自己的食堂。天神桥筋商店街从南到北绵延 2.6 公里，药妆、百元店、生鲜与日常用品一应俱全。天满站周边的居酒屋 alley 在下班后极为热闹，物价远低于道顿堀。若想体验「大阪人真正在吃什么」，天满是比游客区更 authentic 的选择。"
+      }
+    ]
   }
 };
