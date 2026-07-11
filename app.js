@@ -21,6 +21,17 @@ const state = {
   apiSuccessMessage: ""
 };
 
+// 维度中文标签
+const DIM_LABELS = {
+  safety: "安全",
+  transit: "交通",
+  shopping: "购物",
+  cafe: "咖啡",
+  quiet: "安静",
+  nightlife: "夜生活",
+  budget: "预算"
+};
+
 // 各种偏好预设的权重数据
 const PERSONA_PRESETS = {
   firstTime: { budget: 5, safety: 9, transit: 10, shopping: 8, nightlife: 6, quiet: 6, cafe: 6 },
@@ -39,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // 初始化界面事件监听
   initCitySelector();
-  applyRestoredCityUI();
   initSliders();
   initPresetButtons();
   applyRestoredPresetUI();
@@ -174,28 +184,44 @@ function showProviderSuggestion() {
 }
 
 // 1. 城市选择器初始化
+function renderCitySelector() {
+  const grid = document.getElementById("cities-grid");
+  if (!grid || !window.CITIES_DATA) return;
+
+  grid.innerHTML = "";
+  Object.entries(window.CITIES_DATA).forEach(([id, city]) => {
+    const match = city.name.match(/^(.+?)\s*\((.+)\)$/);
+    const cn = match ? match[1].trim() : city.name;
+    const en = match ? match[2].trim() : "";
+
+    const card = document.createElement("div");
+    card.className = `city-card${id === state.currentCityId ? " active" : ""}`;
+    card.dataset.city = id;
+    card.innerHTML = `<h4>${cn}</h4>${en ? `<span>${en}</span>` : ""}`;
+    grid.appendChild(card);
+  });
+}
+
 function initCitySelector() {
-  const cityCards = document.querySelectorAll(".city-card");
-  cityCards.forEach(card => {
-    card.addEventListener("click", () => {
-      // 移除其他激活状态
-      cityCards.forEach(c => c.classList.remove("active"));
-      // 激活当前
-      card.classList.add("active");
-      state.currentCityId = card.dataset.city;
-      
-      // 清空对比和动态打分（切换城市时）
-      state.comparisonList = [];
-      updateComparisonDrawer();
-      
-      savePreferencesToStorage();
-      showProviderSuggestion();
-      
-      // 如果配置了 API，尝试自动获取该城市街区的动态数据
-      triggerDynamicApiAnalysis();
-      
-      calculateRecommendations();
-    });
+  renderCitySelector();
+
+  const grid = document.getElementById("cities-grid");
+  if (!grid) return;
+
+  grid.addEventListener("click", (e) => {
+    const card = e.target.closest(".city-card");
+    if (!card) return;
+
+    document.querySelectorAll(".city-card").forEach(c => c.classList.remove("active"));
+    card.classList.add("active");
+    state.currentCityId = card.dataset.city;
+
+    state.comparisonList = [];
+    updateComparisonDrawer();
+    savePreferencesToStorage();
+    showProviderSuggestion();
+    triggerDynamicApiAnalysis();
+    calculateRecommendations();
   });
 }
 
@@ -335,22 +361,22 @@ function updateApiStatusWidget() {
   
   if (window.MAP_CONFIG.activeProvider === "mock") {
     statusIndicator.className = "status-badge status-mock";
-    providerText.textContent = "本地 Mock 数据分析模式";
+    providerText.textContent = "本地数据模式";
   } else if (window.MAP_CONFIG.activeProvider === "amap") {
     if (window.MAP_CONFIG.amap.key) {
       statusIndicator.className = "status-badge status-active";
-      providerText.textContent = "高德地图 API 动态增强中";
+      providerText.textContent = "高德 API 已启用";
     } else {
       statusIndicator.className = "status-badge status-warning";
-      providerText.textContent = "高德地图 API 未填入 Key";
+      providerText.textContent = "高德 API 未配置";
     }
   } else if (window.MAP_CONFIG.activeProvider === "google") {
     if (window.MAP_CONFIG.google.apiKey) {
       statusIndicator.className = "status-badge status-active";
-      providerText.textContent = "Google 地图 API 动态增强中";
+      providerText.textContent = "Google API 已启用";
     } else {
       statusIndicator.className = "status-badge status-warning";
-      providerText.textContent = "Google 地图 API 未填入 Key";
+      providerText.textContent = "Google API 未配置";
     }
   }
 }
@@ -418,36 +444,32 @@ function renderNeighborhoodList(neighborhoods) {
     if (item.matchScore < 60) scoreClass = "score-low";
     else if (item.matchScore < 80) scoreClass = "score-med";
     
-    // 生成卡片 HTML
     const mapProvider = getEffectiveMapProvider();
     const mapUrl = buildMapUrl(item.center, mapProvider);
     const mapLabel = mapProvider === "amap" ? "高德" : "Google";
+    const dimTags = Object.entries(DIM_LABELS).map(([key, label]) => {
+      const score = item.computedScores[key];
+      const highlight = key === "cafe" ? " highlight" : "";
+      return `<span class="dim-tag${highlight}" title="${label}: ${score}/10">${label} ${score}</span>`;
+    }).join("");
+
     card.innerHTML = `
       <div class="card-header-bar">
-        <span class="rank-badge">#${index + 1}</span>
-        <span class="match-badge ${scoreClass}">契合度 ${item.matchScore}%</span>
+        <span class="rank-badge">${index + 1}</span>
+        <span class="match-badge ${scoreClass}">${item.matchScore}%</span>
       </div>
       <div class="card-body">
         <h3 class="neighborhood-title">${item.name}</h3>
-        <p class="neighborhood-tagline">“${item.tagline}”</p>
+        <p class="neighborhood-tagline">${item.tagline}</p>
         
-        <!-- 7维度简易进度条展示 -->
-        <div class="mini-dimensions-grid">
-          <div class="mini-dim" title="安静静谧: ${item.computedScores.quiet}/10">🤫 ${item.computedScores.quiet}</div>
-          <div class="mini-dim" title="安全环境: ${item.computedScores.safety}/10">🛡️ ${item.computedScores.safety}</div>
-          <div class="mini-dim" title="交通便利: ${item.computedScores.transit}/10">🚇 ${item.computedScores.transit}</div>
-          <div class="mini-dim" title="美食购物: ${item.computedScores.shopping}/10">🛍️ ${item.computedScores.shopping}</div>
-          <div class="mini-dim" title="夜生活: ${item.computedScores.nightlife}/10">✨ ${item.computedScores.nightlife}</div>
-          <div class="mini-dim" title="预算友好: ${item.computedScores.budget}/10">💰 ${item.computedScores.budget}</div>
-          <div class="mini-dim highlight-cafe" title="咖啡/Chill: ${item.computedScores.cafe}/10">☕ ${item.computedScores.cafe}</div>
-        </div>
+        <div class="dim-tags">${dimTags}</div>
         
-        <p class="pros-summary"><strong>优势：</strong>${item.pros[0]}，${item.pros[1] || ''}</p>
+        <p class="pros-summary"><strong>亮点</strong> ${item.pros[0]}${item.pros[1] ? "，" + item.pros[1] : ""}</p>
         
         <div class="card-footer">
           <span class="price-indicator">${item.priceLevel}</span>
           <div class="card-actions">
-            <a class="btn-map-link" href="${mapUrl}" target="_blank" rel="noopener noreferrer" title="在${mapLabel}地图中打开">🗺️ 地图</a>
+            <a class="btn-map-link" href="${mapUrl}" target="_blank" rel="noopener noreferrer" title="在${mapLabel}地图中打开">地图</a>
             <button class="btn-secondary btn-compare" data-id="${item.id}">
               ${isCompared ? "取消对比" : "加入对比"}
             </button>
@@ -507,22 +529,22 @@ function showNeighborhoodDetails(id) {
   const matchPercent = document.getElementById("modal-match-percent");
   
   modalTitle.textContent = neighborhood.name;
-  modalTagline.textContent = `“${neighborhood.tagline}”`;
+  modalTagline.textContent = neighborhood.tagline;
   modalDesc.textContent = neighborhood.detailText || "暂无详细描述。";
   modalBestFor.textContent = neighborhood.bestFor;
   modalPrice.textContent = neighborhood.priceLevel;
-  matchPercent.textContent = `契合度 ${matchScore}%`;
+  matchPercent.textContent = `匹配 ${matchScore}%`;
   
   const mapProvider = getEffectiveMapProvider();
   const modalMapLink = document.getElementById("modal-map-link");
   if (modalMapLink) {
     modalMapLink.href = buildMapUrl(neighborhood.center, mapProvider);
-    modalMapLink.textContent = mapProvider === "amap" ? "🗺️ 在高德地图中打开" : "🗺️ 在 Google 地图中打开";
+    modalMapLink.textContent = mapProvider === "amap" ? "在高德地图中打开" : "在 Google 地图中打开";
   }
   
   // 渲染优势与劣势
-  modalPros.innerHTML = neighborhood.pros.map(pro => `<li>✅ ${pro}</li>`).join("");
-  modalCons.innerHTML = neighborhood.cons.map(con => `<li>❌ ${con}</li>`).join("");
+  modalPros.innerHTML = neighborhood.pros.map(pro => `<li>${pro}</li>`).join("");
+  modalCons.innerHTML = neighborhood.cons.map(con => `<li>${con}</li>`).join("");
   
   // 绘制 SVG 雷达图
   drawRadarChart("radar-chart-container", scores, state.weights);
@@ -533,11 +555,11 @@ function showNeighborhoodDetails(id) {
     apiSection.style.display = "block";
     apiSection.innerHTML = `
       <div class="api-realtime-badge">
-        <span>📍 地图 API 动态分析实测 (1.5km 范围内):</span>
+        <span>地图 API 实测（1.5km 范围）</span>
         <ul>
-          <li>☕️ 精致咖啡店数: <strong>${dynamic.rawCafeCount || 0}</strong> 家 (打分: ${dynamic.cafe}/10)</li>
-          <li>🚇 核心地铁/交通点: <strong>${dynamic.rawTransitCount || 0}</strong> 个 (打分: ${dynamic.transit}/10)</li>
-          <li>🛍️ 餐饮购物配套商圈数: <strong>${dynamic.rawShoppingCount || 0}</strong> 个 (打分: ${dynamic.shopping}/10)</li>
+          <li>咖啡馆 <strong>${dynamic.rawCafeCount || 0}</strong> 家，评分 ${dynamic.cafe}/10</li>
+          <li>交通节点 <strong>${dynamic.rawTransitCount || 0}</strong> 个，评分 ${dynamic.transit}/10</li>
+          <li>商圈配套 <strong>${dynamic.rawShoppingCount || 0}</strong> 处，评分 ${dynamic.shopping}/10</li>
         </ul>
       </div>
     `;
@@ -569,13 +591,13 @@ function drawRadarChart(containerId, scores, weights) {
   
   // 7维定义
   const dims = [
-    { key: "safety", label: "🛡️ 安全环境" },
-    { key: "transit", label: "🚇 交通便利" },
-    { key: "shopping", label: "🛍️ 美食购物" },
-    { key: "nightlife", label: "✨ 夜生活" },
-    { key: "quiet", label: "🤫 安静舒适" },
-    { key: "budget", label: "💰 预算友好" },
-    { key: "cafe", label: "☕ 咖啡/Chill" }
+    { key: "safety", label: "安全" },
+    { key: "transit", label: "交通" },
+    { key: "shopping", label: "购物" },
+    { key: "nightlife", label: "夜生活" },
+    { key: "quiet", label: "安静" },
+    { key: "budget", label: "预算" },
+    { key: "cafe", label: "咖啡" }
   ];
   
   const angleStep = (Math.PI * 2) / dims.length;
@@ -638,31 +660,15 @@ function drawRadarChart(containerId, scores, weights) {
   // 整合完整 SVG
   const svg = `
     <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-      <defs>
-        <radialGradient id="grad-area" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="rgba(13, 148, 136, 0.1)" />
-          <stop offset="100%" stop-color="rgba(14, 165, 233, 0.45)" />
-        </radialGradient>
-      </defs>
-      
-      <!-- 雷达网格 background -->
       ${gridSvg}
       ${axisSvg}
-      
-      <!-- 期望范围 polygon (虚线边框，轻微发光) -->
-      <polygon points="${expectedPoints}" fill="none" stroke="#2563eb" stroke-dasharray="3,3" stroke-width="2" opacity="0.8" />
-      
-      <!-- 实际评分 polygon -->
-      <polygon points="${areaPoints}" fill="url(#grad-area)" stroke="#0d9488" stroke-width="2.5" />
-      
-      <!-- 实际评分折点小圆圈 -->
+      <polygon points="${expectedPoints}" fill="none" stroke="#c4703f" stroke-dasharray="4,3" stroke-width="1.5" opacity="0.85" />
+      <polygon points="${areaPoints}" fill="rgba(30, 58, 47, 0.12)" stroke="#1e3a2f" stroke-width="2" />
       ${dims.map((dim, idx) => {
         const val = scores[dim.key] || 0;
         const coord = getCoordinates(idx, val);
-        return `<circle cx="${coord.x}" cy="${coord.y}" r="3.5" fill="#ffffff" stroke="#0d9488" stroke-width="2" />`;
+        return `<circle cx="${coord.x}" cy="${coord.y}" r="3" fill="#ffffff" stroke="#1e3a2f" stroke-width="1.5" />`;
       }).join("")}
-      
-      <!-- 维度文字 -->
       ${textSvg}
     </svg>
   `;
@@ -672,15 +678,16 @@ function drawRadarChart(containerId, scores, weights) {
 
 // 9. 对比栏功能逻辑
 function initComparisonDrawer() {
-  const drawerHeader = document.getElementById("compare-drawer-header");
   const drawer = document.getElementById("compare-drawer");
-  
+  const drawerHeader = document.getElementById("compare-drawer-header");
+
   if (drawerHeader && drawer) {
-    drawerHeader.addEventListener("click", () => {
+    drawerHeader.addEventListener("click", (e) => {
+      if (e.target.closest("#close-compare-drawer")) return;
       drawer.classList.toggle("open");
     });
   }
-  
+
   const closeBtn = document.getElementById("close-compare-drawer");
   if (closeBtn && drawer) {
     closeBtn.addEventListener("click", (e) => {
@@ -762,17 +769,17 @@ function updateComparisonDrawer() {
   // 构建对比表格结构
   let tableHeader = `<th>特性 / 街区</th>`;
   let scoreRows = {
-    match: `<tr><td><strong>契合度 %</strong></td>`,
-    price: `<tr><td><strong>平均消费</strong></td>`,
-    safety: `<tr><td>🛡️ 安全环境</td>`,
-    transit: `<tr><td>🚇 交通便利</td>`,
-    shopping: `<tr><td>🛍️ 美食购物</td>`,
-    cafe: `<tr><td>☕ 咖啡/Chill</td>`,
-    quiet: `<tr><td>🤫 安静舒适</td>`,
-    nightlife: `<tr><td>✨ 夜生活</td>`,
-    budget: `<tr><td>💰 预算友好</td>`,
-    pros: `<tr><td>✅ 优势</td>`,
-    cons: `<tr><td>❌ 劣势</td>`,
+    match: `<tr><td><strong>匹配度</strong></td>`,
+    price: `<tr><td><strong>消费水平</strong></td>`,
+    safety: `<tr><td>${DIM_LABELS.safety}</td>`,
+    transit: `<tr><td>${DIM_LABELS.transit}</td>`,
+    shopping: `<tr><td>${DIM_LABELS.shopping}</td>`,
+    cafe: `<tr><td>${DIM_LABELS.cafe}</td>`,
+    quiet: `<tr><td>${DIM_LABELS.quiet}</td>`,
+    nightlife: `<tr><td>${DIM_LABELS.nightlife}</td>`,
+    budget: `<tr><td>${DIM_LABELS.budget}</td>`,
+    pros: `<tr><td>优点</td>`,
+    cons: `<tr><td>缺点</td>`,
     actions: `<tr><td>操作</td>`
   };
   
@@ -844,7 +851,7 @@ function triggerDynamicApiAnalysis() {
     return;
   }
   
-  showApiStatusMessage("正在通过地图 API 实测周边设施...", "loading");
+  showApiStatusMessage("正在通过地图 API 获取周边数据…", "loading");
   
   if (provider === "amap") {
     const key = window.MAP_CONFIG.amap.key;
@@ -887,10 +894,7 @@ function showApiStatusMessage(msg, type) {
   if (!banner) return;
   
   banner.className = `api-banner api-banner-${type}`;
-  banner.innerHTML = `
-    <span class="banner-icon">${type === 'loading' ? '⏳' : type === 'active' ? '✅' : '⚠️'}</span>
-    <span class="banner-text">${msg}</span>
-  `;
+  banner.innerHTML = `<span class="banner-text">${msg}</span>`;
   banner.style.display = "flex";
   
   // 成功或警告状态可在 5 秒后消失
@@ -988,7 +992,7 @@ function fetchAmapNeighborhoodsData() {
     });
     
     Promise.all(promises).then(() => {
-      showApiStatusMessage("高德 API 实时增强计算完成！", "active");
+      showApiStatusMessage("高德 API 数据已更新", "active");
       calculateRecommendations();
     });
   });
@@ -1056,7 +1060,7 @@ function fetchGoogleNeighborhoodsData() {
   });
   
   Promise.all(promises).then(() => {
-    showApiStatusMessage("Google API 实时增强计算完成！", "active");
+    showApiStatusMessage("Google API 数据已更新", "active");
     calculateRecommendations();
   });
 }

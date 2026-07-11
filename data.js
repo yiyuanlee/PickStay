@@ -761,5 +761,277 @@ window.CITIES_DATA = {
         detailText: "天满与天神桥筋是大阪人自己的食堂。天神桥筋商店街从南到北绵延 2.6 公里，药妆、百元店、生鲜与日常用品一应俱全。天满站周边的居酒屋 alley 在下班后极为热闹，物价远低于道顿堀。若想体验「大阪人真正在吃什么」，天满是比游客区更 authentic 的选择。"
       }
     ]
+  },
+  shanghai: {
+    preferredProvider: "amap",
+    name: "上海 (Shanghai)",
+    description: "海派风情与国际都市的交汇",
+    center: { lat: 31.2304, lng: 121.4737 },
+    neighborhoods: [
+      {
+        id: "thebund",
+        name: "外滩/南京路 (The Bund)",
+        tagline: "万国建筑群与黄浦江夜景",
+        center: { lat: 31.2397, lng: 121.4908 },
+        scores: { budget: 4, safety: 9, transit: 10, shopping: 10, nightlife: 7, quiet: 6, cafe: 7 },
+        pros: ["步行可达外滩、南京路步行街，夜景极佳", "地铁网络密集，前往浦东机场和虹桥枢纽方便", "高端酒店与精品民宿选择丰富"],
+        cons: ["游客密集，节假日人潮拥挤", "住宿价格偏高，江景房尤其昂贵"],
+        priceLevel: "高档奢华 (¥¥¥¥)",
+        bestFor: "初次到访、喜欢城市地标夜景的旅行者",
+        detailText: "外滩是上海最具标志性的区域。清晨在滨江步道散步，夜晚看陆家嘴灯光，是很多人心目中的上海第一印象。南京路步行街购物便利，周边餐饮选择极多。"
+      },
+      {
+        id: "frenchconcession",
+        name: "法租界/衡山路 (French Concession)",
+        tagline: "梧桐树下的咖啡与洋房慢生活",
+        center: { lat: 31.2156, lng: 121.4453 },
+        scores: { budget: 5, safety: 9, transit: 9, shopping: 8, nightlife: 7, quiet: 8, cafe: 10 },
+        pros: ["独立咖啡馆、买手店、小酒馆密度极高", "街区安静优雅，适合步行和骑行", "治安良好，生活气息浓厚"],
+        cons: ["热门路段周末停车困难", "老洋房民宿隔音参差不齐"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "咖啡爱好者、文艺慢游、追求街区质感的旅行者",
+        detailText: "法租界保留了上海最有味道的街区肌理。衡山路、永康路、武康路一带，梧桐掩映下的咖啡馆和西餐小馆让人愿意放慢脚步，是上海最适合“住下来感受城市”的区域之一。"
+      },
+      {
+        id: "xintiandi",
+        name: "新天地/徐汇 (Xintiandi)",
+        tagline: "石库门改造的时尚生活区",
+        center: { lat: 31.2204, lng: 121.4752 },
+        scores: { budget: 4, safety: 9, transit: 9, shopping: 9, nightlife: 8, quiet: 7, cafe: 9 },
+        pros: ["餐饮、酒吧、精品购物集中，夜生活丰富", "地铁方便，前往迪士尼和虹桥都较顺畅", "新旧建筑融合，拍照和散步体验好"],
+        cons: ["消费偏高，热门餐厅需排队", "周末人流大，安静感一般"],
+        priceLevel: "高档奢华 (¥¥¥¥)",
+        bestFor: "喜欢时尚餐饮、夜生活、城市更新的旅行者",
+        detailText: "新天地把石库门建筑改造成现代商业空间，既有上海历史感，又充满当代都市活力。周边徐汇区域咖啡馆和书店众多，适合边逛边吃的城市度假方式。"
+      },
+      {
+        id: "jingan",
+        name: "静安寺 (Jing'an)",
+        tagline: "市中心商圈与寺庙静谧并存",
+        center: { lat: 31.2231, lng: 121.4455 },
+        scores: { budget: 4, safety: 9, transit: 10, shopping: 9, nightlife: 7, quiet: 7, cafe: 8 },
+        pros: ["地铁换乘极其方便，去浦东浦西都高效", "久光、嘉里中心等商场配套成熟", "酒店选择多，商务和休闲兼顾"],
+        cons: ["早晚高峰商圈拥堵", "住宿价格处于上海高位"],
+        priceLevel: "高档奢华 (¥¥¥¥)",
+        bestFor: "商务出行、追求交通便利和成熟配套的游客",
+        detailText: "静安寺商圈是上海最核心的生活区之一。这里商场、地铁、餐饮一应俱全，既有都市效率，也能在寺庙周边找到片刻安静，适合希望“住得省心”的旅行者。"
+      },
+      {
+        id: "tianzifang",
+        name: "田子坊/泰康路 (Tianzifang)",
+        tagline: "弄堂里的手作小店与市井烟火",
+        center: { lat: 31.2103, lng: 121.4687 },
+        scores: { budget: 6, safety: 8, transit: 8, shopping: 8, nightlife: 6, quiet: 6, cafe: 8 },
+        pros: ["文艺小店、手作工坊和特色餐饮集中", "靠近打浦桥，地铁出行方便", "民宿和青年旅舍选择较多"],
+        cons: ["弄堂狭窄，携带大件行李不便", "白天游客多，夜间相对安静"],
+        priceLevel: "中等 (¥¥¥)",
+        bestFor: "背包客、喜欢逛小店和拍照的旅行者",
+        detailText: "田子坊是上海最典型的弄堂商业区。小巷里藏着无数创意店铺和咖啡馆，适合慢慢逛、慢慢找。住在附近，可以体验更市井、更生活化的一面上海。"
+      }
+    ]
+  },
+  hongkong: {
+    preferredProvider: "google",
+    name: "香港 (Hong Kong)",
+    description: "山海之城与多元文化的交汇点",
+    center: { lat: 22.3193, lng: 114.1694 },
+    neighborhoods: [
+      {
+        id: "central",
+        name: "中环 (Central)",
+        tagline: "金融中心与半山扶梯的都市核心",
+        center: { lat: 22.2819, lng: 114.1586 },
+        scores: { budget: 3, safety: 9, transit: 10, shopping: 10, nightlife: 8, quiet: 6, cafe: 8 },
+        pros: ["地铁、巴士、渡轮接驳方便，出行效率极高", "顶级商场、米其林餐厅和酒吧集中", "前往太平山顶、维港夜景非常便利"],
+        cons: ["酒店面积小、价格贵", "工作日人流密集，节奏快"],
+        priceLevel: "高档奢华 (¥¥¥¥)",
+        bestFor: "商务客、购物达人、追求核心地段便利的旅行者",
+        detailText: "中环是香港最经典的核心区。从置地广场到兰桂坊，从半山扶梯到海滨长廊，这里集中了香港最成熟的都市配套，适合第一次来港、希望住得方便的游客。"
+      },
+      {
+        id: "tsimshatsui",
+        name: "尖沙咀 (Tsim Sha Tsui)",
+        tagline: "维港夜景与购物天堂",
+        center: { lat: 22.2988, lng: 114.1722 },
+        scores: { budget: 4, safety: 9, transit: 10, shopping: 10, nightlife: 7, quiet: 6, cafe: 7 },
+        pros: ["星光大道、海港城、弥敦道购物一站式", "看维港灯光秀和天星小轮非常方便", "酒店密度高，选择面广"],
+        cons: ["游客区物价偏高", "周末弥敦道人流拥挤"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "家庭出游、购物爱好者、想看维港夜景的游客",
+        detailText: "尖沙咀是香港游客最熟悉的住宿区之一。白天购物，傍晚海滨散步，夜晚看灯光秀，行程紧凑也很高效，特别适合短停留的旅行者。"
+      },
+      {
+        id: "causewaybay",
+        name: "铜锣湾 (Causeway Bay)",
+        tagline: "购物天堂与本地生活气息",
+        center: { lat: 22.2802, lng: 114.1850 },
+        scores: { budget: 5, safety: 9, transit: 9, shopping: 10, nightlife: 8, quiet: 6, cafe: 8 },
+        pros: ["时代广场、希慎广场等商场密集", "餐饮选择丰富，从茶餐厅到日料都有", "港岛地铁方便，去湾仔、中环很快"],
+        cons: ["周末购物人流大", "酒店价格不低，房间偏小"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "爱购物、爱美食、希望感受港岛活力的旅行者",
+        detailText: "铜锣湾是香港最热闹的购物区之一，但周边也保留了不少本地生活气息。住在这一带，白天逛街吃饭，晚上去酒吧或海边散步都很方便。"
+      },
+      {
+        id: "mongkok",
+        name: "旺角/油麻地 (Mong Kok)",
+        tagline: "市井烟火与深夜食肆",
+        center: { lat: 22.3193, lng: 114.1694 },
+        scores: { budget: 7, safety: 7, transit: 10, shopping: 9, nightlife: 9, quiet: 4, cafe: 6 },
+        pros: ["餐饮、夜市、药妆和小店性价比很高", "地铁四通八达，去九龙和港岛都方便", "住宿选择多，适合预算有限的旅行者"],
+        cons: ["街道嘈杂，夜间人流密集", "酒店品质差异大，需仔细挑选"],
+        priceLevel: "经济实惠 (¥¥)",
+        bestFor: "背包客、美食爱好者、预算有限的旅行者",
+        detailText: "旺角和油麻地是香港最具市井气息的区域。霓虹招牌、深夜食肆、热闹街市构成了很多人心中的港式日常。如果你更在意性价比和地道体验，这里会比中环更合适。"
+      },
+      {
+        id: "kennedytown",
+        name: "坚尼地城/西环 (Kennedy Town)",
+        tagline: "海旁咖啡与慢节奏社区",
+        center: { lat: 22.2813, lng: 114.1273 },
+        scores: { budget: 6, safety: 9, transit: 8, shopping: 6, nightlife: 5, quiet: 9, cafe: 9 },
+        pros: ["海滨步道风景好，咖啡馆和西餐小店多", "比中环安静，生活感更强", "适合喜欢慢节奏港岛生活的旅行者"],
+        cons: ["距离核心购物区稍远", "夜生活选择相对有限"],
+        priceLevel: "中等 (¥¥¥)",
+        bestFor: "咖啡控、情侣、追求安静海景的旅行者",
+        detailText: "坚尼地城是近年来香港最受欢迎的慢生活区域之一。海旁散步、社区咖啡馆和小餐馆构成了很舒适的日常节奏，适合想避开游客区、体验本地生活的住客。"
+      }
+    ]
+  },
+  seoul: {
+    preferredProvider: "google",
+    name: "首尔 (Seoul)",
+    description: "传统韩屋与潮流文化的并存之都",
+    center: { lat: 37.5665, lng: 126.9780 },
+    neighborhoods: [
+      {
+        id: "myeongdong",
+        name: "明洞 (Myeongdong)",
+        tagline: "购物天堂与游客枢纽",
+        center: { lat: 37.5636, lng: 126.9850 },
+        scores: { budget: 5, safety: 8, transit: 10, shopping: 10, nightlife: 8, quiet: 4, cafe: 7 },
+        pros: ["药妆、美妆、百货和街头小吃极其丰富", "地铁方便，去景福宫、南山塔都近", "酒店和民宿选择多，适合首次到访"],
+        cons: ["游客密集，夜间仍较喧闹", "本地生活感相对弱"],
+        priceLevel: "中等 (¥¥¥)",
+        bestFor: "初次来首尔、热衷购物和美食的旅行者",
+        detailText: "明洞是首尔最典型的游客住宿区。街道热闹、商店密集、交通方便，几乎什么都不用提前规划，适合第一次来韩国、希望住得省心的游客。"
+      },
+      {
+        id: "hongdae",
+        name: "弘大 (Hongdae)",
+        tagline: "年轻潮流与街头表演的活力中心",
+        center: { lat: 37.5563, lng: 126.9236 },
+        scores: { budget: 7, safety: 8, transit: 9, shopping: 9, nightlife: 10, quiet: 4, cafe: 9 },
+        pros: ["夜生活、Live 演出、潮流小店非常丰富", "咖啡馆和平价餐饮选择多", "氛围年轻，适合独自或结伴旅行"],
+        cons: ["周末夜晚嘈杂，睡眠质量可能受影响", "酒店多为中小规模，豪华选择少"],
+        priceLevel: "经济实惠 (¥¥)",
+        bestFor: "年轻人、夜生活爱好者、潮流文化爱好者",
+        detailText: "弘大是首尔最有青春气息的区域。街头表演、独立小店、夜店和咖啡馆让这里从早到晚都充满能量，非常适合喜欢热闹、社交和夜生活的旅行者。"
+      },
+      {
+        id: "itaewon",
+        name: "梨泰院 (Itaewon)",
+        tagline: "异国餐饮与国际社区",
+        center: { lat: 37.5344, lng: 126.9943 },
+        scores: { budget: 5, safety: 8, transit: 8, shopping: 7, nightlife: 9, quiet: 6, cafe: 8 },
+        pros: ["西餐、中东菜、精酿酒吧等异国餐饮丰富", "国际化程度高，英语沟通相对容易", "夜生活活跃，酒吧和俱乐部多"],
+        cons: ["山坡地形多，步行略累", "热门酒吧街周末较吵"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "喜欢国际美食、夜生活、多元文化的旅行者",
+        detailText: "梨泰院是首尔最国际化的区域之一。这里聚集了来自世界各地的美食和酒吧，氛围开放而多元，适合想体验不同于传统韩国城市面貌的游客。"
+      },
+      {
+        id: "gangnam",
+        name: "江南 (Gangnam)",
+        tagline: "现代商圈与高端生活方式",
+        center: { lat: 37.4979, lng: 127.0276 },
+        scores: { budget: 3, safety: 9, transit: 9, shopping: 10, nightlife: 7, quiet: 7, cafe: 8 },
+        pros: ["高端商场、美容、餐饮和商务配套成熟", "地铁方便，区域整洁安全", "酒店服务标准普遍较高"],
+        cons: ["消费昂贵，缺少传统市井感", "景点相对分散，需搭配地铁出行"],
+        priceLevel: "高档奢华 (¥¥¥¥)",
+        bestFor: "商务客、追求舒适住宿和购物体验的旅行者",
+        detailText: "江南代表了首尔现代、精致的一面。这里有大型商场、设计感咖啡馆和整洁的街道，适合重视住宿品质、希望住得安静高效的游客。"
+      },
+      {
+        id: "bukchon",
+        name: "北村/景福宫周边 (Bukchon)",
+        tagline: "韩屋小巷与传统首尔",
+        center: { lat: 37.5826, lng: 126.9831 },
+        scores: { budget: 6, safety: 9, transit: 8, shopping: 6, nightlife: 4, quiet: 9, cafe: 8 },
+        pros: ["韩屋、宫墙和传统街巷保存完好", "清晨和傍晚散步体验极佳", "靠近景福宫、三清洞，文化氛围浓"],
+        cons: ["住宿多为韩屋民宿，设施差异大", "夜间活动少，不适合追求夜生活的人"],
+        priceLevel: "中等 (¥¥¥)",
+        bestFor: "文化爱好者、摄影爱好者、追求安静传统的旅行者",
+        detailText: "北村一带保留了首尔最有历史感的生活肌理。蜿蜒的韩屋小巷、宫墙和茶馆让人仿佛走进传统首尔，适合想慢慢感受城市文化的住客。"
+      }
+    ]
+  },
+  london: {
+    preferredProvider: "google",
+    name: "伦敦 (London)",
+    description: "历史底蕴与现代创意并存的世界都会",
+    center: { lat: 51.5074, lng: -0.1278 },
+    neighborhoods: [
+      {
+        id: "soho",
+        name: "索霍/西区 (Soho)",
+        tagline: "剧院、酒吧与创意产业的心脏",
+        center: { lat: 51.5138, lng: -0.1360 },
+        scores: { budget: 3, safety: 7, transit: 10, shopping: 9, nightlife: 10, quiet: 3, cafe: 8 },
+        pros: ["西区剧院、酒吧、餐厅和夜生活极其丰富", "地铁密集，步行可达很多核心景点", "创意氛围浓厚，街头活力十足"],
+        cons: ["夜间嘈杂，住宿价格很高", "热门区域周末人流密集"],
+        priceLevel: "高档奢华 (¥¥¥¥)",
+        bestFor: "戏剧爱好者、夜生活爱好者、短停留城市旅行者",
+        detailText: "索霍是伦敦最有活力的核心区之一。白天逛商店和咖啡馆，晚上看戏或泡酒吧，几乎什么都不用离开这片区域，适合喜欢城市节奏的游客。"
+      },
+      {
+        id: "kensington",
+        name: "肯辛顿 (Kensington)",
+        tagline: "博物馆区旁的中产优雅住宅",
+        center: { lat: 51.4994, lng: -0.1938 },
+        scores: { budget: 3, safety: 9, transit: 9, shopping: 8, nightlife: 5, quiet: 9, cafe: 8 },
+        pros: ["邻近自然史博物馆、V&A 博物馆和海德公园", "街区安静安全，适合家庭出行", "高端酒店和公寓酒店选择多"],
+        cons: ["夜生活相对平淡", "住宿价格处于伦敦高位"],
+        priceLevel: "高档奢华 (¥¥¥¥)",
+        bestFor: "家庭游客、博物馆爱好者、追求安静品质的旅行者",
+        detailText: "肯辛顿是伦敦最适合“住得舒服”的区域之一。博物馆、公园和优雅街道近在咫尺，白天看展散步，晚上回到安静街区，节奏从容而体面。"
+      },
+      {
+        id: "shoreditch",
+        name: "肖尔迪奇 (Shoreditch)",
+        tagline: "街头艺术、独立酒吧与东伦敦创意",
+        center: { lat: 51.5260, lng: -0.0784 },
+        scores: { budget: 5, safety: 7, transit: 8, shopping: 8, nightlife: 9, quiet: 5, cafe: 9 },
+        pros: ["街头艺术、复古市集、独立咖啡馆和酒吧丰富", "氛围年轻，适合探索东伦敦文化", "餐饮创意度高，选择多样"],
+        cons: ["部分路段夜间较杂", "酒店多为精品民宿，标准差异大"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "文艺青年、设计爱好者、喜欢探索小众街区的旅行者",
+        detailText: "肖尔迪奇代表了伦敦最新潮的一面。旧仓库、涂鸦墙、独立酒吧和创意餐厅让这里充满实验气质，适合不想住传统游客区、希望感受城市创意能量的人。"
+      },
+      {
+        id: "coventgarden",
+        name: "科文特花园 (Covent Garden)",
+        tagline: "街头表演与精品购物的经典地标",
+        center: { lat: 51.5115, lng: -0.1230 },
+        scores: { budget: 3, safety: 8, transit: 10, shopping: 10, nightlife: 7, quiet: 5, cafe: 8 },
+        pros: ["步行可达西区、泰晤士河和众多地标", "精品购物、餐厅和街头表演集中", "地铁方便，旅游效率极高"],
+        cons: ["游客区物价高", "白天热闹，夜间相对安静"],
+        priceLevel: "高档奢华 (¥¥¥¥)",
+        bestFor: "首次到访伦敦、希望步行游览的旅行者",
+        detailText: "科文特花园是伦敦最经典的游客友好区域。街头表演、精品店和餐馆让这里从早到晚都充满吸引力，适合把行程排得很满、又想减少通勤时间的住客。"
+      },
+      {
+        id: "cityoflondon",
+        name: "金融城 (City of London)",
+        tagline: "历史遗迹与现代摩天楼并存",
+        center: { lat: 51.5155, lng: -0.0922 },
+        scores: { budget: 4, safety: 8, transit: 10, shopping: 7, nightlife: 5, quiet: 7, cafe: 7 },
+        pros: ["地铁和铁路枢纽密集，跨城出行方便", "邻近塔桥、伦敦塔等核心景点", "商务酒店服务标准高"],
+        cons: ["周末部分区域较空，生活气息弱", "餐饮和夜生活偏商务风"],
+        priceLevel: "中等偏高 (¥¥¥)",
+        bestFor: "商务客、短途旅行者、重视交通效率的游客",
+        detailText: "金融城看似商务，却藏着伦敦最古老的历史遗迹。这里适合重视交通便利、希望快速抵达机场和主要景点的旅行者，尤其是短停留或商务出差人群。"
+      }
+    ]
   }
 };
