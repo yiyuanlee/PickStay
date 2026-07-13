@@ -22,7 +22,6 @@ export function CompareVisual({ neighborhoods }: CompareVisualProps) {
               weights={DEFAULT_WEIGHTS}
               size="md"
               showLabels
-              matchScore={n.matchScore}
               delayMs={i * 120}
             />
             <div className="text-center">

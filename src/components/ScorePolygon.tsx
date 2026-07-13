@@ -21,7 +21,6 @@ interface ScorePolygonProps {
   animate?: boolean;
   delayMs?: number;
   className?: string;
-  matchScore?: number;
 }
 
 export function ScorePolygon({
@@ -33,7 +32,6 @@ export function ScorePolygon({
   animate = true,
   delayMs = 0,
   className,
-  matchScore,
 }: ScorePolygonProps) {
   const config = POLYGON_SIZES[size];
   const { width, height, radius, labelRadius, fontSize } = config;
@@ -166,19 +164,6 @@ export function ScorePolygon({
             );
           })}
 
-        {matchScore !== undefined && size !== "sm" && (
-          <text
-            x={centerX}
-            y={centerY}
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fill="#0071e3"
-            fontSize={size === "lg" ? 18 : 14}
-            fontWeight="600"
-          >
-            {matchScore}%
-          </text>
-        )}
       </svg>
 
       {showLegend && (

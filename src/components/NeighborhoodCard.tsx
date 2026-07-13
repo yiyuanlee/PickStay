@@ -52,7 +52,6 @@ export function NeighborhoodCard({
               weights={weights}
               size="md"
               showLabels
-              matchScore={neighborhood.matchScore}
               delayMs={rank * 80}
             />
             <span className="mt-2 text-[11px] text-apple-text-secondary">
