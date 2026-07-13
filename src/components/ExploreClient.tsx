@@ -1,8 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { RefreshCw } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { CitySelector } from "@/components/CitySelector";
 import { ComparisonDrawer } from "@/components/ComparisonDrawer";
 import { NeighborhoodCard } from "@/components/NeighborhoodCard";
@@ -66,13 +65,24 @@ function resolveInitialWeights(initialPreset?: PersonaPresetId | null): {
   return { weights: DEFAULT_WEIGHTS, activePreset: null };
 }
 
+function buildExplorePath(cityId: string, preset: PersonaPresetId | null) {
+  const params = new URLSearchParams();
+  if (preset) params.set("preset", preset);
+  const query = params.toString();
+  return `/explore/${cityId}${query ? `?${query}` : ""}`;
+}
+
+function replaceExploreUrl(cityId: string, preset: PersonaPresetId | null) {
+  const nextUrl = buildExplorePath(cityId, preset);
+  window.history.replaceState(window.history.state, "", nextUrl);
+}
+
 export function ExploreClient({
   cities,
   initialCityId = "tokyo",
   initialPreset = null,
   isAuthenticated = false,
 }: ExploreClientProps) {
-  const router = useRouter();
   const initial = resolveInitialWeights(initialPreset);
 
   const [cityId, setCityId] = useState(initialCityId);
@@ -85,6 +95,7 @@ export function ExploreClient({
   const [detailId, setDetailId] = useState<string | null>(null);
   const [apiStatus, setApiStatus] = useState<string | null>(null);
   const [isEnriching, setIsEnriching] = useState(false);
+  const enrichRequestId = useRef(0);
 
   const city = useMemo(
     () => cities.find((c) => c.id === cityId) ?? cities[0],
@@ -120,16 +131,13 @@ export function ExploreClient({
         savePreferences(nextCityId, nextWeights, nextPreset);
       }
 
-      const params = new URLSearchParams();
-      if (nextPreset) params.set("preset", nextPreset);
-      router.replace(`/explore/${nextCityId}?${params.toString()}`, {
-        scroll: false,
-      });
+      replaceExploreUrl(nextCityId, nextPreset);
     },
-    [isAuthenticated, router]
+    [isAuthenticated]
   );
 
   const enrichMapData = useCallback(async (targetCityId: string) => {
+    const requestId = ++enrichRequestId.current;
     setIsEnriching(true);
     setApiStatus("正在通过地图 API 实测周边设施...");
     try {
@@ -139,6 +147,8 @@ export function ExploreClient({
         body: JSON.stringify({ cityId: targetCityId }),
       });
       const data = await res.json();
+      if (requestId !== enrichRequestId.current) return;
+
       if (data.dynamicScores && Object.keys(data.dynamicScores).length > 0) {
         setDynamicScores(data.dynamicScores);
         setApiStatus(`${data.provider} API 实时增强完成`);
@@ -146,18 +156,33 @@ export function ExploreClient({
         setApiStatus("使用本地预置评分（Mock 模式或未配置 API Key）");
       }
     } catch {
-      setApiStatus("API 增强失败，已使用本地数据");
+      if (requestId === enrichRequestId.current) {
+        setApiStatus("API 增强失败，已使用本地数据");
+      }
     } finally {
-      setIsEnriching(false);
-      setTimeout(() => setApiStatus(null), 6000);
+      if (requestId === enrichRequestId.current) {
+        setIsEnriching(false);
+        setTimeout(() => setApiStatus(null), 6000);
+      }
     }
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      void enrichMapData(cityId);
-    }, 0);
-    return () => clearTimeout(timer);
+    const onPopState = () => {
+      const match = window.location.pathname.match(/\/explore\/([^/]+)/);
+      if (match?.[1]) {
+        setCityId(match[1]);
+        setDynamicScores({});
+        setComparisonIds([]);
+      }
+    };
+
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  useEffect(() => {
+    void enrichMapData(cityId);
   }, [cityId, enrichMapData]);
 
   const handleCityChange = (nextCityId: string) => {
@@ -193,7 +218,7 @@ export function ExploreClient({
   return (
     <div className="pb-32">
       {apiStatus && (
-        <div className="mb-4 animate-fade-up rounded-2xl border border-apple-blue/20 bg-[#e8f4fd] px-4 py-3 text-sm text-apple-blue">
+        <div className="mb-4 rounded-2xl border border-apple-blue/20 bg-[#e8f4fd] px-4 py-3 text-sm text-apple-blue transition-opacity duration-300">
           {isEnriching && (
             <RefreshCw className="mr-2 inline h-3.5 w-3.5 animate-spin" />
           )}
@@ -251,7 +276,7 @@ export function ExploreClient({
           <h2 className="mb-4 font-display text-xl font-semibold text-apple-text">
             推荐街区 · {city?.name}
           </h2>
-          <div className="space-y-4">
+          <div key={cityId} className="space-y-4">
             {ranked.map((n, i) => (
               <NeighborhoodCard
                 key={n.id}
