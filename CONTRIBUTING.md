@@ -1,20 +1,46 @@
 # 贡献指南
 
-感谢你对 PickStay 的关注！本项目是纯前端静态应用，欢迎通过 Pull Request 扩展城市与街区数据。
+感谢你对 PickStay 的关注！以下是参与贡献的方式。
 
-## 如何添加新城市
+## 添加新城市/街区
 
-1. 在 `data.js` 的 `window.CITIES_DATA` 中新增城市对象，字段包括：
-   - `name`、`description`、`center`（城市中心坐标）
-   - `preferredProvider`：`"amap"`（国内）或 `"google"`（海外）
-   - `neighborhoods`：街区数组，每个街区需包含 `id`、`name`、`tagline`、`center`、`scores`（7 维 1–10 分）、`pros`、`cons`、`priceLevel`、`bestFor`、`detailText`
+### 方式一：管理后台（推荐，需 admin 角色）
 
-2. 在 `index.html` 的城市选择区增加对应的 `.city-card`，`data-city` 与 `data.js` 中的 key 一致。
+1. 登录后在 Supabase 中将你的 `user_profiles.role` 设为 `admin`
+2. 访问 `/admin` 进行城市/街区 CRUD
 
-3. 本地双击 `index.html` 或用静态服务器预览，确认推荐排序、详情弹窗、地图链接与对比功能正常。
+### 方式二：Seed 脚本
 
-## 开发约定
+1. 编辑 `legacy/data.js` 中的 `window.CITIES_DATA`
+2. 运行 `npm run seed:extract` 重新生成 `src/data/cities.json` 和 `supabase/seed.sql`
+3. 在 Supabase 中执行更新后的 seed SQL
 
-- 保持最小改动，匹配现有代码风格（原生 JS，无构建工具）
-- 坐标使用 `{ lat, lng }` 格式
-- 每个城市建议 6–8 个代表性街区，保持数据质量而非数量堆砌
+### 方式三：直接编辑本地数据
+
+编辑 `src/data/cities.json`（开发模式 fallback 数据源）
+
+## 开发流程
+
+```bash
+npm install
+npm run dev
+npm run test
+npm run lint
+```
+
+## Pull Request 规范
+
+- 确保 `npm run test` 和 `npm run build` 通过
+- 新功能请补充 Vitest 测试
+- UI 变更请确保响应式布局正常
+
+## 数据格式
+
+每个街区需包含：
+
+- `id`, `name`, `tagline`, `center`, `scores` (7 维 1-10 分)
+- `pros[]`, `cons[]`, `priceLevel`, `bestFor`, `detailText`
+
+## 原始 Legacy 代码
+
+v1 纯前端版本保留在 `legacy/` 目录，供参考和对照。

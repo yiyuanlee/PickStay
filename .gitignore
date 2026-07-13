@@ -1,0 +1,12 @@
+.vercel
+node_modules
+.next
+.env
+.env.local
+.env*.local
+playwright-report
+test-results
+coverage
+*.tsbuildinfo
+supabase/seed-all.txt
+supabase/seed-chunks/*.json

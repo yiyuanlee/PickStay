@@ -1,0 +1,113 @@
+INSERT INTO cities (id, name, description, preferred_provider, center_lat, center_lng)
+VALUES ('melbourne', '澧ㄥ皵鏈?(Melbourne)', '鍏ㄧ悆鍜栧暋涔嬮兘锛屽厖婊¤澶磋壓鏈笌鎱㈣妭濂忓贩寮勭殑鏂囧寲涔嬪煄', 'google', -37.8136, 144.9631)
+ON CONFLICT (id) DO UPDATE SET
+  name = EXCLUDED.name,
+  description = EXCLUDED.description,
+  preferred_provider = EXCLUDED.preferred_provider,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('fitzroy', 'melbourne', '鑿茶尐缃椾紛 (Fitzroy)', '娉㈠笇绫充簹鏂囪壓涓庤澶磋壓鏈殑鍙戞簮鍦?, '{"budget":7,"safety":8,"transit":8,"shopping":9,"nightlife":9,"quiet":7,"cafe":10}'::jsonb, '{"鍏ㄥⅷ灏旀湰鏈€妫掔殑鐙珛鍜栧暋搴椾笌绱犻椁愬巺鑱氶泦鍖?,"琛楀ご澹佺敾鑹烘湳涓庝腑鍙?璁捐甯堢簿鍝佸簵闅忓鍙","澶滈棿鏈夎澶氭枃鑹哄鍙ょ殑榛戣兌鐖靛＋閰掑惂涓嶭ivehouse"}', '{"鍛ㄦ湯澶滄櫄閮ㄥ垎閰掑惂鍛ㄨ竟鐣ユ樉鍢堟潅","涓昏鏄簿鍝佸叕瀵撴垨姘戝锛屽ぇ鍨嬭繛閿侀珮绔厭搴楄緝灏?}', -37.801, 144.979, '涓瓑 (楼楼楼)', '鍜栧暋鍙戠儳鍙嬨€佸彜鐫€涓庨粦鑳惰糠銆佽拷姹傚厛閿嬫枃鍖栦綋楠岀殑鏃呰鑰?, '鑿茶尐缃椾紛鏄ⅷ灏旀湰鐨勬疆娴佹枃鍖栧績鑴忋€侭runswick 琛椾笌 Gertrude 琛楃旱妯氦閿欙紝娌胯寮€婊′簡涓栫晫椤跺皷绾х殑鍗曟簮璞嗘墜鍐插挅鍟￠锛堝 Industry Beans锛夈€傝繖閲岀殑寤虹瓚澶栧琚簲褰╂枒鏂撶殑琛楀ご娑傞甫瑕嗙洊锛屾皼鍥撮殢鎬т笖鏋佸叿鍒涢€犲姏锛屾槸鍏ㄤ笘鐣屾渶 Chill 鐨勮鍖轰箣涓€銆?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('cbd', 'melbourne', '甯備腑蹇?(Melbourne CBD)', '娑傞甫宸峰紕涓庝笘鐣岀骇鍜栧暋鎺掓尅鐨勪氦閿?, '{"budget":6,"safety":9,"transit":10,"shopping":10,"nightlife":8,"quiet":4,"cafe":9}'::jsonb, '{"甯備腑蹇冩湁瀹屽叏鍏嶈垂鐨勭數杞﹀尯 (Free Tram Zone)锛屼氦閫氭瀬渚垮埄","钁楀悕鐨勯湇瑗垮皵宸?(Hosier Lane) 鍜岃开鏍奸浄澶 (Degraves St) 鍜栧暋宸疯繎鍦ㄥ挮灏?,"鐢熸椿鏋佸叾鏂逛究锛岀淮澶氬埄浜氬コ鐜嬪競鍦鸿繎鏃?}', '{"楂樻ゼ鏋楃珛锛岃溅姘撮┈榫欙紝缂轰箯瀹侀潤灞呬綇鎰?,"浣忓鎴块棿鏅亶杈冨皬涓斿亸鍚戝叕瀵撳紡閰掑簵"}', -37.8136, 144.9631, '涓瓑鍋忛珮 (楼楼楼)', '鍒濇鍒拌銆佽拷姹傞珮鏁堝嚭琛屼笌璐墿渚垮埄鐨勬梾琛岃€?, '澧ㄥ皵鏈?CBD 缁濋潪鍐峰啺鍐扮殑閲戣瀺鍖猴紝鑰屾槸鍏呮弧浜嗚憲鍚嶇殑鈥滃贩寮勬枃鍖?(Laneway Culture)鈥濄€傛棤鏁扮殑鍦颁笅瀹ゃ€佸皬绐勫贩閲屾尋婊′簡姘村噯鏋侀珮鐨勭嫭绔嬪挅鍟￠锛堝 Brother Baba Budan锛夈€傚厤璐圭殑鐜煄鐢佃溅璁╀綘鏃犻渶浜ら€氬崱鍗冲彲鐜╅亶涓昏鏅偣锛岄潪甯搁€傚悎蹇妭濂忕殑鏃呰鑰呫€?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('stkilda', 'melbourne', '鍦ｅ熀灏旇揪 (St Kilda)', '娴锋哗銆佹姒堟爲涓庢棩钀藉皬浼侀箙鐨勫害鍋囨腐婀?, '{"budget":5,"safety":7,"transit":7,"shopping":7,"nightlife":8,"quiet":7,"cafe":8}'::jsonb, '{"绱ч偦鍦ｅ熀灏旇揪娴锋哗锛屾棩钀芥椂鑳藉湪闃叉尝鍫ょ湅閲庣敓绁炰粰灏忎紒楣呭綊宸?,"鎷ユ湁鍘嗗彶鎮犱箙鐨勬湀浜叕鍥父涔愬満 (Luna Park)","娴锋花澶ч亾椋庢櫙浼樼編锛屼紤闂插害鍋囨劅鏋佸己"}', '{"璺濈 CBD 杈冭繙锛岄渶涔樻湁杞ㄧ數杞︼紝涓斾笉鍖呭惈鍦ㄥ厤璐瑰尯鍐?,"Fitzroy St 閮ㄥ垎鍖哄煙娣卞娌诲畨杈冩潅涔?}', -37.868, 144.9739, '涓瓑 (楼楼楼)', '鐑埍澶ф捣銆佸搴嚭娓搞€佽拷姹傛捣婊ㄥ害鍋囬鐨勬梾浜?, '鍦ｅ熀灏旇揪鏄ⅷ灏旀湰鐨勬父涔愭腐婀俱€傝繖閲屾捣椋庡緪寰愶紝涓ゆ梺绉嶆弧浜嗛珮鑰哥殑妫曟鏍戙€傚湪闃垮厠鍏拌 (Acland St) 鍙互鍝佸皾娆у紡绯曠偣锛屼笅鍗堝湪娴锋哗鏅掑お闃筹紝鍌嶆櫄鍠濅竴鏉簿閰垮暏閰掔瓑寰呭皬浼侀箙褰掑发锛屾槸涓€绉嶆叺鎳掗棽閫傜殑娴锋花 Chill 鏂瑰紡銆?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('carlton', 'melbourne', '鍗″皵椤?(Carlton)', '灏忔剰澶у埄鐨勬剰寮忔祿缂╀笌鐨囧灞曡棣嗙豢鑽?, '{"budget":7,"safety":9,"transit":9,"shopping":8,"nightlife":6,"quiet":9,"cafe":10}'::jsonb, '{"绱ч偦鐨囧灞曡棣嗕笌鍗″皵椤胯姳鍥紝缁垮寲鏋佷匠锛屾极姝ヤ綋楠屾瀬浣?,"钁楀悕鐨勨€滃皬鎰忓ぇ鍒┾€濊幈璐¤ (Lygon St) 鍙戞簮鍦帮紝鎰忓紡椁愰ギ缁濅匠","姝ヨ鍗冲彲鍒板ⅷ灏旀湰澶у锛屾不瀹夋瀬濂斤紝瀛︽湳姘涘洿娴?}', '{"楂樻。閰掑簵鍋忓皯锛屼富瑕佹槸瀛︾敓鍏瘬鍜岀粡鍏哥淮澶氬埄浜氬紡鑱旀帓鍒鏀归€犵殑姘戝","澶滅敓娲讳互椁愰ギ鍜屾剰寮忕敎鍝佸簵涓轰富锛岀己涔忓枾闂瑰搴?}', -37.8, 144.9667, '涓瓑 (楼楼楼)', '缇庨瀹躲€佸亸鐖遍潤璋уぇ鍏洯銆佸枩鐖辨剰寮忓挅鍟℃枃鍖栫殑鏃呰鑰?, '鍗″皵椤挎槸澧ㄥ皵鏈挅鍟℃枃鍖栫殑濂犲熀涔嬪湴銆傛剰澶у埄绉绘皯鍦ㄨ幈璐¤寮曞叆浜嗗ⅷ灏旀湰绗竴鍙版剰寮忔祿缂╁挅鍟℃満銆傝繖閲屾湁钁楀悕鐨?Pidapip贸 鍐版穱娣嬪簵涓?Brunetti 鍜栧暋棣嗐€傚崍鍚庡湪鐨囧灞曡棣嗙殑鍠锋硥鏃佺湅楦藉瓙銆佹檼澶槼锛屽枬涓€鏉函姝ｇ殑 Macchiato锛屾槸鍗″皵椤跨嫭鏈夌殑鎱㈣妭濂忔氮婕€?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('southyarra', 'melbourne', '鍗楅泤鎷?(South Yarra)', '浼橀泤濂㈠崕鐨勯泤鐨＋浣忓畢鍖轰笌鏃跺皻Chapel琛?, '{"budget":4,"safety":9,"transit":9,"shopping":10,"nightlife":7,"quiet":8,"cafe":9}'::jsonb, '{"Chapel 琛楁嫢鏈夐《绾т拱鎵嬪簵銆佺櫨璐уぇ妤间笌鏃跺皻椁愰ギ","闈犺繎闆呮媺娌崇晹缁垮甫涓庣殗瀹舵鐗╁洯锛岃嚜鐒剁┖姘旀€′汉","楂樻槦绾х簿鍝佸叕瀵撻厭搴椾紬澶氾紝浣忓鐜鏋佸叿璐ㄦ劅"}', '{"鐢熸椿鎴愭湰楂樻槀锛岄楗強杞︾杈冭吹","鍛ㄦ湯鏅氶棿鏃跺皻閰掑惂鍛ㄨ竟杞﹁締杈冧负鎷ュ牭"}', -37.8398, 144.9953, '楂樻。濂㈠崕 (楼楼楼楼)', '楂樺搧璐ㄦ梾琛岃€呫€佽喘鐗╄揪浜恒€佽拷姹備紭闆呬綇瀹跨幆澧冪殑鍟嗗姟瀹?, '鍗楅泤鎷夋槸澧ㄥ皵鏈憲鍚嶇殑瀵屼汉鍖恒€傝繖閲岀豢鏍戞垚鑽紝鍙よ€佺殑缁村鍒╀簹寮忔帓灞嬩笌鐜颁唬鍖栫殑杞诲ア鍏瘬浜ょ浉杈夋槧銆傝憲鍚嶇殑 Chapel St 闆嗕腑浜嗗叏鍩庢按鍑嗘瀬楂樼殑娼祦鏈嶉グ銆侀珮绔挅鍟″巺涓庡垱鎰?Brunch锛岄潬杩戦泤鎷夋渤鐨勬竻鏅ㄦ參璺戜綋楠屽湪澧ㄥ皵鏈牚绉颁竴缁濄€?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('brunswick', 'melbourne', '甯冧鸡鐟炲厠 (Brunswick)', '鏋佺畝宸ヤ笟椋庛€佺幇鍦烘憞婊氫笌绉绘皯椋庡懗椋熻', '{"budget":8,"safety":8,"transit":8,"shopping":8,"nightlife":9,"quiet":7,"cafe":10}'::jsonb, '{"鎷ユ湁浼楀鐢辨棫浠撳簱鏀瑰缓鑰屾垚鐨勮秴澶х嫭绔嬪挅鍟￠涓庣儤鐒欏巶","鎮夊凹璺?(Sydney Road) 姹囪仛浜嗗湴閬撳湴涓捣銆佷腑涓滀笌鎰忓紡骞虫皯灏忓悆","鎷ユ湁澧ㄥ皵鏈渶娲昏穬鐨勯潚骞存憞婊氱幇鍦轰笌灏忎紬鏈嶈闆跺敭搴?}', '{"閮ㄥ垎鑰佹棫宸ヤ笟鍘傛埧鏀归€犲尯锛屽競瀹圭己涔忕殗瀹惰吹姘?,"璺濈鍗楅儴娴锋哗鏅尯杈冭繙"}', -37.7684, 144.9608, '缁忔祹瀹炴儬 (楼楼)', '鎽囨粴涔愯糠銆佸挅鍟＄儤鐒欐繁搴﹀彂鐑у弸銆佸姹傛€т环姣斿钩姘戣鍖轰綋楠岀殑鏃呰鑰?, '甯冧鸡鐟炲厠鏄ⅷ灏旀湰鍖楅儴鍏稿瀷鐨勫鍏冩枃鍖栦笌鍒涙剰绀惧尯銆傝繖閲屾槸婢虫床鐑樼剻鍚嶅簵锛堝 Code Black Coffee锛夌殑澶ф湰钀ャ€備粨搴撴敼寤虹殑鎸戦珮鍜栧暋棣嗛噷闅忓鍙甯︾潃鐢佃剳鍐欎綔鎴栫敾鐢荤殑骞磋交浜恒€傝繖閲屾湁鏈€鎺ュ湴姘旂殑鐢熸椿鐗╀环銆侀殢鎬х殑琛楀ご娑傞甫浠ュ強涓板瘜涓旀€т环姣旀瀬楂樼殑鐜板満 Live婕斿嚭銆?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('richmond', 'melbourne', '閲屽＋婊?(Richmond)', '鍘傚尯濂ョ壒鑾辨柉涓庨娴撹秺鍗楅鎯呯殑铻嶅悎', '{"budget":7,"safety":8,"transit":9,"shopping":8,"nightlife":8,"quiet":6,"cafe":9}'::jsonb, '{"鎷ユ湁钁楀悕鐨勮秺鍗楃編椋熻锛堢淮澶氬埄浜氳锛変笌鏈€鍦伴亾鐨勮秺鍗楃矇 (Pho)","濂ョ壒鑾辨柉鎶樻墸搴楀瘑甯冿紝闈犺繎澧ㄥ皵鏈澘鐞冨満 (MCG)锛岃璧涢閫?,"浜ら€氱綉鏍煎洓閫氬叓杈撅紝鐏溅鍦伴搧鏁扮珯鍗冲彲鐩磋揪 CBD"}', '{"缁村鍒╀簹琛楅儴鍒嗚矾娈电櫧澶╄緝鍢堟潅甯備簳","楂樻槦璞崕浼犵粺澶ч厭搴楀亸灏戯紝澶氫负鏂版疆璁捐姘戝"}', -37.8202, 144.9996, '涓瓑 (楼楼楼)', '浜氭床缇庨瀹躲€佽繍鍔ㄨ璧涚埍濂借€呫€佸枩娆㈠伐鍘傚簵娣樻姌鎵ｇ殑鏃呰鑰?, '閲屽＋婊℃槸涓€涓厖婊′簡鍙嶅樊钀岀殑琛楀尯銆傝繖閲屾棦鏈夊ぇ鍨嬬殑杩愬姩鍜屾姌鎵ｅ伐鍘傚簵锛屽張鏈夊寳浜?浜氭床鏃呬汉鏈€鐖辩殑鈥滃ⅷ灏旀湰灏忚タ璐♀€濄€傝繖閲岀殑鍜栧暋棣嗭紙濡?Top Paddock锛夋槸澧ㄥ皵鏈垱鎰?Brunch 鐣岀殑绁炶瘽銆傞噷澹弧淇濈暀浜嗗伐浜洪樁绾ц鍖虹殑璐ㄦ湸涓庡浠婇泤鐨簰鑱旂綉浼佷笟鐨勪氦铻嶉鎯呫€?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;

@@ -1,0 +1,113 @@
+INSERT INTO cities (id, name, description, preferred_provider, center_lat, center_lng)
+VALUES ('paris', '宸撮粠 (Paris)', '娴极濉炵撼娌崇晹鐨勬祦鍔ㄧ殑鐩涘', 'google', 48.8566, 2.3522)
+ON CONFLICT (id) DO UPDATE SET
+  name = EXCLUDED.name,
+  description = EXCLUDED.description,
+  preferred_provider = EXCLUDED.preferred_provider,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('marais', 'paris', '鐜涢粦鍖?(Le Marais - 3/4鍖?', '鍓嶅崼鐢诲粖銆佺簿鍝佸簵涓庝腑涓栫邯鐭虫澘璺?, '{"budget":4,"safety":8,"transit":9,"shopping":10,"nightlife":8,"quiet":7,"cafe":10}'::jsonb, '{"宸撮粠鏈€鏃堕鐨勫尯鍩燂紝閬嶅竷鍏堥攱涔版墜搴椾笌鑹烘湳鐢诲粖","淇濆瓨鏈夊ぇ閲忎腑涓栫邯浼橀泤寤虹瓚锛岃鏅瀬缇?,"鏄熸湡澶╁ぇ閮ㄥ垎鍟嗗簵渚濈劧寮€闂紙宸撮粠灏戞湁锛?}', '{"鐙獎鐨勫巻鍙茶閬撳鏄撴嫢鍫?,"鐑棬瀛ｈ妭浣忓涓€鎴块毦姹備笖鏄傝吹"}', 48.8584, 2.3621, '楂樻。濂㈠崕 (楼楼楼楼)', '鏃跺皻杈句汉銆佽壓鏈埍濂借€呫€佸枩娆㈡琛屾帰绱㈠皬宸风殑鏃呰鑰?, '鐜涢粦鍖鸿法瓒婂反榛庣3鍜岀4鍖猴紝鏄反榛庡綋涔嬫棤鎰х殑娼祦涓績銆傝繖閲屾湁娴＋寰峰紡鐨勫彜鑰佸涵闄€佸悇绉嶇嫭绔嬮姘村簵銆佸皬浼楁椂瑁呭簵鍜岃憲鍚嶇殑钃毊鏉滆壓鏈腑蹇冦€傝繖鍎跨殑琛楄閬嶅竷闇插ぉ鍜栧暋棣嗭紝涓嬪崍鐐逛竴鏉?Caf茅 au lait 鍧愬湪璺竟闈欓潤瑙傚療琛屼汉锛屽氨鏄渶鍏锋硶寮忛鎯呯殑 Chill 浣撻獙銆?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('montmartre', 'paris', '钂欓┈鐗?(Montmartre - 18鍖?', '鍦ｅ績鍫備笅鐨勬尝甯岀背浜氳壓鏈楂樺湴', '{"budget":7,"safety":5,"transit":7,"shopping":8,"nightlife":8,"quiet":6,"cafe":9}'::jsonb, '{"娴极鏂囪壓鐨勮嚦楂樼偣锛屽彲淇灠宸撮粠鍏ㄦ櫙","鐗╀环鍦ㄥ反榛庣浉瀵逛翰姘戯紝鍏呮弧灏忛棣嗕笌闈㈠寘鎴?,"鏈夋祿鍘氳壓鏈皵鎭笌鐢靛奖鎰燂紙銆婂ぉ浣跨埍缇庝附銆嬪彇鏅湴锛?}', '{"灞变笜鍦板舰鍙伴樁鏋佸锛屾惡甯﹀ぇ浠惰鏉庨潪甯稿悆鍔?,"鏅氫笂鍦ｅ績鍫傚懆杈瑰強绾㈢伅鍖猴紙鐨姞鍕掞級娌诲畨闇€瑕侀珮搴﹂槻鑼?}', 48.8867, 2.3431, '缁忔祹瀹炴儬 (楼楼)', '鎯呬荆銆佽拷姹傝壓鏈氮婕€侀绠楁湁闄愮殑骞磋交鏃呰鑰?, '钂欓┈鐗逛綅浜庡反榛庡寳閮ㄥ北涓橈紝鏇炬槸姣曞姞绱€佹⒌楂樼瓑鑹烘湳瀹剁敓娲荤殑鍦版柟銆傝繖閲屾湁鐖弧甯告槬钘ょ殑鐭崇爩灏忓眿銆佸弻椋庤溅鍜栧暋棣嗗拰琛楀ご鐢诲鑱氶泦鐨勭壒灏旂壒骞垮満銆傝繖閲岀殑鑺傚鐩告瘮宸撮粠甯備腑蹇冩洿鎱€佹洿鑷敱锛屾湁鐫€鍒牱鐨勬尝甯岀背浜氬紡 Chill 姘涘洿銆?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('latinquarter', 'paris', '鎷変竵鍖?(Latin Quarter - 5鍖?', '绱㈤偊澶у鏃佺殑宸﹀哺瀛︽湳涓庝功棣欐皵', '{"budget":6,"safety":9,"transit":9,"shopping":7,"nightlife":7,"quiet":8,"cafe":8}'::jsonb, '{"鏋佸叾瀹夊叏鐨勬不瀹夛紝娌诲畨鎯呭喌鍦ㄥ反榛庨灞堜竴鎸?,"鍏呮弧瀛︽湳姘涘洿锛岀揣閭诲崲妫牎鍏洯鍜岃帋澹瘮浜氫功搴?,"浜ら€氭瀬鍏朵究鍒╋紝闈犺繎濉炵撼娌崇晹"}', '{"鑰佹棫寤虹瓚澶氾紝寰堝浣忓鏃犵數姊笖鎴块棿杈冨皬","缂轰箯澶у瀷鐜颁唬璐墿鍟嗗満"}', 48.8474, 2.3458, '涓瓑 (楼楼楼)', '鐙嚜鏃呰鑰呫€佸鑰呬功杩枫€佹敞閲嶅畨鍏ㄥ拰瀹侀潤鐨勬梾琛岃€?, '鎷変竵鍖鸿嚜涓笘绾捣灏辨槸宸撮粠鐨勫ぇ瀛﹀尯銆傝繖閲屾磱婧㈢潃骞磋交鐨勫鏈皵鎭拰涔﹂銆傝繖閲岀殑鐙獎琛楅亾锛堝鑳℃牸娉㈣锛夎棌鐫€璁稿鍘嗗彶鎮犱箙鐨勭嫭绔嬬數褰遍櫌銆佸彜鏃т功搴楀拰鑸掗€傜殑瀛︾敓鍜栧暋棣嗐€傜揣閭荤殑鍗㈡．鍫″叕鍥洿鏄反榛庝汉鏈€鐖辩殑鏅掑お闃炽€佺湅涔﹀拰鍙戝憜鐨?Chill 鍦ｅ湴銆?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('stgermain', 'paris', '鍦ｆ棩鑰虫浖寰蜂僵 (Saint-Germain-des-Pr茅s - 6鍖?', '鑺辩涓庡弻鍙熷挅鍟￠鐨勮惃鐗归仐椋?, '{"budget":3,"safety":10,"transit":9,"shopping":9,"nightlife":6,"quiet":9,"cafe":10}'::jsonb, '{"宸撮粠鏈€瀹夊叏銆佹渶浼橀泤灏婅吹鐨勮鍖轰箣涓€","鎷ユ湁鍏ㄥ反榛庢渶钁楀悕鐨勪紶濂囧挅鍟￠涓庨珮绾ф椂瑁呭簵","鑹烘湳鍝佸晢搴椾笌绮惧搧涔﹀簵鏋佸锛屾硶寮忎紭闆呯殑澶╄姳鏉?}', '{"楂樻槀鐨勪綇瀹夸环鏍硷紝鐢熸椿娑堣垂鎴愭湰鏋侀珮","閰掑簵浠ョ簿鍝佸鍙ゅ皬閰掑簵涓轰富锛屾埧闂撮潰绉緝灏?}', 48.8538, 2.3333, '楂樻。濂㈠崕 (楼楼楼楼)', '杩芥眰鏋佽嚧娉曞紡浼橀泤銆佸巻鍙叉枃鍖栫埍濂借€呫€侀珮棰勭畻鏃呰鑰?, '鍦ｆ棩鑰虫浖鍖烘槸浜屽崄涓栫邯瀛樺湪涓讳箟鍝插鍜屾枃瀛﹁繍鍔ㄧ殑鎽囩銆傝惃鐗广€佽タ钂櫬锋尝濞冨拰姣曞姞绱㈡浘鏄姳绁炲挅鍟￠锛圕af茅 de Flore锛夊拰鍙屽彑鍜栧暋棣嗭紙Les Deux Magots锛夌殑甯稿銆傚浠婅繖閲屽凡鎴愪负椤剁骇濂緢鍝併€佺嫭绔嬬敾寤婁笌楂樼骇浣忓畢鐨勪唬鍚嶈瘝銆傝櫧鐒舵槀璐碉紝浣嗗湪杩欓噷鍠濆挅鍟¤亰澶┿€侀棽閫涚敾寤婃槸宸撮粠鏈€缁忓吀銆佹渶鍏疯川鎰熺殑 Chill 浣撻獙銆?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('canal', 'paris', '鍦ｉ┈涓佽繍娌冲尯 (Canal Saint-Martin - 10/11鍖?', '濉炵撼娌虫敮娴佺晹鐨勬尝甯岀背浜氭疆娴佹參鐢熸椿', '{"budget":6,"safety":7,"transit":8,"shopping":8,"nightlife":8,"quiet":6,"cafe":10}'::jsonb, '{"杩愭渤涓ゅ哺椋庡厜鏃犻檺锛屾槸褰撳湴骞磋交涓€浠ｉ噹椁愩€佸皬鎲╃殑娼祦鍦ｅ湴","姹囪仛浜嗗ぇ閲忔柊娼殑鎵嬪伐闈㈠寘鎴裤€佺嫭绔嬪挅鍟￠涓庣簿閰块厭鍚?,"閬垮紑浜嗕紶缁熸梾琛屾櫙鍖虹殑鍠у殻锛屾瀬瀵岀敓娲绘劅"}', '{"娣卞杩愭渤涓ゆ梺鍋跺皵浼氭湁鑱氫細鍣煶","閮ㄥ垎鏃у紡鍏瘬闅旈煶鐩稿娆犱匠"}', 48.8718, 2.3683, '涓瓑 (楼楼楼)', '鏂囬潚鎯呬荆銆佸鎵剧敓娲诲寲娉曞紡 Chill 鐨勫勾杞昏儗鍖呭', '鍦ｉ┈涓佽繍娌虫槸涓€鏉″厖婊℃椿鍔涚殑缁垮甫銆傚湪杩欓噷锛屾湰鍦颁汉姣旀父瀹㈡洿澶氥€備笅鍗堝潗鍦ㄨ繍娌宠竟鐨勯搧妗ヤ笂锛岀偣涓€鏉ぇ鐑殑 Du Pain et des Id茅es 闈㈠寘涓庝竴鏉墜鍐插挅鍟★紝鐪嬬潃杩囧線灏忚埞锛屼綘鑳戒綋浼氬埌宸撮粠鏋佸叾鐜颁唬銆佹椿鍔涗笖姣笉鍋氫綔鐨勬參鑺傚鐢熸椿銆?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('champs', 'paris', '棣欐Ν涓借垗/绗?鍖?(Champs-脡lys茅es)', '鍑棆闂ㄧ晹鐨勫畯澶х殗瀹跺ぇ閬撲笌濂緢鍚嶅簵', '{"budget":2,"safety":9,"transit":10,"shopping":10,"nightlife":6,"quiet":7,"cafe":7}'::jsonb, '{"绱ч偦鍑棆闂ㄤ笌棣欒锛屽ぇ閬撳畯闃旓紝瀹夊叏绯绘暟鏋侀珮","姹囬泦浜嗗叏鐞冨悇澶ч珮绔ア渚堝搧鐗屾棗鑸板簵涓庣背鍏舵灄濂㈠崕娉曢","澶氭潯涓诲姏鍦伴搧绾胯疮绌匡紝鍓嶅線鍚勬牳蹇冨湴鏍囨棤缂濊鎺?}', '{"浣忓涓庢棩甯哥墿浠烽珮鏄傦紝缂哄皯甯備簳鐢熸椿鐨勭儫鐏皵","娓稿瀵嗗害鏋佸ぇ锛岀櫧澶╁ぇ閬撶暐鏄惧枾闂?}', 48.8725, 2.3025, '鑷冲皧濂㈠崕 (楼楼楼楼楼)', '濂㈠崕娓告梾浜恒€佽湝鏈堟儏渚ｃ€佸鍑鸿鏁堢巼涓庢不瀹夋湁鏋侀珮瑕佹眰鐨勬梾琛岃€?, '绗?鍖烘槸宸撮粠鐨囧椋庤寖鐨勪唬琛ㄣ€傝繖閲岃閬撳骞裤€佹不瀹変弗瀵嗭紝閰掑簵澶ч兘鎷ユ湁鏋侀珮瑙勬牸鐨勬湇鍔′繚闅滐紙濡傜粡鍏哥殑宸撮粠涔旀不浜斾笘鍥涘閰掑簵锛夈€傝櫧鐒跺皯浜嗗乏宀搁偅鑸枃鑹虹殑缇婅偁灏忓贩锛屼絾娓呮櫒鍦ㄨ豹鍗庡叕瀵撶獥鍓嶅枬鏉祿缂╋紝鐪嬬潃閲戣壊鐨勫嚡鏃嬮棬鏃ュ嚭锛屼篃鏄瀬鍏锋硶寮忎紭闆呮劅鐨勪綋楠屻€?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('eiffel', 'paris', '閾佸/鏍煎嫆鍐呭嫆 (Eiffel Tower - 15鍖?', '寮€绐楀嵆瑙侀搧濉旂殑闈欒哀涓骇浣忓畢鍖?, '{"budget":4,"safety":9,"transit":8,"shopping":7,"nightlife":4,"quiet":9,"cafe":8}'::jsonb, '{"姝ヨ鍗冲彲杈炬垬绁炲箍鍦猴紝鐪嬪反榛庨搧濉斿闂撮棯鍏夌鏈€鏂逛究","宸撮粠楂樺搧璐ㄧ殑涓骇浣忓畢鍖猴紝鐜浼橀泤锛屾瀬鍏跺畨闈欏畨鍏?,"鏈夊緢澶氱簿鑷寸殑娉曞紡灏忕儤鐒欏潑涓庣ぞ鍖哄挅鍟″簵"}', '{"缂轰箯澶у瀷鐨勫鐢熸椿璁炬柦涓庡惖闂归厭鍚?,"浣忓浠锋牸闅忕潃閾佸鏅鐨勪紭鍔ｆ尝鍔ㄦ瀬澶?}', 48.8583, 2.2945, '涓瓑鍋忛珮 (楼楼楼)', '浜插瓙鍑烘父銆侀暱杈堝悓琛屻€佹敞閲嶅闂寸粷瀵瑰畨闈欎笌瀹夊叏鐨勬梾琛岃€?, '15鍖烘槸涓€鐗囨瀬鍏惰糠浜轰笖楂橀泤鐨勬硶寮忎腑浜х敓娲诲尯銆傝繖閲岃繙绂讳簡澶у鏁版梾娓稿尯鐨勫槇鏉備笌娣蜂贡锛屾不瀹夋瀬浣筹紝姝ヨ琛椾笂鏁ｅ彂鐫€娉曞紡绀惧尯鐗规湁鐨勬叺鎳掓浼愩€傚湪杩欓噷浣忎笅锛屾竻鏅ㄤ拱鏍瑰垰鍑虹倝鐨勬硶妫嶏紝璧板湪閾佸涓嬬殑濉炵撼娌宠竟鏅掓檼澶槼锛屾槸鏈€鑸掓湇鐨勪綋楠屻€?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;

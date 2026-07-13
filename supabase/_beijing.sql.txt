@@ -1,0 +1,113 @@
+INSERT INTO cities (id, name, description, preferred_provider, center_lat, center_lng)
+VALUES ('beijing', '鍖椾含 (Beijing)', '甯濋兘姘旇薄涓庤儭鍚岀儫鐏殑浜よ瀺', 'amap', 39.9042, 116.4074)
+ON CONFLICT (id) DO UPDATE SET
+  name = EXCLUDED.name,
+  description = EXCLUDED.description,
+  preferred_provider = EXCLUDED.preferred_provider,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('sanlitun', 'beijing', '涓夐噷灞?涓滅洿闂?(Sanlitun)', '鏃跺皻娼祦鍦版爣涓庝娇棣嗗尯缁胯崼', '{"budget":4,"safety":9,"transit":9,"shopping":10,"nightlife":10,"quiet":5,"cafe":9}'::jsonb, '{"鍖椾含鏈€椤剁骇鐨勬椂灏氬晢鍦堬紙澶彜閲岋級涓庣編椋熸眹鑱氬湴","閰掑惂鍜屽鐢熸椿鍐犵粷浜煄","浣块鍖虹豢鏍戞垚鑽紝姝ヨ浣撻獙濂斤紝浜ら€氫究鍒?}', '{"閰掑簵鍧囦环闈炲父鏄傝吹","鍛ㄦ湯鏅氶棿鎵撹溅鍥伴毦锛屼氦閫氭嫢鍫?}', 39.9333, 116.4554, '楂樻。濂㈠崕 (楼楼楼楼)', '鍠滄璐墿銆佸鐢熸椿銆佹椂灏氭疆娴佺殑骞磋交鏃呰鑰?, '涓夐噷灞槸鍖椾含鐨勬疆娴侀鍚戞爣锛屽湪杩欓噷鑳芥壘鍒板悇绉嶉搴椼€佹棗鑸板簵浠ュ強楂樻按鍑嗙殑瑗块鍜岄厭鍚с€傝€岀揣閭荤殑浣块鍖哄張鏋佷负瀹夐潤鑸掗€傦紝琛楅亾瀹介様锛岄潪甯搁€傚悎楠戣鎴栨暎姝ャ€傝繖閲岀殑鍜栧暋棣嗗瘑搴︽瀬澶э紝宸ヤ綔鏃ヤ笅鍗堜篃闅忓鍙鍦ㄥ澶栧枬鍜栧暋鑱婂ぉ鐨勪汉锛屾瀬鍏烽兘甯?Chill 鎰熴€?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('gulou', 'beijing', '榧撴ゼ/浠€鍒规捣 (Gulou)', '鑰佸寳浜儭鍚岄噷鐨勬枃鑹烘柊娴疆', '{"budget":6,"safety":9,"transit":8,"shopping":8,"nightlife":7,"quiet":6,"cafe":10}'::jsonb, '{"鏈€鍦伴亾鐨勮€佸寳浜儭鍚屼笌鍥涘悎闄㈤璨?,"鐙珛鍜栧暋棣嗐€丩ivehouse涓庢墜浣滃皬搴楀瘑闆?,"绱ч偦浠€鍒规捣锛岄鏅鐢伙紝鍏呮弧鐢熸椿姘旀伅"}', '{"鑳″悓鍐呴儴鍒嗚€佹棫浣忓璁炬柦闅旈煶涓€鑸?,"鑳″悓鍐呮棤娉曢€氳溅锛岄渶姝ヨ杈冮暱璺濈"}', 39.9412, 116.3972, '涓瓑鍋忛珮 (楼楼楼)', '鏂囪壓闈掑勾銆佸枩娆㈣€佸寳浜儭鍚屾枃鍖栥€佺埍楠戣鐨勬梾琛岃€?, '榧撴ゼ鍜屼簲閬撹惀鑳″悓鍛ㄨ竟鏄寳浜嫭绔嬪挅鍟′笌闈掑勾鏂囧寲鐨勬牳蹇冧骇鍦般€傜孩鐮栫伆鐡︾殑鑳″悓閲岄殣钘忕潃鍚勭鎵嬪啿鍜栧暋棣嗐€侀粦鑳跺敱鐗囧簵鍜岀嫭绔嬭璁″笀宸ヤ綔瀹ゃ€傛竻鏅ㄨ兘鍚埌楦藉摠锛屼笅鍗堝彲浠ュ湪鑳″悓閲屽徆涓€鏉啺缇庡紡锛屾櫄涓婂幓鍚庢捣鎴?Livehouse 鍚瓕锛屾槸鎶婅€佸寳浜紶缁熶笌鐜颁唬 Chill 缁撳悎寰楁渶瀹岀編鐨勫湴鍖恒€?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('guomao', 'beijing', '鍥借锤/CBD (Guomao)', '鎽╁ぉ澶фゼ鏋楃珛鐨勭幇浠ｅ晢鍔′腑蹇?, '{"budget":3,"safety":10,"transit":10,"shopping":9,"nightlife":6,"quiet":7,"cafe":8}'::jsonb, '{"浜ら€氱綉缁滃彂杈撅紝鍙屽湴閾佹灑绾斤紝鍑鸿鏋佸叾楂樻晥","楂樺搧璐ㄨ豹鍗庨厭搴椾笌楂樼┖鏅鍏瘬鏋楃珛","娌诲畨鏋佷匠锛屾湇鍔′笟閰嶅姘村噯鏋侀珮"}', '{"鐢熸椿鎴愭湰鏋侀珮锛岄楗櫘閬嶄环鏍煎亸璐?,"澶滄櫄鍐欏瓧妤煎尯鍩熺己涔忕敓娲荤儫鐏皵"}', 39.9085, 116.4595, '楂樻。濂㈠崕 (楼楼楼楼)', '鍟嗗姟鍑鸿銆佽拷姹傞珮鍝佽川鏍囧噯鍖栭厭搴楁湇鍔′笌澶滄櫙鐨勬梾琛岃€?, '鍥借锤鏄寳浜殑閲戣瀺涓績锛屼互鏍囧織鎬х殑鈥滃ぇ瑁よ々鈥濆強鍏朵粬鎽╁ぉ澶фゼ涓轰富鏅€傝繖閲岄泦涓簡浼楀鍥介檯瓒呰豹鍗庨厭搴楋紙濡傚浗璐稿ぇ閰掑簵銆佹柊鍥借锤楗簵锛夛紝鍦颁笅鍟嗗湀鏋佸叾搴炲ぇ銆傝繖閲岃櫧鐒跺晢鍔℃劅鐣ラ噸锛屼絾鍜栧暋棣嗭紙鐗瑰埆鏄€傚悎鍔炲叕鍜屽紑浼氱殑杩為攣鍙婄簿鍝佸挅鍟★級闅忓鍙锛屾晥鐜囨瀬楂樸€?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('qianmen', 'beijing', '鍓嶉棬/澶ф爡鏍?(Qianmen)', '鐧惧勾鑰佸瓧鍙蜂笌澶嶅彜鍒涘琛楀尯', '{"budget":7,"safety":9,"transit":9,"shopping":7,"nightlife":4,"quiet":8,"cafe":8}'::jsonb, '{"姝ヨ鍗冲彲鍒拌揪澶╁畨闂ㄥ箍鍦轰笌鏁呭锛岀湅鍗囨棗棣栭€?,"鎷ユ湁寰堝鏂版敼寤虹殑鍥涘悎闄㈢簿鍝佹皯瀹垮拰闈掑勾鏃呯ぞ","鍓嶉棬姝ヨ琛楀拰鏉ㄦ绔规枩琛楁瀬鍏疯€佸寳浜煹鍛?}', '{"灞炰簬鐑棬鏅尯锛岀櫧澶╂父浜哄缁囷紝鑰佸瓧鍙烽楗彛鍛冲亸娓稿鍖?,"澶滈棿琛楅亾鐩稿鍐锋竻锛岄厭鍚уū涔愯緝灏?}', 39.8973, 116.3976, '缁忔祹瀹炴儬 (楼楼)', '鍒濇鏉ヤ含鐪嬫櫙鐐广€佸搴嚭娓搞€佽拷姹傛琛岀湅鍗囨棗鐨勬梾琛岃€?, '鍓嶉棬鍦板尯绱ч偦鏁呭 and 澶╁畨闂紝鏄寳浜殑鍘嗗彶鏍稿績鍦板甫銆傝繖閲岀粡杩囪繎骞寸殑鍩庡競鏇存柊锛岃癁鐢熶簡鍍忓寳浜潑銆佹潹姊呯鏂滆杩欐牱鏃繚鐣欎簡鍘嗗彶寤虹瓚锛屽張寮曞叆浜嗛珮鍝佽川鐙珛涔﹀簵锛堝PageOne锛夈€佺簿鍝佸挅鍟￠涓庤壓鏈睍鍘呯殑澶嶅彜 Chill 绌洪棿锛屽湪鍠у殻鐨勬櫙鍖轰腑闂逛腑鍙栭潤銆?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('wudaokou', 'beijing', '浜旈亾鍙?(Wudaokou)', '瀹囧畽涓績鐨勯潚骞存椿鍔涗笌楂樻€т环姣旈琛?, '{"budget":8,"safety":9,"transit":8,"shopping":7,"nightlife":9,"quiet":5,"cafe":8}'::jsonb, '{"楂樻牎鐜粫锛屽厖婊″勾杞绘椿鍔涳紝椁愰ギ娑堣垂鍗佸垎浜叉皯","闊╁紡鐑х儰銆佸皬鍚冨強鐗硅壊灏忛厭棣嗛€夋嫨鏋佸叾涓板瘜","鏈夋瀬澶氶€傚悎鑷範銆佸姙鍏殑鐗硅壊鍜栧暋搴?}', '{"鏃╂櫄楂樺嘲鍦伴搧13鍙风嚎鏋佸叾鎷ユ尋","缂哄皯楂樻槦绾ц豹鍗庨厭搴?}', 39.9928, 116.3378, '缁忔祹瀹炴儬 (楼楼)', '瀛︾敓鍏氥€佽儗鍖呭銆佹敞閲嶉楗€т环姣斿拰骞磋交姘涘洿鐨勬梾琛岃€?, '浜旈亾鍙ｈ绉颁负鈥滃畤瀹欎腑蹇冣€濓紝鍛ㄥ洿鑱氶泦浜嗘竻鍗庛€佸寳澶с€佽瑷€澶у绛夋暟涓囧悕涓瀛﹀瓙銆傝繖閲岀殑琛楀ご鍏呮弧鐫€闈掓槬钃媰鐨勬湞姘旓紝鎷ユ湁鏃犳暟濂藉悆涓嶈吹鐨勫紓鍥界編椋熷拰灏忓悆銆傝繖閲岀殑鍜栧暋棣嗗ぇ閮藉甫鏈夊鏁炵殑妗屾涓庡畨闈欑殑姘涘洿锛屾瀬鍏锋眰鐭ヤ笌浼戦棽浜よ瀺鐨?Chill 姘旀伅銆?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('wangfujing', 'beijing', '鐜嬪簻浜?涓滃崟 (Wangfujing)', '搴曡暣娣卞帤鐨勭粡鍏稿晢涓氭琛岃', '{"budget":4,"safety":10,"transit":10,"shopping":10,"nightlife":4,"quiet":8,"cafe":7}'::jsonb, '{"浼犵粺鑰佺墝鍟嗕笟琛楀尯锛岀櫨璐уぇ妤兼灄绔嬶紝鏈嶅姟涓氶厤濂楅《绾?,"涓磋繎鏁呭涓滃崕闂紝浜ら€氱綉缁滃瘑甯冿紝鏋佷负瀹夊叏","鎷ユ湁寰堝闅愮浜庡洓鍚堥櫌鎴栭珮绔晢鍦哄唴鐨勭簿鑷翠笅鍗堣尪"}', '{"娓稿瀵嗛泦锛岀墿浠疯緝楂橈紝缂哄皯鏈湡灏忎紬鏂囪壓姘涘洿","鏅氫笂鍟嗕笟琛楁墦鐑婅緝鏃╋紝缂轰箯澶滅敓娲?}', 39.9113, 116.4116, '楂樻。濂㈠崕 (楼楼楼楼)', '鍟嗗姟鍑鸿銆佸悎瀹舵鍑烘父銆佽拷姹備究鍒╁拰瀹夊叏鐨勮€佺墝鍝佽川鏃呰鑰?, '鐜嬪簻浜曟槸鍖椾含鏈€璐熺洓鍚嶇殑鍟嗕笟鍚嶇墖銆傝繖閲岃仛闆嗕簡鐜嬪簻涓幆銆佸寳浜琣pm绛夌幇浠ｅ寲楂樼鍟嗗湀锛屽悓鏃朵繚鐣欑潃鐜嬪簻浜曞ぉ涓诲爞绛夊巻鍙查仐瀛樸€傝繖閲屽畨鍏ㄧ郴鏁版瀬楂橈紝閰掑簵绠＄悊鏋佷负涓撲笟瑙勮寖銆傝櫧鐒惰鍖哄晢涓氭劅閲嶏紝浣嗗悇绉嶈尪瀹や笌楂樻。鍜栧暋鍘呬篃涓虹柌鎯殑鏃呬汉鎻愪緵浜嗕竴澶勪紭闆呯殑閬块娓€?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
+
+INSERT INTO neighborhoods (id, city_id, name, tagline, scores, pros, cons, center_lat, center_lng, price_level, best_for, detail_text)
+VALUES ('wangjing', 'beijing', '鏈涗含 (Wangjing)', '鍓嶆部浜掕仈缃戦珮鍦颁笌闊╁紡鏂囪壓鍜栧暋姹囪仛鍖?, '{"budget":6,"safety":9,"transit":8,"shopping":8,"nightlife":7,"quiet":7,"cafe":9}'::jsonb, '{"姹囬泦浜嗗叏鍖椾含鏈€鍦伴亾鐨勯煩寮忕編椋熴€佺儰鑲変笌椁愬惂","楂樿璁℃劅鐨勭簿鍝佺嫭绔嬪挅鍟￠閬嶅湴寮€鑺?,"琛楀尯鐜颁唬锛岄偦杩?98鑹烘湳鍖猴紝鏋佸叿娼祦鎰?}', '{"璺濈甯備腑蹇冿紙鏁呭銆佸ぉ鍧涳級璺濈杈冭繙锛屼箻杞︽椂闂磋緝闀?,"鏃╂櫄楂樺嘲閮ㄥ垎璺瀹规槗鍫佃溅"}', 39.9934, 116.4746, '涓瓑 (楼楼楼)', '缇庨楗曢ぎ銆佷簰鑱旂綉浠庝笟鑰呫€佸枩鐖遍€涘睍涓庨煩寮忔枃鑹虹殑骞磋交浜?, '鏈涗含鏄寳浜殑鏂板叴绉戞妧涓庡垱鎰忎腑蹇冦€傜敱浜庨暱鏈熸湁澶ч噺闊╄鍙婁簰鑱旂綉绮捐嫳灞呬綇锛岃繖閲屽舰鎴愪簡鏋佸瘜鐗硅壊鐨勨€滃挅鍟′笌brunch鏂囧寲鈥濄€傝繖閲岀殑搴楅潰瑁呮舰鏋佷负鐜颁唬鍜屼笂闀滐紝鍛ㄦ湯鍘婚殧澹佺殑798鑹烘湳鍖虹湅灞曪紝涓嬪崍鍦ㄦ湜浜枬涓€鏉壒鑹茬壒璋冨挅鍟★紝浣撻獙鏋佷负Chill銆?)
+ON CONFLICT (id) DO UPDATE SET
+  city_id = EXCLUDED.city_id,
+  name = EXCLUDED.name,
+  tagline = EXCLUDED.tagline,
+  scores = EXCLUDED.scores,
+  pros = EXCLUDED.pros,
+  cons = EXCLUDED.cons,
+  center_lat = EXCLUDED.center_lat,
+  center_lng = EXCLUDED.center_lng,
+  price_level = EXCLUDED.price_level,
+  best_for = EXCLUDED.best_for,
+  detail_text = EXCLUDED.detail_text;
