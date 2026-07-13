@@ -1,98 +1,117 @@
 "use client";
 
+import { ExternalLink } from "lucide-react";
+import { ScorePolygon } from "@/components/ScorePolygon";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { buildMapUrl } from "@/lib/recommendation/engine";
-import type { ScoredNeighborhood } from "@/lib/recommendation/types";
+import type { ScoredNeighborhood, Weights } from "@/lib/recommendation/types";
 import { cn } from "@/lib/utils";
 
 interface NeighborhoodCardProps {
   neighborhood: ScoredNeighborhood;
   rank: number;
+  weights: Weights;
   mapProvider: "google" | "amap";
   isCompared: boolean;
   onDetail: () => void;
   onCompare: () => void;
 }
 
+function matchBadgeClass(score: number) {
+  if (score >= 80) return "bg-[#e8f4fd] text-apple-blue";
+  if (score >= 60) return "bg-[#f5f0ff] text-apple-purple";
+  return "bg-[#f5f5f7] text-apple-text-secondary";
+}
+
 export function NeighborhoodCard({
   neighborhood,
   rank,
+  weights,
   mapProvider,
   isCompared,
   onDetail,
   onCompare,
 }: NeighborhoodCardProps) {
-  const scoreClass =
-    neighborhood.matchScore >= 80
-      ? "bg-teal-100 text-teal-800"
-      : neighborhood.matchScore >= 60
-        ? "bg-amber-100 text-amber-800"
-        : "bg-slate-100 text-slate-600";
-
   const mapUrl = buildMapUrl(neighborhood.center, mapProvider);
   const mapLabel = mapProvider === "amap" ? "高德" : "Google";
 
   return (
-    <Card className="animate-in fade-in slide-in-from-bottom-2 duration-300 hover:bg-white/95 hover:shadow-md transition-all">
+    <Card
+      className={cn(
+        "animate-fade-up overflow-hidden hover:-translate-y-0.5",
+        isCompared && "ring-2 ring-apple-blue/30"
+      )}
+      style={{ animationDelay: `${Math.min(rank * 70, 560)}ms` }}
+    >
       <CardContent className="p-0">
-        <div className="flex items-center justify-between border-b border-black/5 px-4 py-2">
-          <span className="rounded-lg bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-600">
-            #{rank}
-          </span>
-          <span className={cn("rounded-full px-2.5 py-0.5 text-xs font-semibold", scoreClass)}>
-            契合度 {neighborhood.matchScore}%
-          </span>
-        </div>
-
-        <div className="p-4 space-y-3">
-          <div>
-            <h3 className="text-lg font-bold text-slate-800">{neighborhood.name}</h3>
-            <p className="text-sm text-slate-500 italic">&ldquo;{neighborhood.tagline}&rdquo;</p>
+        <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:gap-6">
+          <div className="flex shrink-0 flex-col items-center sm:w-[148px]">
+            <ScorePolygon
+              scores={neighborhood.computedScores}
+              weights={weights}
+              size="md"
+              showLabels
+              matchScore={neighborhood.matchScore}
+              delayMs={rank * 80}
+            />
+            <span className="mt-2 text-[11px] text-apple-text-secondary">
+              七维得分多边形
+            </span>
           </div>
 
-          <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-7">
-            {[
-              ["🤫", neighborhood.computedScores.quiet, "安静"],
-              ["🛡️", neighborhood.computedScores.safety, "安全"],
-              ["🚇", neighborhood.computedScores.transit, "交通"],
-              ["🛍️", neighborhood.computedScores.shopping, "购物"],
-              ["✨", neighborhood.computedScores.nightlife, "夜生活"],
-              ["💰", neighborhood.computedScores.budget, "预算"],
-              ["☕", neighborhood.computedScores.cafe, "咖啡"],
-            ].map(([icon, score, label]) => (
-              <div
-                key={label as string}
-                title={`${label}: ${score}/10`}
-                className={cn(
-                  "rounded-lg bg-slate-50 px-1 py-1 text-center text-xs",
-                  label === "咖啡" && "bg-teal-50 text-teal-700 font-medium"
-                )}
-              >
-                {icon} {score}
+          <div className="min-w-0 flex-1 space-y-3">
+            <div className="flex flex-wrap items-start justify-between gap-2">
+              <div>
+                <div className="mb-1 flex items-center gap-2">
+                  <span className="rounded-full bg-[#f5f5f7] px-2.5 py-0.5 text-xs font-semibold tabular-nums text-apple-text-secondary">
+                    #{rank}
+                  </span>
+                  <span
+                    className={cn(
+                      "rounded-full px-2.5 py-0.5 text-xs font-semibold tabular-nums",
+                      matchBadgeClass(neighborhood.matchScore)
+                    )}
+                  >
+                    契合度 {neighborhood.matchScore}%
+                  </span>
+                </div>
+                <h3 className="text-xl font-semibold tracking-tight text-apple-text">
+                  {neighborhood.name}
+                </h3>
+                <p className="mt-1 text-sm text-apple-text-secondary">
+                  &ldquo;{neighborhood.tagline}&rdquo;
+                </p>
               </div>
-            ))}
-          </div>
+            </div>
 
-          <p className="text-sm text-slate-600">
-            <strong>优势：</strong>
-            {neighborhood.pros.slice(0, 2).join("，")}
-          </p>
+            <p className="text-sm leading-relaxed text-apple-text-secondary">
+              <span className="font-medium text-apple-text">优势 · </span>
+              {neighborhood.pros.slice(0, 2).join("，")}
+            </p>
 
-          <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-            <span className="text-xs text-slate-500">{neighborhood.priceLevel}</span>
-            <div className="flex flex-wrap gap-2">
-              <Button variant="outline" size="sm" asChild>
-                <a href={mapUrl} target="_blank" rel="noopener noreferrer">
-                  🗺️ {mapLabel}
-                </a>
-              </Button>
-              <Button variant="secondary" size="sm" onClick={onCompare}>
-                {isCompared ? "取消对比" : "加入对比"}
-              </Button>
-              <Button size="sm" onClick={onDetail}>
-                查看详情
-              </Button>
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+              <span className="text-xs text-apple-text-secondary">
+                {neighborhood.priceLevel}
+              </span>
+              <div className="flex flex-wrap gap-2">
+                <Button variant="outline" size="sm" asChild>
+                  <a href={mapUrl} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-3.5 w-3.5" />
+                    {mapLabel}
+                  </a>
+                </Button>
+                <Button
+                  variant={isCompared ? "default" : "secondary"}
+                  size="sm"
+                  onClick={onCompare}
+                >
+                  {isCompared ? "已加入" : "加入对比"}
+                </Button>
+                <Button size="sm" onClick={onDetail}>
+                  详情
+                </Button>
+              </div>
             </div>
           </div>
         </div>

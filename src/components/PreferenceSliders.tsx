@@ -1,18 +1,8 @@
 "use client";
 
 import { Slider } from "@/components/ui/slider";
-import { DIMENSION_KEYS } from "@/lib/recommendation/types";
+import { DIMENSION_LIST } from "@/lib/dimensions";
 import type { Weights } from "@/lib/recommendation/types";
-
-const DIM_CONFIG: Record<string, { label: string; icon: string }> = {
-  budget: { label: "预算友好", icon: "💰" },
-  safety: { label: "安全环境", icon: "🛡️" },
-  transit: { label: "交通便利", icon: "🚇" },
-  shopping: { label: "美食购物", icon: "🛍️" },
-  nightlife: { label: "夜生活", icon: "✨" },
-  quiet: { label: "安静舒适", icon: "🤫" },
-  cafe: { label: "咖啡/Chill", icon: "☕" },
-};
 
 interface PreferenceSlidersProps {
   weights: Weights;
@@ -21,14 +11,17 @@ interface PreferenceSlidersProps {
 
 export function PreferenceSliders({ weights, onChange }: PreferenceSlidersProps) {
   return (
-    <div className="space-y-4">
-      {DIMENSION_KEYS.map((key) => (
-        <div key={key} className="space-y-2">
+    <div className="space-y-5">
+      {DIMENSION_LIST.map(({ key, label, Icon }) => (
+        <div key={key} className="space-y-2.5">
           <div className="flex items-center justify-between text-sm">
-            <span className="font-medium text-slate-700">
-              {DIM_CONFIG[key].icon} {DIM_CONFIG[key].label}
+            <span className="flex items-center gap-2 font-medium text-apple-text">
+              <Icon className="h-3.5 w-3.5 text-apple-blue" />
+              {label}
             </span>
-            <span className="tabular-nums text-teal-700">{weights[key]}</span>
+            <span className="tabular-nums font-semibold text-apple-blue">
+              {weights[key]}
+            </span>
           </div>
           <Slider
             value={[weights[key]]}

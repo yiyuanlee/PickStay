@@ -11,7 +11,7 @@ test("explore page slider changes ranking", async ({ page }) => {
   await page.goto("/explore/tokyo");
   await expect(page.getByText("推荐街区")).toBeVisible();
 
-  const firstCardBefore = await page.locator(".animate-in h3").first().textContent();
+  const firstCardBefore = await page.locator("h3.font-semibold").first().textContent();
 
   // Max out cafe/chill weight
   const cafeSlider = page.locator('[role="slider"]').last();
@@ -21,7 +21,7 @@ test("explore page slider changes ranking", async ({ page }) => {
   }
 
   await page.waitForTimeout(500);
-  const firstCardAfter = await page.locator(".animate-in h3").first().textContent();
+  const firstCardAfter = await page.locator("h3.font-semibold").first().textContent();
   expect(firstCardAfter).toBeTruthy();
   expect(firstCardBefore).toBeTruthy();
 });

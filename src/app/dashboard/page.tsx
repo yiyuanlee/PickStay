@@ -28,13 +28,15 @@ export default async function DashboardPage() {
     : [];
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+    <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
       <Header />
 
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-8 flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800">我的 PickStay</h2>
-          <p className="text-slate-500">
+          <h2 className="font-display text-3xl font-semibold tracking-tight text-apple-text">
+            我的 PickStay
+          </h2>
+          <p className="text-apple-text-secondary">
             {profile?.display_name || user.email}
           </p>
         </div>
@@ -52,7 +54,7 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             {preferences ? (
-              <div className="space-y-2 text-sm text-slate-600">
+              <div className="space-y-2 text-sm text-apple-text-secondary">
                 <p>当前城市: {preferences.city_id || "未设置"}</p>
                 <p>预设: {preferences.active_preset || "自定义"}</p>
                 <Button variant="outline" size="sm" asChild>
@@ -62,7 +64,7 @@ export default async function DashboardPage() {
                 </Button>
               </div>
             ) : (
-              <p className="text-sm text-slate-500">暂无保存的偏好</p>
+              <p className="text-sm text-apple-text-secondary">暂无保存的偏好</p>
             )}
           </CardContent>
         </Card>
@@ -73,14 +75,14 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             {favoriteNeighborhoods.length === 0 ? (
-              <p className="text-sm text-slate-500">还没有收藏任何街区</p>
+              <p className="text-sm text-apple-text-secondary">还没有收藏任何街区</p>
             ) : (
               <ul className="space-y-2">
                 {favoriteNeighborhoods.map((n) => (
                   <li key={n.id}>
                     <Link
                       href={`/explore/${n.cityId}`}
-                      className="text-sm text-teal-700 hover:underline"
+                      className="text-sm text-apple-blue hover:underline"
                     >
                       {n.name}
                     </Link>
@@ -97,15 +99,15 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             {comparisons.length === 0 ? (
-              <p className="text-sm text-slate-500">还没有保存对比方案</p>
+              <p className="text-sm text-apple-text-secondary">还没有保存对比方案</p>
             ) : (
               <ul className="space-y-3">
                 {comparisons.map((c) => (
                   <li
                     key={c.id}
-                    className="flex items-center justify-between rounded-xl border border-black/5 bg-white/50 px-4 py-3"
+                    className="flex items-center justify-between rounded-2xl border border-black/8 bg-[#f5f5f7] px-4 py-3"
                   >
-                    <span className="font-medium text-slate-700">{c.name}</span>
+                    <span className="font-medium text-apple-text">{c.name}</span>
                     <Button variant="outline" size="sm" asChild>
                       <Link href={`/compare?ids=${c.neighborhood_ids.join(",")}`}>
                         查看对比

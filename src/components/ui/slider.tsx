@@ -14,10 +14,10 @@ export function Slider({
       )}
       {...props}
     >
-      <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-slate-200/80">
-        <SliderPrimitive.Range className="absolute h-full bg-gradient-to-r from-teal-500 to-sky-500" />
+      <SliderPrimitive.Track className="relative h-1 w-full grow overflow-hidden rounded-full bg-[#e8e8ed]">
+        <SliderPrimitive.Range className="absolute h-full rounded-full bg-apple-blue" />
       </SliderPrimitive.Track>
-      <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full border-2 border-white bg-teal-600 shadow-md ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500" />
+      <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full border border-black/5 bg-white shadow-md transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue/40" />
     </SliderPrimitive.Root>
   );
 }

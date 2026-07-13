@@ -47,7 +47,7 @@ export default async function ExplorePage({
   return (
     <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
       <Header />
-      <Suspense fallback={<div className="py-12 text-center text-slate-500">加载中...</div>}>
+      <Suspense fallback={<div className="py-12 text-center text-white/45">加载中...</div>}>
         <ExploreClient
           cities={cities}
           initialCityId={cityId}

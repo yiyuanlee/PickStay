@@ -77,15 +77,15 @@ export default function RegisterPage() {
                 required
               />
             </div>
-            {error && <p className="text-sm text-red-600">{error}</p>}
+            {error && <p className="text-sm text-red-500">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "注册中..." : "注册"}
             </Button>
           </form>
 
-          <p className="mt-4 text-center text-sm text-slate-500">
+          <p className="mt-4 text-center text-sm text-apple-text-secondary">
             已有账号？{" "}
-            <Link href="/login" className="text-teal-600 hover:underline">
+            <Link href="/login" className="text-apple-blue hover:underline">
               登录
             </Link>
           </p>

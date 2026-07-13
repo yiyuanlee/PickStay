@@ -22,7 +22,7 @@ export default async function AdminPage() {
     <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
       <Header />
 
-      <h2 className="mb-6 text-2xl font-bold text-slate-800">管理后台</h2>
+      <h2 className="mb-6 font-display text-3xl font-semibold tracking-tight text-apple-text">管理后台</h2>
 
       <div className="mb-8 flex gap-3">
         <form action={clearAllPoiCacheAction}>
@@ -59,7 +59,7 @@ export default async function AdminPage() {
               </form>
 
               <form action={deleteCity.bind(null, city.id)}>
-                <Button variant="ghost" size="sm" type="submit" className="text-red-600">
+                <Button variant="ghost" size="sm" type="submit" className="text-red-500">
                   删除城市
                 </Button>
               </form>
@@ -67,7 +67,7 @@ export default async function AdminPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b text-left text-slate-500">
+                    <tr className="border-b border-black/8 text-left text-apple-text-secondary">
                       <th className="py-2">街区</th>
                       <th>预算</th>
                       <th>安全</th>
@@ -81,8 +81,8 @@ export default async function AdminPage() {
                   </thead>
                   <tbody>
                     {city.neighborhoods.map((n) => (
-                      <tr key={n.id} className="border-b border-black/5">
-                        <td className="py-2 font-medium">{n.name.split(" ")[0]}</td>
+                      <tr key={n.id} className="border-b border-black/5 text-apple-text-secondary">
+                        <td className="py-2 font-medium text-apple-text">{n.name.split(" ")[0]}</td>
                         {(["budget", "safety", "transit", "shopping", "nightlife", "quiet", "cafe"] as const).map((k) => (
                           <td key={k}>{n.scores[k]}</td>
                         ))}

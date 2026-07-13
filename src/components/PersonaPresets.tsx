@@ -20,10 +20,10 @@ export function PersonaPresets({ activePreset, onSelect }: PersonaPresetsProps) 
           type="button"
           onClick={() => onSelect(id, PERSONA_PRESETS[id])}
           className={cn(
-            "rounded-full px-3 py-1.5 text-xs font-medium transition-all",
+            "rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-300 active:scale-[0.97]",
             activePreset === id
-              ? "bg-gradient-to-r from-teal-600 to-sky-500 text-white shadow-md"
-              : "bg-white/70 text-slate-600 border border-black/5 hover:bg-white"
+              ? "bg-apple-blue text-white shadow-sm"
+              : "bg-[#f5f5f7] text-apple-text-secondary hover:bg-[#e8e8ed] hover:text-apple-text"
           )}
         >
           {PERSONA_LABELS[id]}

@@ -1,39 +1,33 @@
 "use client";
 
 import Link from "next/link";
+import { X } from "lucide-react";
+import { ScorePolygon } from "@/components/ScorePolygon";
 import { Button } from "@/components/ui/button";
-import { DIMENSION_KEYS } from "@/lib/recommendation/types";
-import type { ScoredNeighborhood } from "@/lib/recommendation/types";
+import { DIMENSION_LIST } from "@/lib/dimensions";
+import type { ScoredNeighborhood, Weights } from "@/lib/recommendation/types";
 import { cn } from "@/lib/utils";
-
-const DIM_LABELS: Record<string, string> = {
-  budget: "💰 预算",
-  safety: "🛡️ 安全",
-  transit: "🚇 交通",
-  shopping: "🛍️ 购物",
-  nightlife: "✨ 夜生活",
-  quiet: "🤫 安静",
-  cafe: "☕ 咖啡",
-};
 
 interface ComparisonDrawerProps {
   neighborhoods: ScoredNeighborhood[];
+  weights: Weights;
   onRemove: (id: string) => void;
   onClear: () => void;
 }
 
 export function ComparisonDrawer({
   neighborhoods,
+  weights,
   onRemove,
   onClear,
 }: ComparisonDrawerProps) {
   if (neighborhoods.length === 0) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-black/5 bg-white/90 backdrop-blur-xl shadow-2xl">
-      <div className="mx-auto max-w-7xl px-4 py-4">
-        <div className="mb-3 flex items-center justify-between">
-          <h3 className="font-bold text-slate-800">
+    <div className="fixed bottom-0 left-0 right-0 z-40 animate-fade-up border-t border-black/8 bg-white/80 backdrop-blur-2xl shadow-[0_-8px_32px_rgba(0,0,0,0.08)]">
+      <div className="mx-auto max-w-6xl px-4 py-5 sm:px-6">
+        <div className="mb-4 flex items-center justify-between">
+          <h3 className="font-semibold text-apple-text">
             街区对比 ({neighborhoods.length}/3)
           </h3>
           <div className="flex gap-2">
@@ -50,45 +44,61 @@ export function ComparisonDrawer({
           </div>
         </div>
 
+        <div className="mb-4 flex justify-center gap-6 overflow-x-auto pb-2">
+          {neighborhoods.map((n, i) => (
+            <div key={n.id} className="flex flex-col items-center gap-2">
+              <div className="relative">
+                <ScorePolygon
+                  scores={n.computedScores}
+                  weights={weights}
+                  size="sm"
+                  delayMs={i * 100}
+                />
+                <button
+                  type="button"
+                  onClick={() => onRemove(n.id)}
+                  className="absolute -right-1 -top-1 rounded-full bg-[#f5f5f7] p-1 text-apple-text-secondary hover:bg-[#e8e8ed] hover:text-red-500"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              </div>
+              <span className="max-w-[100px] truncate text-xs font-medium text-apple-text">
+                {n.name.split(" ")[0]}
+              </span>
+              <span className="text-xs font-semibold text-apple-blue">
+                {n.matchScore}%
+              </span>
+            </div>
+          ))}
+        </div>
+
         <div className="overflow-x-auto">
           <table className="w-full min-w-[600px] text-sm">
             <thead>
-              <tr className="border-b border-black/5">
-                <th className="py-2 text-left text-slate-500">维度</th>
+              <tr className="border-b border-black/8">
+                <th className="py-2 text-left text-apple-text-secondary">维度</th>
                 {neighborhoods.map((n) => (
-                  <th key={n.id} className="px-3 py-2 text-left font-semibold text-slate-800">
-                    <div className="flex items-center gap-2">
-                      {n.name.split(" ")[0]}
-                      <button
-                        type="button"
-                        onClick={() => onRemove(n.id)}
-                        className="text-slate-400 hover:text-red-500"
-                      >
-                        ×
-                      </button>
-                    </div>
+                  <th key={n.id} className="px-3 py-2 text-left font-semibold text-apple-text">
+                    {n.name.split(" ")[0]}
                   </th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-black/5 bg-teal-50/50">
-                <td className="py-2 font-medium">契合度</td>
-                {neighborhoods.map((n) => (
-                  <td key={n.id} className="px-3 py-2 font-bold text-teal-700">
-                    {n.matchScore}%
-                  </td>
-                ))}
-              </tr>
-              {DIMENSION_KEYS.map((key) => (
+              {DIMENSION_LIST.map(({ key, shortLabel, Icon }) => (
                 <tr key={key} className="border-b border-black/5">
-                  <td className="py-2 text-slate-600">{DIM_LABELS[key]}</td>
+                  <td className="py-2 text-apple-text-secondary">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Icon className="h-3 w-3 text-apple-blue" />
+                      {shortLabel}
+                    </span>
+                  </td>
                   {neighborhoods.map((n) => (
                     <td
                       key={n.id}
                       className={cn(
-                        "px-3 py-2",
-                        key === "cafe" && "font-semibold text-teal-700"
+                        "px-3 py-2 tabular-nums text-apple-text",
+                        key === "cafe" && "font-semibold text-apple-blue"
                       )}
                     >
                       {n.computedScores[key]}/10

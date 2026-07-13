@@ -25,42 +25,44 @@ export async function Header() {
   }
 
   return (
-    <header className="mb-8 flex items-center justify-between border-b border-black/5 pb-4">
-      <Link href="/" className="group">
-        <div className="flex items-center gap-2">
-          <MapPin className="h-7 w-7 text-teal-600" />
+    <header className="sticky top-0 z-30 -mx-4 mb-10 px-4 py-3 sm:-mx-6 sm:px-6">
+      <div className="apple-surface flex items-center justify-between rounded-2xl px-5 py-3 shadow-sm">
+        <Link href="/" className="group flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-apple-blue shadow-sm">
+            <MapPin className="h-4 w-4 text-white" />
+          </div>
           <div>
-            <h1 className="bg-gradient-to-br from-teal-700 to-sky-500 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent">
+            <h1 className="font-display text-lg font-semibold text-apple-text">
               PickStay
             </h1>
-            <p className="text-sm text-slate-500">
+            <p className="text-xs text-apple-text-secondary">
               个性化旅行住宿街区推荐
             </p>
           </div>
-        </div>
-      </Link>
+        </Link>
 
-      <nav className="flex items-center gap-2">
-        <Button variant="ghost" size="sm" asChild>
-          <Link href="/compare">对比</Link>
-        </Button>
-        {user ? (
-          <>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/dashboard">我的</Link>
-            </Button>
-            {profile?.role === "admin" && (
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/admin">管理</Link>
-              </Button>
-            )}
-          </>
-        ) : (
-          <Button variant="secondary" size="sm" asChild>
-            <Link href="/login">登录</Link>
+        <nav className="flex items-center gap-1">
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/compare">对比</Link>
           </Button>
-        )}
-      </nav>
+          {user ? (
+            <>
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/dashboard">我的</Link>
+              </Button>
+              {profile?.role === "admin" && (
+                <Button variant="ghost" size="sm" asChild>
+                  <Link href="/admin">管理</Link>
+                </Button>
+              )}
+            </>
+          ) : (
+            <Button variant="default" size="sm" asChild>
+              <Link href="/login">登录</Link>
+            </Button>
+          )}
+        </nav>
+      </div>
     </header>
   );
 }

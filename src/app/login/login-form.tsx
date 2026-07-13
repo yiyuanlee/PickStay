@@ -77,25 +77,25 @@ export default function LoginForm() {
                 required
               />
             </div>
-            {error && <p className="text-sm text-red-600">{error}</p>}
+            {error && <p className="text-sm text-red-500">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "登录中..." : "登录"}
             </Button>
           </form>
 
           <div className="my-4 flex items-center gap-3">
-            <div className="h-px flex-1 bg-slate-200" />
-            <span className="text-xs text-slate-400">或</span>
-            <div className="h-px flex-1 bg-slate-200" />
+            <div className="h-px flex-1 bg-black/8" />
+            <span className="text-xs text-apple-text-secondary">或</span>
+            <div className="h-px flex-1 bg-black/8" />
           </div>
 
           <Button variant="secondary" className="w-full" onClick={handleGitHubLogin}>
             GitHub 登录
           </Button>
 
-          <p className="mt-4 text-center text-sm text-slate-500">
+          <p className="mt-4 text-center text-sm text-apple-text-secondary">
             还没有账号？{" "}
-            <Link href="/register" className="text-teal-600 hover:underline">
+            <Link href="/register" className="text-apple-blue hover:underline">
               注册
             </Link>
           </p>

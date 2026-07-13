@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { RefreshCw } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { CitySelector } from "@/components/CitySelector";
 import { ComparisonDrawer } from "@/components/ComparisonDrawer";
@@ -19,6 +20,7 @@ import type {
   Weights,
 } from "@/lib/recommendation/types";
 import { savePreferences } from "@/lib/actions/user";
+import { cn } from "@/lib/utils";
 
 const PREFERENCES_KEY = "pickstay_preferences";
 
@@ -139,12 +141,12 @@ export function ExploreClient({
       const data = await res.json();
       if (data.dynamicScores && Object.keys(data.dynamicScores).length > 0) {
         setDynamicScores(data.dynamicScores);
-        setApiStatus(`✅ ${data.provider} API 实时增强完成`);
+        setApiStatus(`${data.provider} API 实时增强完成`);
       } else {
-        setApiStatus("ℹ️ 使用本地预置评分（Mock 模式或未配置 API Key）");
+        setApiStatus("使用本地预置评分（Mock 模式或未配置 API Key）");
       }
     } catch {
-      setApiStatus("⚠️ API 增强失败，已使用本地数据");
+      setApiStatus("API 增强失败，已使用本地数据");
     } finally {
       setIsEnriching(false);
       setTimeout(() => setApiStatus(null), 6000);
@@ -191,24 +193,27 @@ export function ExploreClient({
   return (
     <div className="pb-32">
       {apiStatus && (
-        <div className="mb-4 rounded-xl border border-teal-200 bg-teal-50 px-4 py-2 text-sm text-teal-800">
-          {isEnriching ? "⏳" : ""} {apiStatus}
+        <div className="mb-4 animate-fade-up rounded-2xl border border-apple-blue/20 bg-[#e8f4fd] px-4 py-3 text-sm text-apple-blue">
+          {isEnriching && (
+            <RefreshCw className="mr-2 inline h-3.5 w-3.5 animate-spin" />
+          )}
+          {apiStatus}
         </div>
       )}
 
       <section className="mb-8">
-        <h2 className="mb-3 text-lg font-bold text-slate-800">选择城市</h2>
+        <h2 className="mb-3 font-display text-xl font-semibold text-apple-text">选择城市</h2>
         <CitySelector
           cities={cities}
           selectedCityId={cityId}
           onSelect={handleCityChange}
         />
         {city && (
-          <p className="mt-3 text-sm text-slate-500">{city.description}</p>
+          <p className="mt-3 text-sm leading-relaxed text-apple-text-secondary">{city.description}</p>
         )}
       </section>
 
-      <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
+      <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
         <aside className="space-y-4">
           <Card>
             <CardHeader>
@@ -237,12 +242,13 @@ export function ExploreClient({
             onClick={() => enrichMapData(cityId)}
             disabled={isEnriching}
           >
-            {isEnriching ? "分析中..." : "🔄 刷新地图 API 数据"}
+            <RefreshCw className={cn("h-4 w-4", isEnriching && "animate-spin")} />
+            {isEnriching ? "分析中..." : "刷新地图数据"}
           </Button>
         </aside>
 
         <section>
-          <h2 className="mb-4 text-lg font-bold text-slate-800">
+          <h2 className="mb-4 font-display text-xl font-semibold text-apple-text">
             推荐街区 · {city?.name}
           </h2>
           <div className="space-y-4">
@@ -251,6 +257,7 @@ export function ExploreClient({
                 key={n.id}
                 neighborhood={n}
                 rank={i + 1}
+                weights={weights}
                 mapProvider={mapProvider}
                 isCompared={comparisonIds.includes(n.id)}
                 onDetail={() => setDetailId(n.id)}
@@ -272,6 +279,7 @@ export function ExploreClient({
 
       <ComparisonDrawer
         neighborhoods={comparisonNeighborhoods}
+        weights={weights}
         onRemove={toggleComparison}
         onClear={() => setComparisonIds([])}
       />

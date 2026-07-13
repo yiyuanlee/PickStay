@@ -15,21 +15,23 @@ export function CitySelector({
   onSelect,
 }: CitySelectorProps) {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+    <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4 lg:grid-cols-8">
       {cities.map((city) => (
         <button
           key={city.id}
           type="button"
           onClick={() => onSelect(city.id)}
           className={cn(
-            "rounded-2xl border p-3 text-left transition-all",
+            "rounded-2xl border px-3 py-3 text-left transition-all duration-300 active:scale-[0.97]",
             selectedCityId === city.id
-              ? "border-teal-500/50 bg-white shadow-md ring-2 ring-teal-500/20"
-              : "border-black/5 bg-white/60 hover:bg-white/90"
+              ? "border-apple-blue/40 bg-white shadow-md ring-2 ring-apple-blue/15"
+              : "border-black/8 bg-white/80 hover:border-black/12 hover:shadow-sm"
           )}
         >
-          <div className="text-sm font-semibold text-slate-800">{city.name.split(" ")[0]}</div>
-          <div className="mt-1 text-xs text-slate-500">
+          <div className="text-sm font-semibold text-apple-text">
+            {city.name.split(" ")[0]}
+          </div>
+          <div className="mt-0.5 text-xs text-apple-text-secondary">
             {city.neighborhoods.length} 街区
           </div>
         </button>
