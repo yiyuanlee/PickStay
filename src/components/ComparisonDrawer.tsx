@@ -67,7 +67,7 @@ export function ComparisonDrawer({
                 </button>
               </div>
               <span className="max-w-[100px] truncate text-xs font-medium text-apple-text">
-                {n.name.split(" ")[0]}
+                {n.name}
               </span>
               <span className="text-xs font-semibold text-apple-blue">
                 {n.matchScore}%
@@ -85,7 +85,7 @@ export function ComparisonDrawer({
                 </th>
                 {neighborhoods.map((n) => (
                   <th key={n.id} className="px-3 py-2 text-left font-semibold text-apple-text">
-                    {n.name.split(" ")[0]}
+                    {n.name}
                   </th>
                 ))}
               </tr>

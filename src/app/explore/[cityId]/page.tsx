@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { LoadingFallback } from "@/components/LoadingFallback";
 import { ExploreClient } from "@/components/ExploreClient";
 import { getCities, getCity } from "@/lib/data";
-import { getServerT } from "@/i18n/server";
+import { getLocale, getServerT } from "@/i18n/server";
 import { getUser } from "@/lib/supabase/server";
 
 interface ExplorePageProps {
@@ -19,7 +19,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ExplorePageProps) {
   const { cityId } = await params;
-  const [city, t] = await Promise.all([getCity(cityId), getServerT()]);
+  const [city, t] = await Promise.all([getCity(cityId, await getLocale()), getServerT()]);
   if (!city) return { title: t("explore.cityNotFound") };
   return {
     title: `${city.name} — ${t("meta.titleSuffix")}`,
@@ -33,9 +33,10 @@ export default async function ExplorePage({
 }: ExplorePageProps) {
   const { cityId } = await params;
   const { preset } = await searchParams;
+  const locale = await getLocale();
   const [cities, city, user] = await Promise.all([
-    getCities(),
-    getCity(cityId),
+    getCities(locale),
+    getCity(cityId, locale),
     getUser(),
   ]);
 

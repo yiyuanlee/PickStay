@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { getServerT } from "@/i18n/server";
+import { getLocale, getServerT } from "@/i18n/server";
 import { getNeighborhoodsByIds } from "@/lib/data";
 import {
   getFavorites,
@@ -14,7 +14,7 @@ import {
 import { getUser, getUserProfile } from "@/lib/supabase/server";
 
 export default async function DashboardPage() {
-  const t = await getServerT();
+  const [t, locale] = await Promise.all([getServerT(), getLocale()]);
   const user = await getUser();
   if (!user) redirect("/login?redirect=/dashboard");
 
@@ -26,7 +26,7 @@ export default async function DashboardPage() {
   ]);
 
   const favoriteNeighborhoods = favorites.length
-    ? await getNeighborhoodsByIds(favorites.map((f) => f.neighborhood_id))
+    ? await getNeighborhoodsByIds(favorites.map((f) => f.neighborhood_id), locale)
     : [];
 
   return (

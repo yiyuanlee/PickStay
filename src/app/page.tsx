@@ -3,12 +3,12 @@ import { Cloud, GitCompare, Map, SlidersHorizontal } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getServerT } from "@/i18n/server";
+import { getLocale, getServerT } from "@/i18n/server";
 import { getCities } from "@/lib/data";
 
 export default async function HomePage() {
-  const t = await getServerT();
-  const cities = await getCities();
+  const [t, locale] = await Promise.all([getServerT(), getLocale()]);
+  const cities = await getCities(locale);
   const totalNeighborhoods = cities.reduce(
     (sum, c) => sum + c.neighborhoods.length,
     0
@@ -103,7 +103,7 @@ export default async function HomePage() {
               style={{ animationDelay: `${0.4 + i * 0.06}s` }}
             >
               <div className="font-semibold text-apple-text transition-colors group-hover:text-apple-blue">
-                {city.name.split(" ")[0]}
+                {city.name}
               </div>
               <div className="mt-1 text-xs text-apple-text-secondary">
                 {city.neighborhoods.length} {t("home.neighborhoods")}

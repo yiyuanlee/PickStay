@@ -32,7 +32,7 @@ export function CitySelector({
           )}
         >
           <div className="text-sm font-semibold text-apple-text">
-            {city.name.split(" ")[0]}
+            {city.name}
           </div>
           <div className="mt-0.5 text-xs text-apple-text-secondary">
             {city.neighborhoods.length} {t("citySelector.neighborhoods")}

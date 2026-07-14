@@ -84,7 +84,7 @@ export default async function AdminPage() {
                   <tbody>
                     {city.neighborhoods.map((n) => (
                       <tr key={n.id} className="border-b border-black/5 text-apple-text-secondary">
-                        <td className="py-2 font-medium text-apple-text">{n.name.split(" ")[0]}</td>
+                        <td className="py-2 font-medium text-apple-text">{n.name}</td>
                         {dimensionList.map((d) => (
                           <td key={d.key}>{n.scores[d.key]}</td>
                         ))}

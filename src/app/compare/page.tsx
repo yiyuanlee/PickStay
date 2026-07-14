@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { CompareEmpty, CompareVisual } from "@/components/CompareVisual";
-import { getServerT } from "@/i18n/server";
+import { getLocale, getServerT } from "@/i18n/server";
 import { getNeighborhoodsByIds } from "@/lib/data";
 import { rankNeighborhoods } from "@/lib/recommendation/engine";
 import { DEFAULT_WEIGHTS } from "@/lib/recommendation/presets";
@@ -10,12 +10,12 @@ interface ComparePageProps {
 }
 
 export default async function ComparePage({ searchParams }: ComparePageProps) {
-  const t = await getServerT();
+  const [t, locale] = await Promise.all([getServerT(), getLocale()]);
   const { ids } = await searchParams;
   const idList = ids?.split(",").filter(Boolean) ?? [];
 
   const neighborhoods = idList.length
-    ? await getNeighborhoodsByIds(idList)
+    ? await getNeighborhoodsByIds(idList, locale)
     : [];
 
   const ranked = rankNeighborhoods(neighborhoods, DEFAULT_WEIGHTS);

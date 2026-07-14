@@ -1,6 +1,14 @@
 import { createClient } from "@supabase/supabase-js";
+import type { Locale } from "@/i18n/types";
+import { DEFAULT_LOCALE } from "@/i18n/types";
 import type { City, Neighborhood, Scores } from "@/lib/recommendation/types";
 import { getLocalCities, getLocalCity, getLocalNeighborhood } from "./local";
+import {
+  localizeCities,
+  localizeCity,
+  localizeNeighborhood,
+  localizeNeighborhoods,
+} from "./localize";
 
 function isSupabaseConfigured() {
   return Boolean(
@@ -33,81 +41,113 @@ function mapNeighborhood(row: Record<string, unknown>): Neighborhood {
   };
 }
 
-export async function getCities(): Promise<City[]> {
-  if (!isSupabaseConfigured()) return getLocalCities();
+export async function getCities(locale: Locale = DEFAULT_LOCALE): Promise<City[]> {
+  let cities: City[];
 
-  const supabase = getAdminClient();
-  const { data: cities, error: citiesError } = await supabase
-    .from("cities")
-    .select("*")
-    .order("name");
+  if (!isSupabaseConfigured()) {
+    cities = getLocalCities();
+  } else {
+    const supabase = getAdminClient();
+    const { data: cityRows, error: citiesError } = await supabase
+      .from("cities")
+      .select("*")
+      .order("name");
 
-  if (citiesError || !cities?.length) return getLocalCities();
+    if (citiesError || !cityRows?.length) {
+      cities = getLocalCities();
+    } else {
+      const { data: neighborhoods, error: nError } = await supabase
+        .from("neighborhoods")
+        .select("*");
 
-  const { data: neighborhoods, error: nError } = await supabase
-    .from("neighborhoods")
-    .select("*");
+      if (nError) {
+        cities = getLocalCities();
+      } else {
+        cities = cityRows.map((city) => ({
+          id: city.id,
+          name: city.name,
+          description: city.description,
+          preferredProvider: city.preferred_provider as City["preferredProvider"],
+          center: { lat: city.center_lat, lng: city.center_lng },
+          neighborhoods: (neighborhoods || [])
+            .filter((n) => n.city_id === city.id)
+            .map(mapNeighborhood),
+        }));
+      }
+    }
+  }
 
-  if (nError) return getLocalCities();
-
-  return cities.map((city) => ({
-    id: city.id,
-    name: city.name,
-    description: city.description,
-    preferredProvider: city.preferred_provider as City["preferredProvider"],
-    center: { lat: city.center_lat, lng: city.center_lng },
-    neighborhoods: (neighborhoods || [])
-      .filter((n) => n.city_id === city.id)
-      .map(mapNeighborhood),
-  }));
+  return localizeCities(cities, locale);
 }
 
-export async function getCity(cityId: string): Promise<City | null> {
-  if (!isSupabaseConfigured()) return getLocalCity(cityId);
+export async function getCity(
+  cityId: string,
+  locale: Locale = DEFAULT_LOCALE
+): Promise<City | null> {
+  let city: City | null;
 
-  const supabase = getAdminClient();
-  const { data: city, error } = await supabase
-    .from("cities")
-    .select("*")
-    .eq("id", cityId)
-    .single();
+  if (!isSupabaseConfigured()) {
+    city = getLocalCity(cityId);
+  } else {
+    const supabase = getAdminClient();
+    const { data: cityRow, error } = await supabase
+      .from("cities")
+      .select("*")
+      .eq("id", cityId)
+      .single();
 
-  if (error || !city) return getLocalCity(cityId);
+    if (error || !cityRow) {
+      city = getLocalCity(cityId);
+    } else {
+      const { data: neighborhoods } = await supabase
+        .from("neighborhoods")
+        .select("*")
+        .eq("city_id", cityId);
 
-  const { data: neighborhoods } = await supabase
-    .from("neighborhoods")
-    .select("*")
-    .eq("city_id", cityId);
+      city = {
+        id: cityRow.id,
+        name: cityRow.name,
+        description: cityRow.description,
+        preferredProvider: cityRow.preferred_provider as City["preferredProvider"],
+        center: { lat: cityRow.center_lat, lng: cityRow.center_lng },
+        neighborhoods: (neighborhoods || []).map(mapNeighborhood),
+      };
+    }
+  }
 
-  return {
-    id: city.id,
-    name: city.name,
-    description: city.description,
-    preferredProvider: city.preferred_provider as City["preferredProvider"],
-    center: { lat: city.center_lat, lng: city.center_lng },
-    neighborhoods: (neighborhoods || []).map(mapNeighborhood),
-  };
+  return city ? localizeCity(city, locale) : null;
 }
 
 export async function getNeighborhood(
-  neighborhoodId: string
+  neighborhoodId: string,
+  locale: Locale = DEFAULT_LOCALE
 ): Promise<Neighborhood | null> {
-  if (!isSupabaseConfigured()) return getLocalNeighborhood(neighborhoodId);
+  let neighborhood: Neighborhood | null;
 
-  const supabase = getAdminClient();
-  const { data, error } = await supabase
-    .from("neighborhoods")
-    .select("*")
-    .eq("id", neighborhoodId)
-    .single();
+  if (!isSupabaseConfigured()) {
+    neighborhood = getLocalNeighborhood(neighborhoodId);
+  } else {
+    const supabase = getAdminClient();
+    const { data, error } = await supabase
+      .from("neighborhoods")
+      .select("*")
+      .eq("id", neighborhoodId)
+      .single();
 
-  if (error || !data) return getLocalNeighborhood(neighborhoodId);
-  return mapNeighborhood(data);
+    if (error || !data) {
+      neighborhood = getLocalNeighborhood(neighborhoodId);
+    } else {
+      neighborhood = mapNeighborhood(data);
+    }
+  }
+
+  return neighborhood ? localizeNeighborhood(neighborhood, locale) : null;
 }
 
 export async function getNeighborhoodsByIds(
-  ids: string[]
+  ids: string[],
+  locale: Locale = DEFAULT_LOCALE
 ): Promise<Neighborhood[]> {
-  const results = await Promise.all(ids.map((id) => getNeighborhood(id)));
+  const results = await Promise.all(ids.map((id) => getNeighborhood(id, locale)));
   return results.filter((n): n is Neighborhood => n !== null);
 }

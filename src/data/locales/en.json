@@ -1,0 +1,950 @@
+{
+  "cities": {
+    "tokyo": {
+      "name": "Tokyo",
+      "description": "A megacity where tradition and modernity intertwine"
+    },
+    "beijing": {
+      "name": "Beijing",
+      "description": "Where imperial grandeur meets the warmth of hutong life"
+    },
+    "paris": {
+      "name": "Paris",
+      "description": "A movable feast along the romantic banks of the Seine"
+    },
+    "melbourne": {
+      "name": "Melbourne",
+      "description": "The global coffee capital — a cultural city of street art and slow-paced laneways"
+    },
+    "queenstown": {
+      "name": "Queenstown",
+      "description": "The adventure and lakeside capital at the foot of the Southern Alps"
+    },
+    "sydney": {
+      "name": "Sydney",
+      "description": "A Southern Hemisphere metropolis where the Harbour Bridge meets sun-drenched beaches"
+    },
+    "guangzhou": {
+      "name": "Guangzhou",
+      "description": "A thousand-year trading city of arcaded streets, street life, and dim sum culture"
+    },
+    "osaka": {
+      "name": "Osaka",
+      "description": "The Kansai food capital — takoyaki aromas and down-to-earth neighborhood warmth"
+    }
+  },
+  "neighborhoods": {
+    "shinjuku": {
+      "name": "Shinjuku",
+      "tagline": "A neon-lit metropolis that never sleeps",
+      "pros": [
+        "Tokyo's strongest transport hub — easy access everywhere",
+        "Packed with department stores and drugstores — a shopper's paradise",
+        "Incredibly rich nightlife (Kabukicho, Omoide Yokocho)"
+      ],
+      "cons": [
+        "Massive crowds and a relatively noisy street environment",
+        "Some busy nightlife areas require extra caution late at night"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "First-time visitors who love bustling convenience and nightlife",
+      "detailText": "Shinjuku is Tokyo's most famous commercial and entertainment center. Home to one of the world's busiest train stations, it's incredibly convenient whether you're heading to Hakone, Mount Fuji, or anywhere else in the city. Fast-paced and loud as it is, this is where you feel the raw pulse of urban Tokyo."
+    },
+    "shibuya": {
+      "name": "Shibuya",
+      "tagline": "The trendsetter and playground for young Tokyo",
+      "pros": [
+        "Shopping streets that set global fashion trends",
+        "Abundant cafés and curated boutiques",
+        "Walking distance to Omotesando, Harajuku, and Yoyogi Park"
+      ],
+      "cons": [
+        "Crowded on weekends and holidays",
+        "Accommodation tends to be expensive"
+      ],
+      "priceLevel": "Upscale (¥¥¥¥)",
+      "bestFor": "Fashion lovers, young travelers, and café-hopping enthusiasts",
+      "detailText": "Shibuya is more than its famous scramble crossing — it's Tokyo's fashion heart. Stretch north through Harajuku and Omotesando and you'll find specialty coffee shops, streetwear stores, and designer boutiques at every turn. The energy is vibrant and creative, perfect for travelers who love exploring side streets and hunting for hidden gems."
+    },
+    "asakusa": {
+      "name": "Asakusa",
+      "tagline": "A foothold in Edo-era charm and traditional culture",
+      "pros": [
+        "Rich traditional Japanese atmosphere near Senso-ji Temple and the Sumida River",
+        "Great value with affordable guesthouses and design hostels",
+        "Very quiet at night with an excellent safety record"
+      ],
+      "cons": [
+        "Far from western hubs like Shinjuku and Shibuya",
+        "Limited nightlife — most shops close around 8–9 PM"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Families, budget backpackers, and travelers who love traditional culture",
+      "detailText": "Asakusa preserves a rare slice of old Tokyo's shitamachi (working-class Edo-era) atmosphere. Stroll in a kimono with views of Skytree in the distance. Transport isn't as omnidirectional as Shinjuku, but accommodation offers outstanding value in a serene, timeless setting — ideal for a slower-paced Tokyo experience."
+    },
+    "nakameguro": {
+      "name": "Nakameguro",
+      "tagline": "Refined, artsy slow living along the Meguro River",
+      "pros": [
+        "Picturesque riverbanks (especially during cherry blossom season)",
+        "Tokyo's hub for independent cafés and niche designer shops",
+        "Quiet elegance with a high quality of everyday life"
+      ],
+      "cons": [
+        "Packed during cherry blossom season with limited mobility",
+        "Few luxury hotels — mostly high-end guesthouses and boutique apartments"
+      ],
+      "priceLevel": "Upscale (¥¥¥¥)",
+      "bestFor": "Creative types, slow walkers, and travelers who value quality of stay",
+      "detailText": "Nakameguro is one of Tokyo's most coveted residential neighborhoods. The Meguro River winds through streets lined with some of the city's best pour-over cafés (including the Starbucks Reserve Roastery), bakeries, and vintage furniture shops. Just one stop from Shibuya yet worlds away from the chaos, it embodies a lazy, refined chill."
+    },
+    "shimokitazawa": {
+      "name": "Shimokitazawa",
+      "tagline": "A sanctuary for vintage fashion, music, and youth subculture",
+      "pros": [
+        "Tokyo's best cluster of vintage shops and vinyl record stores",
+        "Lively street energy and spontaneous street art",
+        "Many excellent independent cafés and craft beer bars"
+      ],
+      "cons": [
+        "Narrow, maze-like streets — awkward with large luggage",
+        "Few large chain hotels — mostly character hostels and guesthouses"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Vintage lovers, indie music fans, and young travelers seeking authentic local life",
+      "detailText": "Shimokitazawa (or 'Shimokita') radiates rebellion and freedom. No skyscrapers here — just dense alleys hiding countless vintage shops, small theaters, live houses, and outstanding yet affordable cafés. The pace is slow and effortlessly comfortable, making it one of Tokyo's most charming chill neighborhoods."
+    },
+    "ginza": {
+      "name": "Ginza",
+      "tagline": "Tokyo's pinnacle of luxury shopping and department stores",
+      "pros": [
+        "Tokyo's most upscale shopping district with luxury brands and fine dining",
+        "Multiple subway lines, excellent safety, and immaculate streets",
+        "Many distinguished old-school coffee salons"
+      ],
+      "cons": [
+        "Very high prices with few budget options for food and lodging",
+        "Lacks street-level grit and niche youth culture"
+      ],
+      "priceLevel": "Ultra-luxury (¥¥¥¥¥)",
+      "bestFor": "High-budget travelers who love luxury shopping and refined living",
+      "detailText": "Ginza is Tokyo's most storied upscale district. Experience top-tier Japanese hospitality and some of the city's best public safety. Though pricey, it concentrates Tokyo's finest boutique hotels, Michelin restaurants, and historic cafés (like Café de L'Ambre) — perfect for travelers who value composure and quality."
+    },
+    "ueno": {
+      "name": "Ueno",
+      "tagline": "Park greenery and a convenient airport-line hub",
+      "pros": [
+        "Keisei line direct to the airport, multiple Shinkansen lines — superb transport",
+        "Adjacent to Ueno Park and numerous national museums",
+        "Ameyoko market offers affordable drugstores and street food"
+      ],
+      "cons": [
+        "Crowded and noisy around Ueno Station; some areas have homeless presence at night",
+        "Conservative nightlife — mostly traditional izakaya"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Travelers prioritizing airport access, museums, and park greenery — families and backpackers",
+      "detailText": "Ueno is Tokyo's northern gateway. Ueno Park offers wide green spaces and is a cherry blossom hotspot. Transport is outstanding — take the Skyliner straight to the airport or hop a Shinkansen to northeastern Japan. Nearby Ameyoko brims with market-stall character, and accommodation is excellent value."
+    },
+    "koenji": {
+      "name": "Koenji",
+      "tagline": "Punk musicians, neighborhood bars, and lazy afternoons",
+      "pros": [
+        "Cheap eats and great-value Japanese rental apartments",
+        "Distinct punk, live music, and thrift-shop culture",
+        "Far from the bustle — pure, slow local life"
+      ],
+      "cons": [
+        "Far from eastern sights like Tsukiji and Ginza",
+        "Few large commercial streets — mostly small apartment guesthouses"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Creative travelers seeking offbeat local life and affordable vintage finds",
+      "detailText": "Just a few stops from Shinjuku, Koenji feels worlds apart — relaxed and unhurried. It's the heart of Tokyo's indie rock and working-class culture, packed with thrift stores, independent cafés, and lively yakitori stalls at night. An easy, carefree vibe makes it perfect for travelers who want to 'live in Tokyo' for a while."
+    },
+    "sanlitun": {
+      "name": "Sanlitun / Dongzhimen",
+      "tagline": "A fashion landmark and embassy-district greenery",
+      "pros": [
+        "Beijing's top fashion district (Taikoo Li) and dining hub",
+        "The city's best bars and nightlife",
+        "Tree-lined embassy area with great walkability and transport"
+      ],
+      "cons": [
+        "Hotel prices are very high",
+        "Hard to get taxis on weekend evenings; heavy traffic"
+      ],
+      "priceLevel": "Upscale (¥¥¥¥)",
+      "bestFor": "Young travelers who love shopping, nightlife, and fashion",
+      "detailText": "Sanlitun is Beijing's trend barometer — flagship stores, first-in-market openings, and excellent Western restaurants and bars. The adjacent embassy district is quiet and comfortable with wide streets ideal for cycling or strolling. Cafés are everywhere; on weekday afternoons you'll see people chatting over coffee outdoors — pure urban chill."
+    },
+    "gulou": {
+      "name": "Gulou / Shichahai",
+      "tagline": "Old Beijing hutongs meet a new wave of arts and culture",
+      "pros": [
+        "The most authentic hutong and siheyuan courtyard atmosphere",
+        "Dense with independent cafés, live houses, and handmade craft shops",
+        "Steps from Shichahai — scenic and full of local life"
+      ],
+      "cons": [
+        "Some older hutong lodgings have average soundproofing",
+        "Hutongs are car-free — expect longer walks with luggage"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "Creative travelers who love hutong culture and cycling",
+      "detailText": "Around Gulou and Wudaoying Hutong lies the core of Beijing's indie coffee and youth culture. Red-brick lanes hide pour-over cafés, vinyl shops, and independent designer studios. Hear pigeon whistles in the morning, grab an iced Americano in the afternoon, and catch live music at Houhai or a live house at night — old Beijing tradition and modern chill in perfect balance."
+    },
+    "guomao": {
+      "name": "Guomao / CBD",
+      "tagline": "A modern business district of soaring skyscrapers",
+      "pros": [
+        "Excellent transport with dual subway hubs — highly efficient",
+        "Premium luxury hotels and high-rise apartments with skyline views",
+        "Outstanding safety and top-tier service infrastructure"
+      ],
+      "cons": [
+        "Very high cost of living; dining is generally expensive",
+        "Office districts lack neighborhood warmth at night"
+      ],
+      "priceLevel": "Upscale (¥¥¥¥)",
+      "bestFor": "Business travelers seeking premium hotels, skyline views, and polished service",
+      "detailText": "Guomao is Beijing's financial center, anchored by the iconic CCTV Tower and other skyscrapers. International luxury hotels (China World Summit Wing, Hotel Jen) cluster here above vast underground malls. Though business-heavy, cafés — both chains and specialty spots suited for work meetings — are everywhere, making it highly efficient."
+    },
+    "qianmen": {
+      "name": "Qianmen / Dashilar",
+      "tagline": "Century-old brands and a retro creative quarter",
+      "pros": [
+        "Walking distance to Tiananmen Square and the Forbidden City — ideal for flag-raising",
+        "Many renovated courtyard boutique guesthouses and hostels",
+        "Qianmen pedestrian street and Yangmeizhu Xiejie brim with old Beijing character"
+      ],
+      "cons": [
+        "A major tourist zone — crowded by day; some heritage restaurants cater to visitors",
+        "Quiet at night with limited bar and nightlife options"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "First-time visitors, families, and anyone who wants to walk to the flag-raising ceremony",
+      "detailText": "Qianmen sits beside the Forbidden City and Tiananmen — the historic heart of Beijing. Recent urban renewal has produced spaces like Beijing Fun and Yangmeizhu Xiejie: historic architecture paired with quality indie bookstores (PageOne), boutique cafés, and art galleries — a calm retreat within a busy tourist zone."
+    },
+    "wudaokou": {
+      "name": "Wudaokou",
+      "tagline": "Youthful energy and affordable eats at the 'Center of the Universe'",
+      "pros": [
+        "Surrounded by universities — young energy and very affordable dining",
+        "Excellent Korean BBQ, snacks, and specialty pubs",
+        "Many cafés suited for studying and remote work"
+      ],
+      "cons": [
+        "Line 13 subway is extremely crowded at rush hour",
+        "Few high-star luxury hotels"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Students, backpackers, and travelers who value food value and youthful vibes",
+      "detailText": "Wudaokou is nicknamed the 'Center of the Universe,' surrounded by Tsinghua, Peking University, Language University, and tens of thousands of students. Streets pulse with youthful energy and countless affordable international eats. Cafés tend to have spacious seating and quiet atmospheres — a blend of study and leisure that's distinctly chill."
+    },
+    "wangfujing": {
+      "name": "Wangfujing / Dongdan",
+      "tagline": "A storied classic shopping pedestrian street",
+      "pros": [
+        "Traditional commercial district with major department stores and top-tier services",
+        "Near the Forbidden City's East Gate; dense transport network and very safe",
+        "Many refined afternoon teas hidden in courtyards or upscale malls"
+      ],
+      "cons": [
+        "Tourist-heavy, higher prices, and limited indie artsy atmosphere",
+        "Shopping streets close relatively early; little nightlife"
+      ],
+      "priceLevel": "Upscale (¥¥¥¥)",
+      "bestFor": "Business travelers, families, and those who value convenience, safety, and established quality",
+      "detailText": "Wangfujing is Beijing's most famous commercial name card. Modern upscale malls like WF Central and Beijing apm sit alongside historic landmarks like St. Joseph's Church. Safety is exceptional and hotel management is highly professional. Though commercial in feel, tea houses and upscale cafés offer weary travelers an elegant refuge."
+    },
+    "wangjing": {
+      "name": "Wangjing",
+      "tagline": "Tech frontier meets Korean-inspired café culture",
+      "pros": [
+        "Beijing's most authentic Korean food, BBQ, and dining bars",
+        "Designer indie cafés everywhere",
+        "Modern neighborhood near 798 Art District with strong creative energy"
+      ],
+      "cons": [
+        "Far from central sights (Forbidden City, Temple of Heaven) — longer rides",
+        "Rush-hour traffic on some roads"
+      ],
+      "priceLevel": "Mid-range (¥¥¥)",
+      "bestFor": "Food lovers, tech workers, and young people who enjoy galleries and Korean-inspired culture",
+      "detailText": "Wangjing is Beijing's emerging tech and creative hub. A large Korean and internet-industry community has shaped a distinctive coffee-and-brunch culture. Shops are modern and photogenic — spend a weekend at nearby 798, then grab a specialty coffee in Wangjing for a thoroughly chill experience."
+    },
+    "marais": {
+      "name": "Le Marais (3rd/4th Arr.)",
+      "tagline": "Avant-garde galleries, boutiques, and medieval cobblestones",
+      "pros": [
+        "Paris's trendiest area with cutting-edge boutiques and art galleries",
+        "Beautiful medieval architecture throughout",
+        "Most shops open on Sundays (rare in Paris)"
+      ],
+      "cons": [
+        "Narrow historic streets get congested",
+        "Accommodation scarce and expensive in peak season"
+      ],
+      "priceLevel": "Upscale (¥¥¥¥)",
+      "bestFor": "Fashion lovers, art enthusiasts, and walkers who love exploring alleys",
+      "detailText": "Le Marais spans Paris's 3rd and 4th arrondissements — the undisputed fashion heart of the city. Faubourg-style courtyards, indie perfumeries, niche fashion shops, and the Centre Pompidou define the scene. Sidewalk cafés abound; an afternoon café au lait watching passersby is the quintessential French chill."
+    },
+    "montmartre": {
+      "name": "Montmartre (18th Arr.)",
+      "tagline": "A bohemian artists' hill beneath Sacré-Cœur",
+      "pros": [
+        "Romantic and artistic summit with panoramic Paris views",
+        "Relatively affordable by Paris standards — plenty of bistros and bakeries",
+        "Strong artistic, cinematic atmosphere (Amélie filming locations)"
+      ],
+      "cons": [
+        "Hilly with many steps — tough with heavy luggage",
+        "Heightened caution needed around Sacré-Cœur and Pigalle at night"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Couples, romantics on a budget, and young artistic travelers",
+      "detailText": "Montmartre rises on Paris's northern hill — once home to Picasso, Van Gogh, and other greats. Ivy-clad stone cottages, the Café des Deux Moulins, and street artists at Place du Tertre set the scene. Slower and freer than central Paris, it carries a distinctive bohemian chill."
+    },
+    "latinquarter": {
+      "name": "Latin Quarter (5th Arr.)",
+      "tagline": "Left Bank scholarship and bookish charm by the Sorbonne",
+      "pros": [
+        "Exceptionally safe — among the best in Paris",
+        "Academic atmosphere near Luxembourg Gardens and Shakespeare and Company",
+        "Very convenient transport close to the Seine"
+      ],
+      "cons": [
+        "Many older buildings — no elevators and small rooms",
+        "Few large modern shopping malls"
+      ],
+      "priceLevel": "Mid-range (¥¥¥)",
+      "bestFor": "Solo travelers, scholars and book lovers who value safety and tranquility",
+      "detailText": "The Latin Quarter has been Paris's university district since the Middle Ages. Narrow streets (like Rue de la Huchette) hide historic indie cinemas, old bookshops, and cozy student cafés. Luxembourg Gardens is a beloved spot for sunbathing, reading, and daydreaming — a true Parisian chill sanctuary."
+    },
+    "stgermain": {
+      "name": "Saint-Germain-des-Prés (6th Arr.)",
+      "tagline": "Café de Flore and Les Deux Magots — Sartre's legacy",
+      "pros": [
+        "One of Paris's safest and most elegant neighborhoods",
+        "Legendary cafés and haute couture at their finest",
+        "Abundant art dealers and specialty bookshops — the pinnacle of French grace"
+      ],
+      "cons": [
+        "Very expensive accommodation and cost of living",
+        "Mostly small boutique hotels with compact rooms"
+      ],
+      "priceLevel": "Upscale (¥¥¥¥)",
+      "bestFor": "Travelers seeking quintessential French elegance, history, and a generous budget",
+      "detailText": "Saint-Germain was the cradle of twentieth-century existentialist philosophy and literature. Sartre, Simone de Beauvoir, and Picasso were regulars at Café de Flore and Les Deux Magots. Today it's synonymous with top luxury, independent galleries, and upscale residences. Expensive, yes — but coffee, conversation, and gallery-hopping here remain Paris's most classic, textured chill."
+    },
+    "canal": {
+      "name": "Canal Saint-Martin (10th/11th Arr.)",
+      "tagline": "Bohemian trendy slow living along a Seine tributary",
+      "pros": [
+        "Beautiful canal banks — a trendy local spot for picnics and lounging",
+        "New-wave artisan bakeries, indie cafés, and craft beer bars",
+        "Away from tourist crowds with authentic neighborhood life"
+      ],
+      "cons": [
+        "Occasional late-night noise along the canal",
+        "Some older apartments have average soundproofing"
+      ],
+      "priceLevel": "Mid-range (¥¥¥)",
+      "bestFor": "Creative couples and young backpackers seeking everyday French chill",
+      "detailText": "Canal Saint-Martin is a vibrant green corridor where locals outnumber tourists. Sit on an iron bridge in the afternoon with bread from Du Pain et des Idées and a pour-over, watching boats pass — and you'll taste Paris's modern, energetic, unpretentious slow life."
+    },
+    "champs": {
+      "name": "Champs-Élysées (8th Arr.)",
+      "tagline": "Grand royal avenue and luxury flagship stores by the Arc de Triomphe",
+      "pros": [
+        "Steps from the Arc and Champs-Élysées — wide boulevards and top safety",
+        "Global luxury flagship stores and Michelin-level French dining",
+        "Major subway lines connect seamlessly to all core landmarks"
+      ],
+      "cons": [
+        "Very expensive lodging and daily costs; little everyday neighborhood warmth",
+        "Heavy tourist traffic; the avenue can feel noisy by day"
+      ],
+      "priceLevel": "Ultra-luxury (¥¥¥¥¥)",
+      "bestFor": "Luxury travelers, honeymooners, and those who demand efficiency and safety",
+      "detailText": "The 8th arrondissement embodies Parisian royal grandeur. Broad streets, tight security, and hotels with exceptional service (like the classic Four Seasons George V). Less intimate than the Left Bank's winding lanes, but morning espresso by a luxury window watching the golden Arc at sunrise is elegance itself."
+    },
+    "eiffel": {
+      "name": "Eiffel Tower / Grenelle (15th Arr.)",
+      "tagline": "Quiet middle-class residential streets with Eiffel views from your window",
+      "pros": [
+        "Walking distance to Champ de Mars — best base for the nightly Eiffel light show",
+        "Elegant, very safe middle-class residential area",
+        "Charming neighborhood bakeries and community cafés"
+      ],
+      "cons": [
+        "Few major nightlife venues or loud bars",
+        "Prices vary sharply depending on Eiffel view quality"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "Families, travelers with elders, and anyone who values nighttime quiet and safety",
+      "detailText": "The 15th is a charming, refined French residential district — away from tourist chaos with excellent safety and leisurely pedestrian streets. Buy a fresh baguette in the morning and stroll along the Seine beneath the tower. Comfort at its finest."
+    },
+    "fitzroy": {
+      "name": "Fitzroy",
+      "tagline": "The birthplace of bohemian art and street culture",
+      "pros": [
+        "Melbourne's best cluster of independent cafés and vegetarian restaurants",
+        "Street murals, vintage shops, and designer boutiques everywhere",
+        "Vintage jazz bars and live houses at night"
+      ],
+      "cons": [
+        "Some bar areas get noisy on weekend nights",
+        "Mostly boutique apartments and guesthouses — few large chain luxury hotels"
+      ],
+      "priceLevel": "Mid-range (¥¥¥)",
+      "bestFor": "Coffee obsessives, vintage and vinyl fans, and travelers seeking cutting-edge culture",
+      "detailText": "Fitzroy is Melbourne's cultural heart. Brunswick and Gertrude Streets intersect in a grid of world-class single-origin pour-over cafés (like Industry Beans). Colorful murals cover building facades — casual, creative, and one of the world's chilliest neighborhoods."
+    },
+    "cbd": {
+      "name": "Melbourne CBD",
+      "tagline": "Where graffiti laneways meet world-class coffee counters",
+      "pros": [
+        "Free Tram Zone in the city center — incredibly convenient",
+        "Famous Hosier Lane and Degraves Street coffee alleys right nearby",
+        "Very convenient living with Queen Victoria Market close at hand"
+      ],
+      "cons": [
+        "High-rises and traffic — little sense of residential tranquility",
+        "Rooms tend to be small, mostly apartment-style hotels"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "First-time visitors who want efficient transport and shopping convenience",
+      "detailText": "Melbourne's CBD is far from a cold financial district — it's defined by famous laneway culture. Basements and narrow alleys pack outstanding independent cafés (like Brother Baba Budan). Free circle trams let you hit major sights without a transit card — perfect for fast-paced travelers."
+    },
+    "stkilda": {
+      "name": "St Kilda",
+      "tagline": "Beaches, palm trees, and sunset penguins in a holiday harbor",
+      "pros": [
+        "St Kilda Beach — watch wild fairy penguins return at sunset on the breakwater",
+        "Historic Luna Park amusement park",
+        "Beautiful esplanade with a strong resort feel"
+      ],
+      "cons": [
+        "Far from the CBD — tram required, outside the free zone",
+        "Some Fitzroy Street areas can feel rough late at night"
+      ],
+      "priceLevel": "Mid-range (¥¥¥)",
+      "bestFor": "Ocean lovers, families, and travelers seeking a seaside holiday vibe",
+      "detailText": "St Kilda is Melbourne's playground by the sea. Sea breezes and towering palms line the shore. Sample European pastries on Acland Street, sunbathe in the afternoon, and wait for penguins with a craft beer at dusk — the ultimate lazy coastal chill."
+    },
+    "carlton": {
+      "name": "Carlton",
+      "tagline": "Little Italy's espresso and the greenery of the Royal Exhibition Building",
+      "pros": [
+        "Adjacent to the Royal Exhibition Building and Carlton Gardens — excellent greenery",
+        "Birthplace of 'Little Italy' on Lygon Street with outstanding Italian dining",
+        "Walking distance to Melbourne University — safe with strong academic atmosphere"
+      ],
+      "cons": [
+        "Few upscale hotels — mostly student apartments and converted Victorian terraces",
+        "Nightlife centers on dining and Italian dessert shops, not loud clubs"
+      ],
+      "priceLevel": "Mid-range (¥¥¥)",
+      "bestFor": "Food lovers, park walkers, and fans of Italian coffee culture",
+      "detailText": "Carlton laid the foundations of Melbourne's coffee culture. Italian immigrants brought the city's first espresso machine to Lygon Street. Famous spots include Pidapipó gelato and Brunetti café. An afternoon by the Royal Exhibition Building fountain with pigeons and sun, sipping a proper macchiato — Carlton's own slow romance."
+    },
+    "southyarra": {
+      "name": "South Yarra",
+      "tagline": "Elegant yuppie living and fashionable Chapel Street",
+      "pros": [
+        "Chapel Street's top boutiques, department stores, and stylish dining",
+        "Near the Yarra River green belt and Royal Botanic Gardens — fresh air",
+        "Many high-star boutique apartment hotels with refined ambiance"
+      ],
+      "cons": [
+        "High cost of living; dining and parking are expensive",
+        "Weekend traffic congestion around fashionable bars"
+      ],
+      "priceLevel": "Upscale (¥¥¥¥)",
+      "bestFor": "Quality-focused travelers, shopping enthusiasts, and business guests who want elegance",
+      "detailText": "South Yarra is one of Melbourne's famous affluent neighborhoods. Tree-lined streets blend Victorian terraces with modern light-luxury apartments. Chapel Street concentrates the city's best fashion, upscale cafés, and creative brunch spots. A morning jog along the Yarra is among Melbourne's finest."
+    },
+    "brunswick": {
+      "name": "Brunswick",
+      "tagline": "Minimal industrial style, live rock, and immigrant food streets",
+      "pros": [
+        "Many oversized independent cafés and roasteries in converted warehouses",
+        "Sydney Road's authentic Mediterranean, Middle Eastern, and Italian street food",
+        "Melbourne's most active youth rock scene and niche fashion retail"
+      ],
+      "cons": [
+        "Some old industrial zones lack polished grandeur",
+        "Far from southern beach attractions"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Rock fans, coffee roasting enthusiasts, and travelers seeking affordable neighborhood character",
+      "detailText": "Brunswick is Melbourne's quintessential multicultural creative community — home to renowned roasters like Code Black Coffee. High-ceiling warehouse cafés fill with people writing or sketching on laptops. Down-to-earth prices, casual street art, and excellent-value live music define the vibe."
+    },
+    "richmond": {
+      "name": "Richmond",
+      "tagline": "Factory outlets meet fragrant Vietnamese street life",
+      "pros": [
+        "Famous Vietnamese food street (Victoria Street) with the city's best pho",
+        "Outlet discount stores and proximity to the MCG — ideal for sports fans",
+        "Excellent transport grid — train and tram to CBD in just a few stops"
+      ],
+      "cons": [
+        "Victoria Street can feel noisy and gritty by day",
+        "Few traditional luxury hotels — mostly trendy design guesthouses"
+      ],
+      "priceLevel": "Mid-range (¥¥¥)",
+      "bestFor": "Asian food lovers, sports spectators, and outlet shoppers",
+      "detailText": "Richmond is full of delightful contrasts — big sports and discount factory stores alongside Melbourne's beloved 'Little Saigon.' Cafés like Top Paddock are legends of the creative brunch scene. Working-class roots meet today's yuppie internet culture in a neighborhood with real character."
+    },
+    "queenstown-central": {
+      "name": "Queenstown Central",
+      "tagline": "Lake Wakatipu's adventure hub and dining nightlife center",
+      "pros": [
+        "Walking distance to lakeside trails, restaurants, and adventure booking centers",
+        "Orbus buses and water taxis connect easily; information points everywhere",
+        "Fergburger and craft beer bars — lively nightlife"
+      ],
+      "cons": [
+        "Crowded in peak season; parking and central accommodation prices run high",
+        "Some bar streets noisy late at night; lakeside luxury hotels book out fast"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "First-time visitors who love lakeside walks and rich dining and nightlife",
+      "detailText": "Queenstown Central is the South Island's hottest travel hub. The Lake Wakatipu waterfront trail links boutique hotels, adventure booking desks, and Western restaurants. A morning jog by the lake and a sunset dinner at a lakeside restaurant — the classic Queenstown urban chill."
+    },
+    "frankton": {
+      "name": "Frankton",
+      "tagline": "A practical, great-value base beside the airport",
+      "pros": [
+        "Right next to Queenstown Airport — extremely convenient arrivals and departures",
+        "Five Mile Shopping Centre with supermarkets — lower costs than the town center",
+        "Orbus to town center in 10 minutes; ideal for self-drive layovers"
+      ],
+      "cons": [
+        "Lacks Queenstown's signature lakeside core scenery",
+        "Far fewer nightlife and boutique dining options than downtown"
+      ],
+      "priceLevel": "Mid-range (¥¥)",
+      "bestFor": "Travelers prioritizing airport access, self-drive transfers, or a tighter budget",
+      "detailText": "Frankton is Queenstown's gateway — many self-drive travelers pick up or drop off cars here. Five Mile offers supermarkets, chain dining, and basic shopping at better value than the town center. Less postcard scenery, but highly efficient as a practical accommodation base."
+    },
+    "arrowtown": {
+      "name": "Arrowtown",
+      "tagline": "Gold-rush heritage and autumn maples in a slow-paced historic town",
+      "pros": [
+        "Well-preserved Victorian gold-rush town with excellent safety",
+        "April's golden foliage is among New Zealand's most photogenic",
+        "High density of indie cafés, galleries, and boutique guesthouses — artsy chill"
+      ],
+      "cons": [
+        "About 20 minutes by car from Queenstown center — car or bus required",
+        "Dining and nightlife are daytime-focused; shops close early"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "Couples, photographers, and travelers seeking slow historic-town life and quality coffee",
+      "detailText": "Arrowtown is Queenstown's most charming historic satellite. Buckingham Street lines up century-old stone buildings, artisan bakeries, and boutique wineries. Away from town-center bustle yet 20 minutes from adventure — ideal for 'quiet town by day, Queenstown buzz by evening.'"
+    },
+    "fernhill": {
+      "name": "Fernhill",
+      "tagline": "A quiet hillside residential area overlooking Lake Wakatipu",
+      "pros": [
+        "Most lodgings offer panoramic Lake Wakatipu and Remarkables views",
+        "Far from bar-street noise — extremely quiet and safe at night",
+        "Skyline Gondola and luge track right nearby"
+      ],
+      "cons": [
+        "Steep terrain — some guesthouses require driving or uphill walks",
+        "15–20 minute walk to town center; limited bus frequency"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "Families and travelers who want lake views and a peaceful environment",
+      "detailText": "Fernhill is a hillside neighborhood beloved by locals. Guesthouses and apartments typically boast open lake views, with the Skyline Gondola climbing from the base to Bob's Peak lookout. Perfect for travelers who don't want the nightlife zone but still want Queenstown panoramas."
+    },
+    "kelvin-heights": {
+      "name": "Kelvin Heights",
+      "tagline": "An upscale lakeside retreat at the tip of the peninsula",
+      "pros": [
+        "Peninsula tip on Lake Wakatipu with stunning 360° lake-and-mountain views",
+        "Kelvin Heights Golf Course and upscale resort apartments",
+        "Elegant and private — ideal for honeymoons and quality family holidays"
+      ],
+      "cons": [
+        "Expensive lodging and dining with few budget options",
+        "Car or bus needed from town center — not ideal without a car for frequent outings"
+      ],
+      "priceLevel": "Upscale (¥¥¥¥)",
+      "bestFor": "Honeymooners, high-budget travelers, and families seeking ultimate lake views and privacy",
+      "detailText": "Kelvin Heights is Queenstown's premier lakeside peninsula — away from crowds yet with the region's most expansive Lake Wakatipu vistas. Many upscale apartments and boutique B&Bs offer private lake access. Morning runs on peninsula trails and golden-hour mountain light — Queenstown's most chill luxury."
+    },
+    "glenorchy": {
+      "name": "Glenorchy",
+      "tagline": "Lord of the Rings filming locations and primal alpine lakes",
+      "pros": [
+        "Iconic filming locations for The Lord of the Rings and The Chronicles of Narnia",
+        "Dart River and Routeburn Track hiking trailheads",
+        "Away from tour groups — pure Southern Alps lake-and-mountain scenery"
+      ],
+      "cons": [
+        "About 45 minutes from Queenstown by car — no public transport; self-drive only",
+        "Very limited dining, shopping, and nightlife — small cafés and lodges only"
+      ],
+      "priceLevel": "Mid-range (¥¥)",
+      "bestFor": "Hikers, photographers, and travelers seeking raw nature and Lord of the Rings pilgrimages",
+      "detailText": "Lonely Planet called the drive here one of the world's most photogenic road endings. Heading north along Lake Wakatipu's head, snow peaks and emerald water compose a Middle-earth canvas. Ideal for a 1–2 night nature stay or a day trip for photography and hiking."
+    },
+    "arthur-point": {
+      "name": "Arthur's Point / Shotover",
+      "tagline": "The adventure sports basecamp for canyon jets and bungy jumps",
+      "pros": [
+        "Shotover Jet, canyon swings, and bungy operations concentrated here",
+        "Just 5 minutes from town center yet retains canyon atmosphere",
+        "Adventure-themed lodges and hostels — popular with young travelers"
+      ],
+      "cons": [
+        "Some canyon roads poorly lit at night — drive carefully",
+        "Non-adrenaline seekers may find it too intense and lacking artsy charm"
+      ],
+      "priceLevel": "Mid-range (¥¥)",
+      "bestFor": "Extreme sports fans, young backpackers, and adventure-focused travelers",
+      "detailText": "Arthur's Point sits at the Shotover River canyon entrance — the geographic heart of Queenstown adventure. World-famous Shotover Jet and Nevis Bungy launch from here. Lodging centers on adventure lodges and value guesthouses for travelers whose trip theme is thrill-seeking."
+    },
+    "surry-hills": {
+      "name": "Surry Hills",
+      "tagline": "A creative highland of specialty coffee and inventive dining",
+      "pros": [
+        "Sydney's highest density of independent cafés and brunch restaurants",
+        "Walking distance to the CBD; Central Station right nearby",
+        "Beautiful Victorian terrace streets with galleries and boutiques"
+      ],
+      "cons": [
+        "Long queues on Crown Street on weekends",
+        "Mostly boutique guesthouses and apartments — few large chain hotels"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "Coffee lovers, food enthusiasts, and travelers seeking artsy urban slow life",
+      "detailText": "Surry Hills is Sydney's undisputed brunch and coffee capital. Crown and Bourke Streets brim with outstanding independent cafés (Single O, Bourke Street Bakery). Victorian terraces, corner graffiti, and boutique shops sit minutes from the CBD by bus — one of the best bases for Sydney's urban chill."
+    },
+    "sydney-cbd": {
+      "name": "Sydney CBD & The Rocks",
+      "tagline": "The classic hub beside the Opera House and Circular Quay",
+      "pros": [
+        "Walking distance to Sydney Opera House, Harbour Bridge, and The Rocks weekend markets",
+        "Dense train, light rail, and ferry hubs — maximum efficiency",
+        "Rich choice of upscale hotels and boutique apartments with top-tier services"
+      ],
+      "cons": [
+        "Heavy weekday commuter crowds; some streets noisy",
+        "Expensive accommodation with limited budget options"
+      ],
+      "priceLevel": "Upscale (¥¥¥¥)",
+      "bestFor": "First-time visitors, business travelers, and those who want landmark walkability and transport",
+      "detailText": "Sydney CBD and historic The Rocks form the city's core travel hub. Sunrise at Circular Quay, evening strolls through cobblestone Rocks lanes, weekend market browsing — fast-paced and crowded, but the optimal base to capture Sydney's classic landmarks in one sweep."
+    },
+    "bondi": {
+      "name": "Bondi Beach",
+      "tagline": "The name that defines surf culture and coastal slow living",
+      "pros": [
+        "Australia's most iconic golden beach — world-class surfing and sunbathing",
+        "Campbell Parade packed with beachfront cafés and seafood restaurants",
+        "The six-kilometer Bondi to Coogee coastal walk is breathtaking"
+      ],
+      "cons": [
+        "Packed on summer weekends; parking extremely tight",
+        "30–40 minutes by bus from the CBD; outside the free light rail zone"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "Beach lovers, beginner surfers, and travelers seeking sun-soaked coastal holidays",
+      "detailText": "Bondi Beach is the icon of Sydney and Australian beach culture. Campbell Parade cafés and brunch spots face the ocean; Icebergs pool perched on the cliff is a classic photo spot. Morning runs on the Bondi to Bronte walk, afternoon surfing, sunset views — the Southern Hemisphere's chilliest seaside lifestyle."
+    },
+    "newtown": {
+      "name": "Newtown",
+      "tagline": "Punk graffiti and vibrant multicultural subculture",
+      "pros": [
+        "King Street — one of Sydney's longest independent retail and dining strips",
+        "Secondhand record shops, vintage stores, live houses, and LGBTQ+-friendly bars",
+        "Direct train to Central; far better food value than the CBD"
+      ],
+      "cons": [
+        "King Street crowded and noisy on weekends",
+        "Mostly character guesthouses and hostels — few luxury hotels"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Young backpackers, subculture fans, and travelers seeking local life and nightlife",
+      "detailText": "Newtown is Sydney's most rebellious inner-west neighborhood. King Street stretches for kilometers with Vietnamese pho shops, craft beer bars, indie record stores, and street graffiti. Free, inclusive, and alive with live music and thrift culture — the best choice for a non-postcard Sydney."
+    },
+    "manly": {
+      "name": "Manly",
+      "tagline": "A North Shore ferry harbor and dual-beach holiday hideaway",
+      "pros": [
+        "30-minute ferry from Circular Quay — the crossing itself is a classic experience",
+        "Manly Beach and Shelly Beach — one lively, one calm; excellent snorkeling",
+        "The Corso pedestrian street with dining and boutiques — strong resort feel"
+      ],
+      "cons": [
+        "Dependent on ferries or long bus rides; limited late-night return services",
+        "Peak-season prices vary sharply with ocean-view quality"
+      ],
+      "priceLevel": "Mid-range (¥¥¥)",
+      "bestFor": "Families, couples, and slow travelers who want ferry commuting plus beach life",
+      "detailText": "Manly sits at the tip of Sydney's North Shore peninsula — locals' weekend escape from the CBD. Ferries cross the harbor to Manly Wharf and the main beach in minutes. The Corso lines up cafés and seafood restaurants; Shelly Beach suits snorkeling and kayaking. More relaxed and private than Bondi."
+    },
+    "darlinghurst": {
+      "name": "Darlinghurst",
+      "tagline": "Where Oxford Street nightlife meets East End galleries",
+      "pros": [
+        "Oxford Street — the heart of Sydney's LGBTQ+ culture and nightlife",
+        "Near Potts Point's boutique dining and East End gallery district",
+        "Excellent train and bus links to the CBD and Bondi Junction"
+      ],
+      "cons": [
+        "Oxford Street noisy late on weekends",
+        "Some older apartments have average soundproofing; parking is difficult"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "Nightlife lovers, art fans, and travelers who enjoy diverse, inclusive urban energy",
+      "detailText": "Darlinghurst and Potts Point form the cultural heart of Sydney's east. Oxford Street bars, clubs, and late-night dining run until the early hours; by day, walk to Paddington Galleries or Victoria Park. Urban vitality meets artistic flair — Sydney's most vibrant nightlife base."
+    },
+    "paddington": {
+      "name": "Paddington",
+      "tagline": "Victorian terraces and boutique shopping in an elegant neighborhood",
+      "pros": [
+        "Oxford Street Paddington's top designer boutiques and galleries",
+        "Five Ways area with outstanding specialty cafés and brunch",
+        "Excellent safety; among Sydney's most beautiful terrace streetscapes"
+      ],
+      "cons": [
+        "Higher prices with limited budget accommodation",
+        "Nightlife is refined small bars — no large clubs"
+      ],
+      "priceLevel": "Upscale (¥¥¥¥)",
+      "bestFor": "Fashion lovers, art enthusiasts, and travelers seeking quality quiet accommodation",
+      "detailText": "Paddington is one of Sydney's most elegant inner-east neighborhoods. Oxford Street here shifts from nightlife to high fashion and galleries; the Five Ways roundabout surrounds premium brunch and pour-over spots. Weekend Paddington Markets and tree-lined terrace strolls — Sydney's most textured slow life."
+    },
+    "tianhe": {
+      "name": "Tianhe / Tiyu Xilu",
+      "tagline": "A modern urban core where subway hubs meet shopping districts",
+      "pros": [
+        "Tiyu Xilu and Zhujiang New Town subway interchanges — easy citywide access",
+        "Walking distance to Grandview Mall, Tee Mall, Taikoo Hui, and other top malls",
+        "Dining from affordable Cantonese to Black Pearl restaurants"
+      ],
+      "cons": [
+        "Subway extremely crowded at rush hour",
+        "Weekend mall crowds and noisy streets in some areas"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "First-time visitors to Guangzhou who want transport and shopping convenience",
+      "detailText": "Tianhe distills modern Guangzhou life. Tiyu Xilu Station is a Line 1/3 hub with Tianhe Road malls steps away. From Tee Mall's everyday shopping to Taikoo Hui's premium experience, dim sum, Cantonese cuisine, coffee, and bubble tea are everywhere — a versatile base balancing efficiency and quality."
+    },
+    "zhujiang-new-town": {
+      "name": "Zhujiang New Town",
+      "tagline": "Guangzhou's upscale new axis beneath the Canton Tower skyline",
+      "pros": [
+        "Walking distance to Canton Tower, Huacheng Square, and Guangdong Museum",
+        "Cluster of high-star hotels and serviced apartments with top safety and service",
+        "APM Line and multiple subways — efficient access to Baiyun Airport and Guangzhou South"
+      ],
+      "cons": [
+        "Expensive lodging and dining",
+        "Business-heavy on weekdays; some areas lack street-level neighborhood warmth at night"
+      ],
+      "priceLevel": "Upscale (¥¥¥¥)",
+      "bestFor": "Business travelers, high-budget visitors, and those who want landmark views and modern hotels",
+      "detailText": "Zhujiang New Town is Guangzhou's twenty-first-century calling card. Huacheng Square faces the Canton Tower, flanked by Guangdong Museum and Guangzhou Library. Hotels often feature river or tower views; upscale cafés and dining concentrate in K11, IGC, and other malls — ideal for travelers who want modern urban polish and maximum safety."
+    },
+    "beijing-road": {
+      "name": "Beijing Road / Yuexiu",
+      "tagline": "A thousand-year thoroughfare and arcaded Lingnan shopping memory",
+      "pros": [
+        "Beijing Road pedestrian street with heritage brands and trendy first stores — easy walking",
+        "Lines 1/2/6 subway interchange — convenient to Shamian, Chen Clan Academy, and more",
+        "Rich budget and chain hotel options with strong value"
+      ],
+      "cons": [
+        "Tourist-heavy by day; some heritage restaurants cater to visitors",
+        "Nightlife is dining-focused; bars are relatively conservative"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "First-time sightseers, families, and budget-conscious travelers",
+      "detailText": "Beijing Road is Guangzhou's oldest commercial axis — underground archaeological displays reveal a thousand-year-old thoroughfare. Arcaded shopfronts line the pedestrian street with heritage names like Lian Xiang Lou and Tao Tao Ju alongside new brands. Near Haizhu Square and Yuexiu Park, accommodation beats Tianhe on value — a classic base for old Guangzhou commerce."
+    },
+    "shamian-liwan": {
+      "name": "Shamian & Yongqingfang",
+      "tagline": "European island charm and Xiguan arcades for slow cultural wandering",
+      "pros": [
+        "Shamian Island's intact colonial European architecture — highly photogenic",
+        "Yongqingfang, Enning Road, Cantonese Opera Art Museum, and heritage brands — rich Xiguan culture",
+        "High density of indie cafés, creative shops, and boutique guesthouses — artsy chill"
+      ],
+      "cons": [
+        "10–15 minute walk to subway; some areas rely on buses",
+        "Few large malls — shopping is mostly creative and niche"
+      ],
+      "priceLevel": "Mid-range (¥¥¥)",
+      "bestFor": "Creative travelers, photographers, and walkers who love old architecture and slow pacing",
+      "detailText": "Shamian is a European island on the Pearl River — banyan-shaded streets lined with former consulate buildings turned cafés and restaurants. Cross the bridge to Yongqingfang, Guangzhou's benchmark old-town renewal with the Cantonese Opera Museum, Zhongshuge bookstore, and craft workshops hidden in arcades. Slow-paced — Guangzhou's chilliest arts neighborhood."
+    },
+    "dongshankou": {
+      "name": "Dongshankou",
+      "tagline": "Red-brick villas and indie coffee in a fashionable old-money quarter",
+      "pros": [
+        "Xinhepu area preserves 1920s red-brick villas and celebrity residences",
+        "Among Guangzhou's highest densities of independent cafés; city-leading brunch culture",
+        "Dongshankou Station on Lines 1/6 — convenient to Tianhe and Yuexiu"
+      ],
+      "cons": [
+        "Some villa-converted guesthouses run pricey",
+        "Small boutique retail — no large shopping malls"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "Coffee lovers, creative travelers, and fans of historic architecture and boutique shops",
+      "detailText": "Dongshankou is the birthplace of Guangzhou's 'Dongshan Gentleman' culture. Red-brick villas along Peizheng Road and Tugu Road now house indie cafés, boutiques, and art spaces. Weekend strolls on Miaoqian West Street and an afternoon pour-over — the chill way Guangzhou's young people love to spend time. History and contemporary cool in balance."
+    },
+    "chimelong": {
+      "name": "Chimelong / Panyu",
+      "tagline": "Theme parks and safari worlds — a family paradise",
+      "pros": [
+        "Chimelong Safari Park, Happy World, and Water Park — one-stop family fun",
+        "On-site hotels offer early park entry — very convenient for families",
+        "Panyu dining better value than downtown with rich Cantonese options"
+      ],
+      "cons": [
+        "30–40 minutes by subway from downtown — awkward for city exploration",
+        "Area centers on theme parks — limited deep urban cultural experience"
+      ],
+      "priceLevel": "Mid-range (¥¥¥)",
+      "bestFor": "Families, theme park fans, and multi-day Chimelong-focused itineraries",
+      "detailText": "Chimelong Resort is South China's largest theme park cluster. Metro Lines 3/7 reach Panyu directly; on-site hotels offer animal-themed stays and priority entry. If your trip centers on family fun, staying here maximizes play time and avoids daily long commutes."
+    },
+    "jiangnanxi": {
+      "name": "Jiangnanxi / Haizhu",
+      "tagline": "Local food streets and everyday life at great value",
+      "pros": [
+        "Jiangnan New World and R&F Haizhu City surrounded by excellent-value Cantonese eateries",
+        "Jiangnanxi Station on Lines 2/8 — easy access to Beijing Road and Pazhou",
+        "Mostly local residents, fewer tourists — authentic daily life"
+      ],
+      "cons": [
+        "No top landmarks or luxury hotels",
+        "Some older neighborhoods feel gritty; less photogenic"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Food lovers, backpackers, and travelers seeking local life and strong value",
+      "detailText": "Jiangnanxi is Haizhu District's everyday center — not a typical tourist zone, but packed with word-of-mouth Cantonese restaurants, beef offal stalls, and dessert shops. Jiangnan New World handles daily shopping; the subway connects easily. To taste what Guangzhou locals actually eat and how they live, Jiangnanxi is more grounded than Beijing Road."
+    },
+    "namba": {
+      "name": "Namba & Dotonbori",
+      "tagline": "Neon food streets at the absolute center of Kansai cuisine",
+      "pros": [
+        "Dotonbori and Shinsaibashi-suji shopping street within walking distance — Japan's top Kansai food density",
+        "Namba Station connects Nankai, Kintetsu, and multiple subway lines — easy to Nara and Wakayama",
+        "Rich nightlife with izakaya and kushikatsu open late"
+      ],
+      "cons": [
+        "Dotonbori noisy and crowded late at night; pickpockets in some areas",
+        "Mostly business hotels — generally not very quiet"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Food lovers, first-time Kansai visitors, and travelers who love nightlife and street energy",
+      "detailText": "Namba and Dotonbori define Osaka. The Glico running man sign, Kani Doraku crab, and streets of takoyaki, okonomiyaki, and kushikatsu deliver the most authentic Kansai experience. Nankai Namba Station reaches Kansai Airport directly — the default first stop for most visitors. Loud, yes — but the ultimate 'eat in Osaka' base."
+    },
+    "umeda": {
+      "name": "Umeda",
+      "tagline": "Northern hub and modern metropolis with a sky garden",
+      "pros": [
+        "Osaka and Umeda stations — Kansai's largest rail hub; easy to Kyoto and Kobe",
+        "Grand Front, Lucua, Hankyu Department Store, and other mega-malls",
+        "Umeda Sky Building's floating garden observatory and excellent safety"
+      ],
+      "cons": [
+        "Massive commuter crowds on weekdays",
+        "Higher accommodation prices; little traditional shitamachi character"
+      ],
+      "priceLevel": "Mid-high (¥¥¥)",
+      "bestFor": "Travelers who frequently visit Kyoto/Kobe and want shopping convenience and transport",
+      "detailText": "Umeda is Osaka's northern commercial and transport heart. Underground malls stretch for kilometers around Osaka Station — drugstores to luxury brands under one roof. The Umeda Sky Building observatory is a classic night view. If your itinerary includes repeated Shinkansen trips or Kyoto visits, Umeda saves serious commute time."
+    },
+    "shinsaibashi": {
+      "name": "Shinsaibashi",
+      "tagline": "Arcaded shopping street and a pedestrian paradise for fashion",
+      "pros": [
+        "580-meter Shinsaibashi-suji covered arcade — shop rain or shine",
+        "Amerikamura and Horie packed with trendy boutiques and vintage shops",
+        "Nagahoribashi and Shinsaibashi subway stations — convenient to Universal Studios"
+      ],
+      "cons": [
+        "Crowded on weekends and holidays; noisy shopping street",
+        "Mostly budget chain hotels — few character guesthouses"
+      ],
+      "priceLevel": "Mid-range (¥¥¥)",
+      "bestFor": "Shoppers, young fashion fans, and travelers centered on Shinsaibashi",
+      "detailText": "Shinsaibashi is Osaka's classic shopping artery. The covered arcade offers everything from drugstores and fast fashion to local designer brands. North into Amerikamura — Osaka's Harajuku — thrift and streetwear dominate. Seamlessly connected to Namba, it covers Osaka's busiest commercial strip on foot."
+    },
+    "tennoji": {
+      "name": "Tennoji & Abeno",
+      "tagline": "Tsutenkaku Tower and Abeno Harukas — south Osaka's gateway",
+      "pros": [
+        "Abeno Harukas — one of Japan's tallest buildings with observatory and department store",
+        "Tsutenkaku Tower, Shinsekai kushikatsu, and Showa-era neighborhood atmosphere",
+        "JR Tennoji direct to Kansai Airport and Nara — better value than Umeda"
+      ],
+      "cons": [
+        "Some areas retain Showa shitamachi feel — contrast with modern north Osaka",
+        "Fewer upscale boutique hotels than Umeda or Namba"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Budget travelers needing airport access who love shitamachi charm and Tsutenkaku",
+      "detailText": "Tennoji anchors south Osaka. Abeno Harukas 300 Observatory offers 360° city views; Shinsekai's Tsutenkaku and kushikatsu shops preserve Showa-era neighborhood soul. JR Tennoji runs the Haruka express to Kansai Airport — better lodging value than Umeda for practical travelers."
+    },
+    "osaka-castle": {
+      "name": "Osaka Castle & Kyobashi",
+      "tagline": "Castle park greenery balanced with Kyobashi izakaya streets",
+      "pros": [
+        "Osaka Castle Park beautiful in every season — cherry blossoms and autumn leaves",
+        "Kyobashi area packed with izakaya and local eateries at friendly prices",
+        "Quiet and family-friendly; just a few subway stops from Umeda"
+      ],
+      "cons": [
+        "Less trendy shopping and nightlife than Shinsaibashi",
+        "Residential areas dominate; English signage can be limited"
+      ],
+      "priceLevel": "Mid-range (¥¥¥)",
+      "bestFor": "Families, history lovers, and travelers who want quiet and green space",
+      "detailText": "Osaka Castle Park is the city's green heart. The reconstructed keep and wide moat make a classic scene; morning jogs and evening strolls are a pleasure. Nearby Kyobashi is where office workers drink — prices well below Dotonbori. History, nature, and convenience — a solid choice for travelers with parents or children."
+    },
+    "amerikamura": {
+      "name": "Amerikamura & Horie",
+      "tagline": "Kansai's Harajuku and secondhand streetwear youth culture",
+      "pros": [
+        "Amerikamura — birthplace of Osaka street culture with dense vintage and streetwear shops",
+        "Horie's independent cafés and craft beer bars are outstanding",
+        "Walking distance to Shinsaibashi; young travelers and active atmosphere"
+      ],
+      "cons": [
+        "Triangle Park area noisy on Amerikamura weekends",
+        "Mostly small hotels and guesthouses — few large chains"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Young backpackers, vintage fans, and travelers seeking Kansai subculture and coffee",
+      "detailText": "Amerikamura (Amemura) is Osaka's trend heart — thrift and streetwear boutiques around Triangle Park draw youth from across Kansai. West into Horie, designer shops and indie cafés hide in back alleys. Five minutes from Shinsaibashi Station yet a distinctly different subcultural vibe — one of Osaka's chilliest youth neighborhoods."
+    },
+    "tenma": {
+      "name": "Tenma & Tenjinbashisuji",
+      "tagline": "Japan's longest shopping street and local izakaya late-night dining",
+      "pros": [
+        "Tenjinbashisuji Shopping Street — 2.6 km, Japan's longest covered arcade",
+        "Tenma Station area dense with izakaya and standing bars — mostly local regulars",
+        "Just two stops from Umeda — better value than north Osaka core"
+      ],
+      "cons": [
+        "Limited English service and international amenities",
+        "Low tourist profile — not ideal for landmark-focused itineraries"
+      ],
+      "priceLevel": "Budget-friendly (¥¥)",
+      "bestFor": "Deep travelers, food explorers, and those seeking local life and value",
+      "detailText": "Tenma and Tenjinbashisuji are where Osaka locals eat. The 2.6 km shopping street runs north to south with drugstores, hundred-yen shops, fresh produce, and daily essentials. Izakaya alleys near Tenma Station buzz after work at prices far below Dotonbori. For what Osaka people actually eat, Tenma is more authentic than the tourist zones."
+    }
+  }
+}

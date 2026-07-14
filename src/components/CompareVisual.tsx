@@ -46,7 +46,7 @@ export function CompareVisual({ neighborhoods }: CompareVisualProps) {
                 </th>
                 {neighborhoods.map((n) => (
                   <th key={n.id} className="px-4 py-3 text-left font-bold text-apple-text">
-                    {n.name.split(" ")[0]}
+                    {n.name}
                   </th>
                 ))}
               </tr>
