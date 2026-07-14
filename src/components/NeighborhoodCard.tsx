@@ -2,6 +2,7 @@
 
 import { ExternalLink } from "lucide-react";
 import { ScorePolygon } from "@/components/ScorePolygon";
+import { useI18n } from "@/components/I18nProvider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { buildMapUrl } from "@/lib/recommendation/engine";
@@ -33,8 +34,9 @@ export function NeighborhoodCard({
   onDetail,
   onCompare,
 }: NeighborhoodCardProps) {
+  const { t } = useI18n();
   const mapUrl = buildMapUrl(neighborhood.center, mapProvider);
-  const mapLabel = mapProvider === "amap" ? "高德" : "Google";
+  const mapLabel = mapProvider === "amap" ? "AMap" : "Google";
 
   return (
     <Card
@@ -55,7 +57,7 @@ export function NeighborhoodCard({
               delayMs={rank * 80}
             />
             <span className="mt-2 text-[11px] text-apple-text-secondary">
-              七维得分多边形
+              {t("explore.polygonCaption")}
             </span>
           </div>
 
@@ -72,7 +74,7 @@ export function NeighborhoodCard({
                       matchBadgeClass(neighborhood.matchScore)
                     )}
                   >
-                    契合度 {neighborhood.matchScore}%
+                    {t("explore.matchScore")} {neighborhood.matchScore}%
                   </span>
                 </div>
                 <h3 className="text-xl font-semibold tracking-tight text-apple-text">
@@ -85,8 +87,10 @@ export function NeighborhoodCard({
             </div>
 
             <p className="text-sm leading-relaxed text-apple-text-secondary">
-              <span className="font-medium text-apple-text">优势 · </span>
-              {neighborhood.pros.slice(0, 2).join("，")}
+              <span className="font-medium text-apple-text">
+                {t("explore.advantages")} ·{" "}
+              </span>
+              {neighborhood.pros.slice(0, 2).join(", ")}
             </p>
 
             <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
@@ -105,10 +109,10 @@ export function NeighborhoodCard({
                   size="sm"
                   onClick={onCompare}
                 >
-                  {isCompared ? "已加入" : "加入对比"}
+                  {isCompared ? t("explore.added") : t("explore.addCompare")}
                 </Button>
                 <Button size="sm" onClick={onDetail}>
-                  详情
+                  {t("explore.details")}
                 </Button>
               </div>
             </div>

@@ -1,7 +1,8 @@
 "use client";
 
 import { Slider } from "@/components/ui/slider";
-import { DIMENSION_LIST } from "@/lib/dimensions";
+import { useI18n } from "@/components/I18nProvider";
+import { getDimensionList } from "@/lib/dimensions";
 import type { Weights } from "@/lib/recommendation/types";
 
 interface PreferenceSlidersProps {
@@ -10,9 +11,12 @@ interface PreferenceSlidersProps {
 }
 
 export function PreferenceSliders({ weights, onChange }: PreferenceSlidersProps) {
+  const { locale, t } = useI18n();
+  const dimensionList = getDimensionList(locale);
+
   return (
     <div className="space-y-5">
-      {DIMENSION_LIST.map(({ key, label, Icon }) => (
+      {dimensionList.map(({ key, label, Icon }) => (
         <div key={key} className="space-y-2.5">
           <div className="flex items-center justify-between text-sm">
             <span className="flex items-center gap-2 font-medium text-apple-text">

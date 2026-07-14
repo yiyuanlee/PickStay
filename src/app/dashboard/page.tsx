@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { getServerT } from "@/i18n/server";
 import { getNeighborhoodsByIds } from "@/lib/data";
 import {
   getFavorites,
@@ -13,6 +14,7 @@ import {
 import { getUser, getUserProfile } from "@/lib/supabase/server";
 
 export default async function DashboardPage() {
+  const t = await getServerT();
   const user = await getUser();
   if (!user) redirect("/login?redirect=/dashboard");
 
@@ -34,7 +36,7 @@ export default async function DashboardPage() {
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h2 className="font-display text-3xl font-semibold tracking-tight text-apple-text">
-            我的 PickStay
+            {t("dashboard.title")}
           </h2>
           <p className="text-apple-text-secondary">
             {profile?.display_name || user.email}
@@ -42,7 +44,7 @@ export default async function DashboardPage() {
         </div>
         <form action={signOut}>
           <Button variant="secondary" type="submit">
-            退出登录
+            {t("nav.logout")}
           </Button>
         </form>
       </div>
@@ -50,32 +52,42 @@ export default async function DashboardPage() {
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>偏好设置</CardTitle>
+            <CardTitle>{t("dashboard.preferences")}</CardTitle>
           </CardHeader>
           <CardContent>
             {preferences ? (
               <div className="space-y-2 text-sm text-apple-text-secondary">
-                <p>当前城市: {preferences.city_id || "未设置"}</p>
-                <p>预设: {preferences.active_preset || "自定义"}</p>
+                <p>
+                  {t("dashboard.currentCity")}: {preferences.city_id || t("dashboard.notSet")}
+                </p>
+                <p>
+                  {t("dashboard.preset")}: {preferences.active_preset || t("dashboard.custom")}
+                </p>
                 <Button variant="outline" size="sm" asChild>
                   <Link href={`/explore/${preferences.city_id || "tokyo"}`}>
-                    继续探索
+                    {t("dashboard.continueExplore")}
                   </Link>
                 </Button>
               </div>
             ) : (
-              <p className="text-sm text-apple-text-secondary">暂无保存的偏好</p>
+              <p className="text-sm text-apple-text-secondary">
+                {t("dashboard.noPreferences")}
+              </p>
             )}
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>收藏的街区 ({favoriteNeighborhoods.length})</CardTitle>
+            <CardTitle>
+              {t("dashboard.favorites")} ({favoriteNeighborhoods.length})
+            </CardTitle>
           </CardHeader>
           <CardContent>
             {favoriteNeighborhoods.length === 0 ? (
-              <p className="text-sm text-apple-text-secondary">还没有收藏任何街区</p>
+              <p className="text-sm text-apple-text-secondary">
+                {t("dashboard.noFavorites")}
+              </p>
             ) : (
               <ul className="space-y-2">
                 {favoriteNeighborhoods.map((n) => (
@@ -95,11 +107,15 @@ export default async function DashboardPage() {
 
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>保存的对比方案 ({comparisons.length})</CardTitle>
+            <CardTitle>
+              {t("dashboard.savedComparisons")} ({comparisons.length})
+            </CardTitle>
           </CardHeader>
           <CardContent>
             {comparisons.length === 0 ? (
-              <p className="text-sm text-apple-text-secondary">还没有保存对比方案</p>
+              <p className="text-sm text-apple-text-secondary">
+                {t("dashboard.noComparisons")}
+              </p>
             ) : (
               <ul className="space-y-3">
                 {comparisons.map((c) => (
@@ -110,7 +126,7 @@ export default async function DashboardPage() {
                     <span className="font-medium text-apple-text">{c.name}</span>
                     <Button variant="outline" size="sm" asChild>
                       <Link href={`/compare?ids=${c.neighborhood_ids.join(",")}`}>
-                        查看对比
+                        {t("dashboard.viewCompare")}
                       </Link>
                     </Button>
                   </li>

@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { X } from "lucide-react";
 import { ScorePolygon } from "@/components/ScorePolygon";
+import { useI18n } from "@/components/I18nProvider";
 import { Button } from "@/components/ui/button";
-import { DIMENSION_LIST } from "@/lib/dimensions";
+import { getDimensionList } from "@/lib/dimensions";
 import type { ScoredNeighborhood, Weights } from "@/lib/recommendation/types";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +22,9 @@ export function ComparisonDrawer({
   onRemove,
   onClear,
 }: ComparisonDrawerProps) {
+  const { locale, t } = useI18n();
+  const dimensionList = getDimensionList(locale);
+
   if (neighborhoods.length === 0) return null;
 
   return (
@@ -28,18 +32,18 @@ export function ComparisonDrawer({
       <div className="mx-auto max-w-6xl px-4 py-5 sm:px-6">
         <div className="mb-4 flex items-center justify-between">
           <h3 className="font-semibold text-apple-text">
-            街区对比 ({neighborhoods.length}/3)
+            {t("compare.drawerTitle")} ({neighborhoods.length}/3)
           </h3>
           <div className="flex gap-2">
             <Button variant="secondary" size="sm" asChild>
               <Link
                 href={`/compare?ids=${neighborhoods.map((n) => n.id).join(",")}`}
               >
-                展开对比
+                {t("compare.expand")}
               </Link>
             </Button>
             <Button variant="ghost" size="sm" onClick={onClear}>
-              清空
+              {t("compare.clear")}
             </Button>
           </div>
         </div>
@@ -76,7 +80,9 @@ export function ComparisonDrawer({
           <table className="w-full min-w-[600px] text-sm">
             <thead>
               <tr className="border-b border-black/8">
-                <th className="py-2 text-left text-apple-text-secondary">维度</th>
+                <th className="py-2 text-left text-apple-text-secondary">
+                  {t("compare.dimension")}
+                </th>
                 {neighborhoods.map((n) => (
                   <th key={n.id} className="px-3 py-2 text-left font-semibold text-apple-text">
                     {n.name.split(" ")[0]}
@@ -85,7 +91,7 @@ export function ComparisonDrawer({
               </tr>
             </thead>
             <tbody>
-              {DIMENSION_LIST.map(({ key, shortLabel, Icon }) => (
+              {dimensionList.map(({ key, shortLabel, Icon }) => (
                 <tr key={key} className="border-b border-black/5">
                   <td className="py-2 text-apple-text-secondary">
                     <span className="inline-flex items-center gap-1.5">

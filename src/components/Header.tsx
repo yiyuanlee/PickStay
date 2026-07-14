@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { MapPin } from "lucide-react";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Button } from "@/components/ui/button";
+import { getLocale, getServerT } from "@/i18n/server";
 import { createClient } from "@/lib/supabase/server";
 
 export async function Header() {
+  const [t, locale] = await Promise.all([getServerT(), getLocale()]);
+
   const supabase = process.env.NEXT_PUBLIC_SUPABASE_URL
     ? await createClient()
     : null;
@@ -36,29 +40,30 @@ export async function Header() {
               PickStay
             </h1>
             <p className="text-xs text-apple-text-secondary">
-              个性化旅行住宿街区推荐
+              {t("header.tagline")}
             </p>
           </div>
         </Link>
 
-        <nav className="flex items-center gap-1">
+        <nav className="flex items-center gap-2">
+          <LanguageSwitcher currentLocale={locale} />
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/compare">对比</Link>
+            <Link href="/compare">{t("nav.compare")}</Link>
           </Button>
           {user ? (
             <>
               <Button variant="ghost" size="sm" asChild>
-                <Link href="/dashboard">我的</Link>
+                <Link href="/dashboard">{t("nav.dashboard")}</Link>
               </Button>
               {profile?.role === "admin" && (
                 <Button variant="ghost" size="sm" asChild>
-                  <Link href="/admin">管理</Link>
+                  <Link href="/admin">{t("nav.admin")}</Link>
                 </Button>
               )}
             </>
           ) : (
             <Button variant="default" size="sm" asChild>
-              <Link href="/login">登录</Link>
+              <Link href="/login">{t("nav.login")}</Link>
             </Button>
           )}
         </nav>

@@ -1,8 +1,10 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
+import { LoadingFallback } from "@/components/LoadingFallback";
 import { ExploreClient } from "@/components/ExploreClient";
 import { getCities, getCity } from "@/lib/data";
+import { getServerT } from "@/i18n/server";
 import { getUser } from "@/lib/supabase/server";
 
 interface ExplorePageProps {
@@ -17,10 +19,10 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ExplorePageProps) {
   const { cityId } = await params;
-  const city = await getCity(cityId);
-  if (!city) return { title: "城市未找到" };
+  const [city, t] = await Promise.all([getCity(cityId), getServerT()]);
+  if (!city) return { title: t("explore.cityNotFound") };
   return {
-    title: `${city.name} — PickStay 街区推荐`,
+    title: `${city.name} — ${t("meta.titleSuffix")}`,
     description: city.description,
   };
 }
@@ -47,7 +49,7 @@ export default async function ExplorePage({
   return (
     <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
       <Header />
-      <Suspense fallback={<div className="py-12 text-center text-white/45">加载中...</div>}>
+      <Suspense fallback={<LoadingFallback />}>
         <ExploreClient
           cities={cities}
           initialCityId={cityId}

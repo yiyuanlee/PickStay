@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { ScorePolygon } from "@/components/ScorePolygon";
+import { useI18n } from "@/components/I18nProvider";
 import { Card, CardContent } from "@/components/ui/card";
-import { DIMENSION_LIST } from "@/lib/dimensions";
+import { getDimensionList } from "@/lib/dimensions";
 import type { ScoredNeighborhood } from "@/lib/recommendation/types";
 import { DEFAULT_WEIGHTS } from "@/lib/recommendation/presets";
 
@@ -12,6 +13,9 @@ interface CompareVisualProps {
 }
 
 export function CompareVisual({ neighborhoods }: CompareVisualProps) {
+  const { locale, t } = useI18n();
+  const dimensionList = getDimensionList(locale);
+
   return (
     <>
       <div className="mb-8 flex flex-wrap justify-center gap-8">
@@ -37,7 +41,9 @@ export function CompareVisual({ neighborhoods }: CompareVisualProps) {
           <table className="w-full min-w-[600px] text-sm">
             <thead>
               <tr className="border-b border-black/8">
-                <th className="py-3 text-left text-apple-text-secondary">维度</th>
+                <th className="py-3 text-left text-apple-text-secondary">
+                  {t("compare.dimension")}
+                </th>
                 {neighborhoods.map((n) => (
                   <th key={n.id} className="px-4 py-3 text-left font-bold text-apple-text">
                     {n.name.split(" ")[0]}
@@ -46,7 +52,17 @@ export function CompareVisual({ neighborhoods }: CompareVisualProps) {
               </tr>
             </thead>
             <tbody>
-              {DIMENSION_LIST.map(({ key, shortLabel, Icon }) => (
+              <tr className="border-b border-black/5 bg-[#e8f4fd]/50">
+                <td className="py-3 font-medium text-apple-text">
+                  {t("compare.matchDefault")}
+                </td>
+                {neighborhoods.map((n) => (
+                  <td key={n.id} className="px-4 py-3 font-bold text-apple-blue">
+                    {n.matchScore}%
+                  </td>
+                ))}
+              </tr>
+              {dimensionList.map(({ key, shortLabel, Icon }) => (
                 <tr key={key} className="border-b border-black/5">
                   <td className="py-3 text-apple-text-secondary">
                     <span className="inline-flex items-center gap-1.5">
@@ -62,7 +78,7 @@ export function CompareVisual({ neighborhoods }: CompareVisualProps) {
                 </tr>
               ))}
               <tr>
-                <td className="py-3 text-apple-text-secondary">价位</td>
+                <td className="py-3 text-apple-text-secondary">{t("compare.price")}</td>
                 {neighborhoods.map((n) => (
                   <td key={n.id} className="px-4 py-3 text-apple-text-secondary">
                     {n.priceLevel}
@@ -78,12 +94,14 @@ export function CompareVisual({ neighborhoods }: CompareVisualProps) {
 }
 
 export function CompareEmpty() {
+  const { t } = useI18n();
+
   return (
     <Card>
       <CardContent className="p-12 text-center text-apple-text-secondary">
-        <p className="mb-4">请先选择 2-3 个街区进行对比</p>
+        <p className="mb-4">{t("compare.empty")}</p>
         <Link href="/explore/tokyo" className="text-apple-blue hover:underline">
-          前往探索
+          {t("compare.goExplore")}
         </Link>
       </CardContent>
     </Card>

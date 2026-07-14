@@ -19,6 +19,7 @@ import type {
   Weights,
 } from "@/lib/recommendation/types";
 import { savePreferences } from "@/lib/actions/user";
+import { useI18n } from "@/components/I18nProvider";
 import { cn } from "@/lib/utils";
 
 const PREFERENCES_KEY = "pickstay_preferences";
@@ -83,6 +84,7 @@ export function ExploreClient({
   initialPreset = null,
   isAuthenticated = false,
 }: ExploreClientProps) {
+  const { t } = useI18n();
   const initial = resolveInitialWeights(initialPreset);
 
   const [cityId, setCityId] = useState(initialCityId);
@@ -139,7 +141,7 @@ export function ExploreClient({
   const enrichMapData = useCallback(async (targetCityId: string) => {
     const requestId = ++enrichRequestId.current;
     setIsEnriching(true);
-    setApiStatus("正在通过地图 API 实测周边设施...");
+    setApiStatus(t("explore.enriching"));
     try {
       const res = await fetch("/api/maps/enrich", {
         method: "POST",
@@ -151,13 +153,13 @@ export function ExploreClient({
 
       if (data.dynamicScores && Object.keys(data.dynamicScores).length > 0) {
         setDynamicScores(data.dynamicScores);
-        setApiStatus(`${data.provider} API 实时增强完成`);
+        setApiStatus(t("explore.enrichDone", { provider: data.provider }));
       } else {
-        setApiStatus("使用本地预置评分（Mock 模式或未配置 API Key）");
+        setApiStatus(t("explore.enrichMock"));
       }
     } catch {
       if (requestId === enrichRequestId.current) {
-        setApiStatus("API 增强失败，已使用本地数据");
+        setApiStatus(t("explore.enrichFailed"));
       }
     } finally {
       if (requestId === enrichRequestId.current) {
@@ -165,7 +167,7 @@ export function ExploreClient({
         setTimeout(() => setApiStatus(null), 6000);
       }
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     const onPopState = () => {
@@ -227,7 +229,9 @@ export function ExploreClient({
       )}
 
       <section className="mb-8">
-        <h2 className="mb-3 font-display text-xl font-semibold text-apple-text">选择城市</h2>
+        <h2 className="mb-3 font-display text-xl font-semibold text-apple-text">
+          {t("explore.selectCity")}
+        </h2>
         <CitySelector
           cities={cities}
           selectedCityId={cityId}
@@ -242,7 +246,7 @@ export function ExploreClient({
         <aside className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>旅行人格预设</CardTitle>
+              <CardTitle>{t("explore.personaTitle")}</CardTitle>
             </CardHeader>
             <CardContent>
               <PersonaPresets
@@ -254,7 +258,7 @@ export function ExploreClient({
 
           <Card>
             <CardHeader>
-              <CardTitle>偏好权重</CardTitle>
+              <CardTitle>{t("explore.weightsTitle")}</CardTitle>
             </CardHeader>
             <CardContent>
               <PreferenceSliders weights={weights} onChange={handleWeightsChange} />
@@ -268,13 +272,13 @@ export function ExploreClient({
             disabled={isEnriching}
           >
             <RefreshCw className={cn("h-4 w-4", isEnriching && "animate-spin")} />
-            {isEnriching ? "分析中..." : "刷新地图数据"}
+            {isEnriching ? t("explore.refreshing") : t("explore.refreshMaps")}
           </Button>
         </aside>
 
         <section>
           <h2 className="mb-4 font-display text-xl font-semibold text-apple-text">
-            推荐街区 · {city?.name}
+            {t("explore.recommended")} · {city?.name}
           </h2>
           <div key={cityId} className="space-y-4">
             {ranked.map((n, i) => (

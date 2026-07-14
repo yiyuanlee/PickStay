@@ -3,12 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useI18n } from "@/components/I18nProvider";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/client";
 
 export default function LoginForm() {
+  const { t } = useI18n();
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "/dashboard";
@@ -17,7 +19,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(
-    authError === "auth" ? "登录失败，请重试或使用邮箱登录" : null
+    authError === "auth" ? t("auth.authFailed") : null
   );
   const [loading, setLoading] = useState(false);
 
@@ -27,13 +29,13 @@ export default function LoginForm() {
     setError(null);
 
     const supabase = createClient();
-    const { error: authError } = await supabase.auth.signInWithPassword({
+    const { error: loginError } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
-    if (authError) {
-      setError(authError.message);
+    if (loginError) {
+      setError(loginError.message);
       setLoading(false);
       return;
     }
@@ -60,12 +62,12 @@ export default function LoginForm() {
     <main className="flex min-h-screen items-center justify-center px-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>登录 PickStay</CardTitle>
+          <CardTitle>{t("auth.loginTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <Label htmlFor="email">邮箱</Label>
+              <Label htmlFor="email">{t("auth.email")}</Label>
               <Input
                 id="email"
                 type="email"
@@ -75,7 +77,7 @@ export default function LoginForm() {
               />
             </div>
             <div>
-              <Label htmlFor="password">密码</Label>
+              <Label htmlFor="password">{t("auth.password")}</Label>
               <Input
                 id="password"
                 type="password"
@@ -86,24 +88,24 @@ export default function LoginForm() {
             </div>
             {error && <p className="text-sm text-red-500">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "登录中..." : "登录"}
+              {loading ? t("auth.loggingIn") : t("auth.login")}
             </Button>
           </form>
 
           <div className="my-4 flex items-center gap-3">
             <div className="h-px flex-1 bg-black/8" />
-            <span className="text-xs text-apple-text-secondary">或</span>
+            <span className="text-xs text-apple-text-secondary">{t("auth.or")}</span>
             <div className="h-px flex-1 bg-black/8" />
           </div>
 
           <Button variant="secondary" className="w-full" onClick={handleGitHubLogin}>
-            GitHub 登录
+            {t("auth.githubLogin")}
           </Button>
 
           <p className="mt-4 text-center text-sm text-apple-text-secondary">
-            还没有账号？{" "}
+            {t("auth.noAccount")}{" "}
             <Link href="/register" className="text-apple-blue hover:underline">
-              注册
+              {t("auth.register")}
             </Link>
           </p>
         </CardContent>

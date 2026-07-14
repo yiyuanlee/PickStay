@@ -1,6 +1,7 @@
 "use client";
 
-import { DIMENSION_LIST } from "@/lib/dimensions";
+import { useI18n } from "@/components/I18nProvider";
+import { getDimensionList } from "@/lib/dimensions";
 import {
   getLabelPoint,
   getRadarPoints,
@@ -33,6 +34,8 @@ export function ScorePolygon({
   delayMs = 0,
   className,
 }: ScorePolygonProps) {
+  const { locale, t } = useI18n();
+  const dimensionList = getDimensionList(locale);
   const config = POLYGON_SIZES[size];
   const { width, height, radius, labelRadius, fontSize } = config;
   const centerX = width / 2;
@@ -64,7 +67,7 @@ export function ScorePolygon({
         )}
         style={animate ? { animationDelay: `${delayMs}ms` } : undefined}
         role="img"
-        aria-label="七维偏好得分多边形图"
+        aria-label={t("detail.polygonAria")}
       >
         {gridLevels.map((level) => (
           <polygon
@@ -140,7 +143,7 @@ export function ScorePolygon({
         ))}
 
         {shouldShowLabels &&
-          DIMENSION_LIST.map(({ key, shortLabel }, index) => {
+          dimensionList.map(({ key, shortLabel }, index) => {
             const labelPt = getLabelPoint(
               index,
               DIMENSION_KEYS.length,
@@ -163,12 +166,11 @@ export function ScorePolygon({
               </text>
             );
           })}
-
       </svg>
 
       {showLegend && (
         <p className="mt-2 text-center text-[10px] text-[var(--text-muted)]">
-          实线=街区得分 · 虚线=偏好权重
+          {t("detail.polygonLegend")}
         </p>
       )}
     </div>

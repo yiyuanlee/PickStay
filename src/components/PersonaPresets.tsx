@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { PERSONA_LABELS, PERSONA_PRESETS } from "@/lib/recommendation/presets";
+import { useI18n } from "@/components/I18nProvider";
+import { PERSONA_PRESETS } from "@/lib/recommendation/presets";
 import type { PersonaPresetId, Weights } from "@/lib/recommendation/types";
 
 interface PersonaPresetsProps {
@@ -12,6 +13,8 @@ interface PersonaPresetsProps {
 const PRESET_IDS = Object.keys(PERSONA_PRESETS) as PersonaPresetId[];
 
 export function PersonaPresets({ activePreset, onSelect }: PersonaPresetsProps) {
+  const { t } = useI18n();
+
   return (
     <div className="flex flex-wrap gap-2">
       {PRESET_IDS.map((id) => (
@@ -26,7 +29,7 @@ export function PersonaPresets({ activePreset, onSelect }: PersonaPresetsProps) 
               : "bg-[#f5f5f7] text-apple-text-secondary hover:bg-[#e8e8ed] hover:text-apple-text"
           )}
         >
-          {PERSONA_LABELS[id]}
+          {t(`personas.${id}`)}
         </button>
       ))}
     </div>

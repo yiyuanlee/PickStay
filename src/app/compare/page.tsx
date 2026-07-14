@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { CompareEmpty, CompareVisual } from "@/components/CompareVisual";
+import { getServerT } from "@/i18n/server";
 import { getNeighborhoodsByIds } from "@/lib/data";
 import { rankNeighborhoods } from "@/lib/recommendation/engine";
 import { DEFAULT_WEIGHTS } from "@/lib/recommendation/presets";
@@ -9,6 +10,7 @@ interface ComparePageProps {
 }
 
 export default async function ComparePage({ searchParams }: ComparePageProps) {
+  const t = await getServerT();
   const { ids } = await searchParams;
   const idList = ids?.split(",").filter(Boolean) ?? [];
 
@@ -23,7 +25,7 @@ export default async function ComparePage({ searchParams }: ComparePageProps) {
       <Header />
 
       <h2 className="mb-8 font-display text-3xl font-semibold tracking-tight text-apple-text">
-        街区对比
+        {t("compare.title")}
       </h2>
 
       {ranked.length === 0 ? (

@@ -3,12 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useI18n } from "@/components/I18nProvider";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/client";
 
 export default function RegisterPage() {
+  const { t } = useI18n();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,12 +46,12 @@ export default function RegisterPage() {
     <main className="flex min-h-screen items-center justify-center px-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>注册 PickStay</CardTitle>
+          <CardTitle>{t("auth.registerTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleRegister} className="space-y-4">
             <div>
-              <Label htmlFor="displayName">昵称</Label>
+              <Label htmlFor="displayName">{t("auth.nickname")}</Label>
               <Input
                 id="displayName"
                 value={displayName}
@@ -57,7 +59,7 @@ export default function RegisterPage() {
               />
             </div>
             <div>
-              <Label htmlFor="email">邮箱</Label>
+              <Label htmlFor="email">{t("auth.email")}</Label>
               <Input
                 id="email"
                 type="email"
@@ -67,7 +69,7 @@ export default function RegisterPage() {
               />
             </div>
             <div>
-              <Label htmlFor="password">密码</Label>
+              <Label htmlFor="password">{t("auth.password")}</Label>
               <Input
                 id="password"
                 type="password"
@@ -79,14 +81,14 @@ export default function RegisterPage() {
             </div>
             {error && <p className="text-sm text-red-500">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "注册中..." : "注册"}
+              {loading ? t("auth.registering") : t("auth.register")}
             </Button>
           </form>
 
           <p className="mt-4 text-center text-sm text-apple-text-secondary">
-            已有账号？{" "}
+            {t("auth.hasAccount")}{" "}
             <Link href="/login" className="text-apple-blue hover:underline">
-              登录
+              {t("auth.login")}
             </Link>
           </p>
         </CardContent>

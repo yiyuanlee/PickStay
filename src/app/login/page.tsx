@@ -1,9 +1,10 @@
 import { Suspense } from "react";
+import { LoadingFallback } from "@/components/LoadingFallback";
 import LoginForm from "./login-form";
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="flex min-h-screen items-center justify-center text-white/45">加载中...</div>}>
+    <Suspense fallback={<LoadingFallback />}>
       <LoginForm />
     </Suspense>
   );

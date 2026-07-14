@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/components/I18nProvider";
 import type { City } from "@/lib/recommendation/types";
 
 interface CitySelectorProps {
@@ -14,6 +15,8 @@ export function CitySelector({
   selectedCityId,
   onSelect,
 }: CitySelectorProps) {
+  const { t } = useI18n();
+
   return (
     <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4 lg:grid-cols-8">
       {cities.map((city) => (
@@ -32,7 +35,7 @@ export function CitySelector({
             {city.name.split(" ")[0]}
           </div>
           <div className="mt-0.5 text-xs text-apple-text-secondary">
-            {city.neighborhoods.length} 街区
+            {city.neighborhoods.length} {t("citySelector.neighborhoods")}
           </div>
         </button>
       ))}

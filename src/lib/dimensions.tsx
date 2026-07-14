@@ -8,23 +8,30 @@ import {
   Wallet,
   type LucideIcon,
 } from "lucide-react";
+import { getMessages } from "@/i18n/messages";
 import { DIMENSION_KEYS } from "@/lib/recommendation/types";
 import type { DimensionKey } from "@/lib/recommendation/types";
+import type { Locale } from "@/i18n/types";
 
-export const DIMENSION_CONFIG: Record<
-  DimensionKey,
-  { label: string; shortLabel: string; Icon: LucideIcon }
-> = {
-  budget: { label: "预算友好", shortLabel: "预算", Icon: Wallet },
-  safety: { label: "安全环境", shortLabel: "安全", Icon: Shield },
-  transit: { label: "交通便利", shortLabel: "交通", Icon: TrainFront },
-  shopping: { label: "美食购物", shortLabel: "购物", Icon: ShoppingBag },
-  nightlife: { label: "夜生活", shortLabel: "夜生活", Icon: Sparkles },
-  quiet: { label: "安静舒适", shortLabel: "安静", Icon: Volume2 },
-  cafe: { label: "咖啡 Chill", shortLabel: "咖啡", Icon: Coffee },
+const ICONS: Record<DimensionKey, LucideIcon> = {
+  budget: Wallet,
+  safety: Shield,
+  transit: TrainFront,
+  shopping: ShoppingBag,
+  nightlife: Sparkles,
+  quiet: Volume2,
+  cafe: Coffee,
 };
 
-export const DIMENSION_LIST = DIMENSION_KEYS.map((key) => ({
-  key,
-  ...DIMENSION_CONFIG[key],
-}));
+export function getDimensionList(locale: Locale) {
+  const dims = getMessages(locale).dimensions;
+  return DIMENSION_KEYS.map((key) => ({
+    key,
+    label: dims[key].label,
+    shortLabel: dims[key].short,
+    Icon: ICONS[key],
+  }));
+}
+
+/** @deprecated Use getDimensionList(locale) instead */
+export const DIMENSION_LIST = getDimensionList("zh");
