@@ -131,12 +131,26 @@ npm run build         # 生产构建
 ### Vercel
 
 1. 导入 GitHub 仓库到 [vercel.com](https://vercel.com)
-2. 配置环境变量（参考 `.env.example`）
+2. 配置环境变量（参考 [docs/PRODUCTION.md](docs/PRODUCTION.md)）
 3. Deploy
+
+部署后访问 `/api/health` 检查各服务配置状态。
 
 ### Render（备选）
 
 使用 Web Service，确保绑定 `0.0.0.0:$PORT`。
+
+---
+
+## 作品集 / Case Study
+
+完整项目说明见 **[docs/CASE_STUDY.md](docs/CASE_STUDY.md)**（含简历 bullet、架构决策、Demo 录制指南）。
+
+**推荐展示方式：**
+1. README 顶部 Live Demo 链接
+2. 30 秒 GIF：选城市 → 调偏好 → 看多边形变化 → 对比（保存为 `docs/demo.gif`）
+3. 分享链接测试 OG 预览（Twitter Card / Slack unfurl）
+4. 面试时打开 `/api/health` 说明生产配置完整性
 
 ---
 
@@ -168,21 +182,30 @@ PickStay/
 
 ---
 
-## 简历 Bullet Points 模板
+## 简历 Bullet Points
 
-> **PickStay** — 全栈旅行住宿街区推荐平台 | Next.js, TypeScript, Supabase, Redis
->
-> - 设计并实现 7 维加权推荐引擎，支持 8 城 57 街区实时排序与 SVG 雷达图可视化
-> - 构建 Supabase Auth 用户体系，实现偏好云端同步、收藏与对比方案持久化（RLS 行级安全）
-> - 开发服务端 Map API 代理 + Upstash Redis 缓存层，减少 POI 重复查询，API Key 零暴露
-> - 搭建 Admin 后台实现街区数据 CRUD；Vitest + Playwright 测试 + GitHub Actions CI/CD
-> - 部署于 Vercel，Live Demo: [your-url.vercel.app]
+> **PickStay** — 全栈旅行住宿街区推荐平台 | Next.js, TypeScript, Supabase, Redis  
+> **Live Demo:** https://pickstay.vercel.app
+
+- 设计 7 维加权推荐引擎，8 城 57 街区实时排序 + 七边形得分可视化
+- Supabase Auth 用户体系，偏好/收藏/对比云端同步（PostgreSQL + RLS）
+- Map API 服务端代理 + Upstash Redis 缓存，API Key 零暴露，Mock 降级
+- Vitest + Playwright + GitHub Actions CI；Vercel Analytics / Speed Insights 监控
+
+完整中英文版本见 [docs/CASE_STUDY.md](docs/CASE_STUDY.md)。
 
 ---
 
-## 监控（可选）
+## 监控与可观测性
 
-配置 `NEXT_PUBLIC_SENTRY_DSN` 环境变量即可接入 Sentry 错误监控。
+| 能力 | 状态 | 说明 |
+|------|------|------|
+| `/api/health` | ✅ 已内置 | 检查 Supabase / Redis / Maps / Sentry 配置 |
+| Vercel Analytics | ✅ 已集成 | 部署到 Vercel 自动启用 |
+| Speed Insights | ✅ 已集成 | Core Web Vitals |
+| Sentry | 可选 | 设置 `NEXT_PUBLIC_SENTRY_DSN` 后自动初始化 |
+
+生产配置步骤见 [docs/PRODUCTION.md](docs/PRODUCTION.md)。
 
 ---
 
