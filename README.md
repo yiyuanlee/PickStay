@@ -52,7 +52,21 @@ flowchart TB
 - **管理后台** — 城市/街区 CRUD（错误上屏）、POI 缓存清理与预热
 - **Mock 降级** — 无 API Key 时使用本地预置评分，开箱即用
 
-文档：[Case Study](docs/CASE_STUDY.md) · [面试题卡](docs/INTERVIEW_QA.md) · [Demo 脚本](docs/DEMO_SCRIPT.md) · [ADR](docs/adr/)
+文档：[目录结构](docs/STRUCTURE.md) · [Case Study](docs/CASE_STUDY.md) · [面试题卡](docs/INTERVIEW_QA.md) · [Demo 脚本](docs/DEMO_SCRIPT.md) · [ADR](docs/adr/)
+
+### 仓库目录（简图）
+
+```
+src/app + src/components   # 页面与 UI
+src/lib/*                  # 引擎 / Maps / Redis / Supabase / Actions
+src/data                   # 本地 cities.json（无 DB 也可跑）
+supabase/                  # migrations + seed（无 _payloads 临时目录）
+docs/                      # 求职与生产文档
+legacy/                    # v1 静态站归档
+tests/ + fixtures/         # E2E 与排序回归基线
+```
+
+完整说明见 [docs/STRUCTURE.md](docs/STRUCTURE.md)。
 
 ### 覆盖城市 (8 城 57 街区)
 

@@ -8,5 +8,11 @@ playwright-report
 test-results
 coverage
 *.tsbuildinfo
+
+# One-off seed / MCP scratch (do not commit)
+supabase/_exec/
+supabase/_payloads/
+supabase/_*.sql.txt
+supabase/seed-chunks/_tmp_*.sql
 supabase/seed-all.txt
 supabase/seed-chunks/*.json
