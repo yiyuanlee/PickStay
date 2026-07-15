@@ -45,11 +45,14 @@ flowchart TB
 
 ## 核心特性
 
-- **7 维加权推荐引擎** — 8 城 57 街区实时排序，SVG 雷达图可视化
-- **地图 API 服务端代理** — API Key 零暴露，Redis 缓存降低重复调用
+- **7 维加权推荐引擎** — 同城归一化后实时排序，SVG 雷达图 + 匹配驱动解释
+- **偏好深链分享** — `?preset=` / `?w=` 零登录复现排序；Dashboard 一键回流
+- **地图 API 服务端代理** — Key 零暴露，并发池 + 部分失败 + IP 限流 + Redis 24h
 - **用户体系** — 偏好云端同步、收藏、对比方案持久化 (RLS)
-- **管理后台** — 城市/街区 CRUD、POI 缓存管理
+- **管理后台** — 城市/街区 CRUD（错误上屏）、POI 缓存清理与预热
 - **Mock 降级** — 无 API Key 时使用本地预置评分，开箱即用
+
+文档：[Case Study](docs/CASE_STUDY.md) · [面试题卡](docs/INTERVIEW_QA.md) · [Demo 脚本](docs/DEMO_SCRIPT.md) · [ADR](docs/adr/)
 
 ### 覆盖城市 (8 城 57 街区)
 

@@ -1,10 +1,8 @@
 "use server";
 
-import { clearCache } from "@/lib/redis/cache";
-import { getUserProfile } from "@/lib/supabase/server";
+import { clearPoiCache } from "@/lib/actions/admin";
+import type { ActionResult } from "@/lib/actions/types";
 
-export async function clearAllPoiCacheAction(): Promise<void> {
-  const profile = await getUserProfile();
-  if (profile?.role !== "admin") return;
-  await clearCache();
+export async function clearAllPoiCacheAction(): Promise<ActionResult> {
+  return clearPoiCache();
 }

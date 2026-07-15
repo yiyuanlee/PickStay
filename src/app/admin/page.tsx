@@ -1,5 +1,9 @@
 import { redirect } from "next/navigation";
 import { Header } from "@/components/Header";
+import {
+  AdminActionForm,
+  AdminBoundActionForm,
+} from "@/components/AdminActionForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
@@ -10,6 +14,7 @@ import {
   deleteCity,
   deleteNeighborhood,
   upsertCity,
+  warmCityPoiCache,
 } from "@/lib/actions/admin";
 import { clearAllPoiCacheAction } from "@/lib/actions/admin-cache";
 import { getUserProfile } from "@/lib/supabase/server";
@@ -30,12 +35,12 @@ export default async function AdminPage() {
         {t("admin.title")}
       </h2>
 
-      <div className="mb-8 flex gap-3">
-        <form action={clearAllPoiCacheAction}>
+      <div className="mb-8 flex flex-wrap gap-3">
+        <AdminBoundActionForm action={clearAllPoiCacheAction}>
           <Button variant="outline" type="submit">
             {t("admin.clearCache")}
           </Button>
-        </form>
+        </AdminBoundActionForm>
       </div>
 
       <div className="space-y-8">
@@ -45,7 +50,10 @@ export default async function AdminPage() {
               <CardTitle>{city.name}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <form action={upsertCity} className="grid gap-3 sm:grid-cols-3">
+              <AdminActionForm
+                action={upsertCity}
+                className="grid gap-3 sm:grid-cols-3"
+              >
                 <input type="hidden" name="id" value={city.id} />
                 <div>
                   <Label>{t("admin.name")}</Label>
@@ -57,18 +65,36 @@ export default async function AdminPage() {
                 </div>
                 <div>
                   <Label>{t("admin.mapProvider")}</Label>
-                  <Input name="preferred_provider" defaultValue={city.preferredProvider} />
+                  <Input
+                    name="preferred_provider"
+                    defaultValue={city.preferredProvider}
+                  />
                 </div>
                 <input type="hidden" name="center_lat" value={city.center.lat} />
                 <input type="hidden" name="center_lng" value={city.center.lng} />
-                <Button type="submit" size="sm">{t("admin.saveCity")}</Button>
-              </form>
-
-              <form action={deleteCity.bind(null, city.id)}>
-                <Button variant="ghost" size="sm" type="submit" className="text-red-500">
-                  {t("admin.deleteCity")}
+                <Button type="submit" size="sm">
+                  {t("admin.saveCity")}
                 </Button>
-              </form>
+              </AdminActionForm>
+
+              <div className="flex flex-wrap gap-3">
+                <AdminBoundActionForm action={() => deleteCity(city.id)}>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    type="submit"
+                    className="text-red-500"
+                  >
+                    {t("admin.deleteCity")}
+                  </Button>
+                </AdminBoundActionForm>
+
+                <AdminBoundActionForm action={() => warmCityPoiCache(city.id)}>
+                  <Button variant="outline" size="sm" type="submit">
+                    {t("admin.warmCache")}
+                  </Button>
+                </AdminBoundActionForm>
+              </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
@@ -83,17 +109,29 @@ export default async function AdminPage() {
                   </thead>
                   <tbody>
                     {city.neighborhoods.map((n) => (
-                      <tr key={n.id} className="border-b border-black/5 text-apple-text-secondary">
-                        <td className="py-2 font-medium text-apple-text">{n.name}</td>
+                      <tr
+                        key={n.id}
+                        className="border-b border-black/5 text-apple-text-secondary"
+                      >
+                        <td className="py-2 font-medium text-apple-text">
+                          {n.name}
+                        </td>
                         {dimensionList.map((d) => (
                           <td key={d.key}>{n.scores[d.key]}</td>
                         ))}
                         <td>
-                          <form action={deleteNeighborhood.bind(null, n.id)}>
-                            <Button variant="ghost" size="sm" type="submit" className="text-red-500">
+                          <AdminBoundActionForm
+                            action={() => deleteNeighborhood(n.id)}
+                          >
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              type="submit"
+                              className="text-red-500"
+                            >
                               {t("admin.delete")}
                             </Button>
-                          </form>
+                          </AdminBoundActionForm>
                         </td>
                       </tr>
                     ))}

@@ -11,7 +11,15 @@ import {
   getSavedComparisons,
   signOut,
 } from "@/lib/actions/user";
+import { DEFAULT_WEIGHTS } from "@/lib/recommendation/presets";
+import { buildExploreSharePath } from "@/lib/recommendation/share";
+import type { PersonaPresetId, Weights } from "@/lib/recommendation/types";
 import { getUser, getUserProfile } from "@/lib/supabase/server";
+
+function asWeights(raw: unknown): Weights {
+  if (!raw || typeof raw !== "object") return DEFAULT_WEIGHTS;
+  return { ...DEFAULT_WEIGHTS, ...(raw as Partial<Weights>) };
+}
 
 export default async function DashboardPage() {
   const [t, locale] = await Promise.all([getServerT(), getLocale()]);
@@ -28,6 +36,14 @@ export default async function DashboardPage() {
   const favoriteNeighborhoods = favorites.length
     ? await getNeighborhoodsByIds(favorites.map((f) => f.neighborhood_id), locale)
     : [];
+
+  const continueHref = preferences
+    ? buildExploreSharePath(
+        preferences.city_id || "tokyo",
+        asWeights(preferences.weights),
+        (preferences.active_preset as PersonaPresetId | null) ?? null
+      )
+    : "/explore/tokyo";
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
@@ -64,7 +80,7 @@ export default async function DashboardPage() {
                   {t("dashboard.preset")}: {preferences.active_preset || t("dashboard.custom")}
                 </p>
                 <Button variant="outline" size="sm" asChild>
-                  <Link href={`/explore/${preferences.city_id || "tokyo"}`}>
+                  <Link href={continueHref} data-testid="continue-explore">
                     {t("dashboard.continueExplore")}
                   </Link>
                 </Button>

@@ -5,11 +5,12 @@ import { LoadingFallback } from "@/components/LoadingFallback";
 import { ExploreClient } from "@/components/ExploreClient";
 import { getCities, getCity } from "@/lib/data";
 import { getLocale, getServerT } from "@/i18n/server";
+import { parsePresetParam, parseWeightsParam } from "@/lib/recommendation/share";
 import { getUser } from "@/lib/supabase/server";
 
 interface ExplorePageProps {
   params: Promise<{ cityId: string }>;
-  searchParams: Promise<{ preset?: string }>;
+  searchParams: Promise<{ preset?: string; w?: string }>;
 }
 
 export async function generateStaticParams() {
@@ -32,7 +33,7 @@ export default async function ExplorePage({
   searchParams,
 }: ExplorePageProps) {
   const { cityId } = await params;
-  const { preset } = await searchParams;
+  const { preset, w } = await searchParams;
   const locale = await getLocale();
   const [cities, city, user] = await Promise.all([
     getCities(locale),
@@ -42,10 +43,8 @@ export default async function ExplorePage({
 
   if (!city) notFound();
 
-  const validPresets = ["firstTime", "backpacker", "family", "chill", "nightOwl"];
-  const initialPreset = validPresets.includes(preset ?? "")
-    ? (preset as "firstTime" | "backpacker" | "family" | "chill" | "nightOwl")
-    : null;
+  const initialPreset = parsePresetParam(preset);
+  const initialWeights = initialPreset ? null : parseWeightsParam(w);
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
@@ -55,6 +54,7 @@ export default async function ExplorePage({
           cities={cities}
           initialCityId={cityId}
           initialPreset={initialPreset}
+          initialWeights={initialWeights}
           isAuthenticated={!!user}
         />
       </Suspense>

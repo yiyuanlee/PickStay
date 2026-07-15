@@ -112,12 +112,24 @@ Admin 可访问 `/admin` 管理城市与街区数据。
 ## 6. 部署后验证清单
 
 - [ ] 首页加载 8 个城市
-- [ ] `/explore/tokyo` 滑块可改变排序
+- [ ] `/explore/tokyo` 切换人格预设会改变 Top-1（`data-neighborhood-id`）
+- [ ] `/explore/tokyo?w=5,9,7,8,4,9,10` 与 chill 预设排序一致
 - [ ] `/api/health` 返回 `status: ok`
-- [ ] 注册 / 登录成功，跳转 `/dashboard`
+- [ ] 注册 / 登录成功，跳转 `/dashboard`，「继续探索」带权重回流
 - [ ] GitHub OAuth 回调正常（若已配置）
 - [ ] 分享链接 OG 预览正常（Twitter/Slack/微信开发者工具）
 - [ ] `/sitemap.xml` 可访问
+
+### 失败路径手工验证（面试 / 值班）
+
+| 场景 | 操作 | 期望 |
+|------|------|------|
+| 无 Maps Key | 清空 `GOOGLE_*` / `AMAP_*` 后 enrich | UI 提示 Mock；排序仍可用专家分 |
+| Redis 宕机 | 去掉 Upstash env | enrich 仍 200；`meta.cached`≈0、`fresh`/`failed` 增加；日志有 `maps.enrich` |
+| 限流 | 短时间连打 enrich >30 次 | HTTP 429 + `explore.enrichRateLimited` 文案 |
+| Admin 无权限 | 非 admin 调 warm/clear | Action 返回 `Unauthorized`，表单下方红字 |
+
+相关 ADR：`docs/adr/001-maps-server-proxy.md`、`docs/adr/002-scoring-normalization.md`。
 
 ---
 

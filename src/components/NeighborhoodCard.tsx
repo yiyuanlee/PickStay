@@ -6,7 +6,7 @@ import { useI18n } from "@/components/I18nProvider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { buildMapUrl } from "@/lib/recommendation/engine";
-import type { ScoredNeighborhood, Weights } from "@/lib/recommendation/types";
+import type { DimensionKey, ScoredNeighborhood, Weights } from "@/lib/recommendation/types";
 import { cn } from "@/lib/utils";
 
 interface NeighborhoodCardProps {
@@ -25,6 +25,13 @@ function matchBadgeClass(score: number) {
   return "bg-[#f5f5f7] text-apple-text-secondary";
 }
 
+function driverLabel(
+  key: DimensionKey,
+  t: (path: string) => string
+): string {
+  return t(`dimensions.${key}.short`);
+}
+
 export function NeighborhoodCard({
   neighborhood,
   rank,
@@ -37,6 +44,8 @@ export function NeighborhoodCard({
   const { t } = useI18n();
   const mapUrl = buildMapUrl(neighborhood.center, mapProvider);
   const mapLabel = mapProvider === "amap" ? "AMap" : "Google";
+  const drivers = neighborhood.matchDrivers ?? [];
+  const scoreSource = neighborhood.scoreSource ?? "static";
 
   return (
     <Card
@@ -45,6 +54,9 @@ export function NeighborhoodCard({
         isCompared && "ring-2 ring-apple-blue/30"
       )}
       style={{ animationDelay: `${Math.min(rank * 70, 560)}ms` }}
+      data-testid="neighborhood-card"
+      data-neighborhood-id={neighborhood.id}
+      data-rank={rank}
     >
       <CardContent className="p-0">
         <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:gap-6">
@@ -76,6 +88,14 @@ export function NeighborhoodCard({
                   >
                     {t("explore.matchScore")} {neighborhood.matchScore}%
                   </span>
+                  <span
+                    className="rounded-full bg-[#f5f5f7] px-2.5 py-0.5 text-[10px] font-medium text-apple-text-secondary"
+                    data-testid="score-source"
+                  >
+                    {scoreSource === "poi"
+                      ? t("explore.scoreSourcePoi")
+                      : t("explore.scoreSourceStatic")}
+                  </span>
                 </div>
                 <h3 className="text-xl font-semibold tracking-tight text-apple-text">
                   {neighborhood.name}
@@ -85,6 +105,18 @@ export function NeighborhoodCard({
                 </p>
               </div>
             </div>
+
+            {drivers.length > 0 && (
+              <p
+                className="text-sm text-apple-text-secondary"
+                data-testid="match-drivers"
+              >
+                <span className="font-medium text-apple-text">
+                  {t("explore.matchBecause")}{" "}
+                </span>
+                {drivers.map((key) => driverLabel(key, t)).join(" · ")}
+              </p>
+            )}
 
             <p className="text-sm leading-relaxed text-apple-text-secondary">
               <span className="font-medium text-apple-text">
