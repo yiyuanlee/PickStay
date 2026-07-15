@@ -2,6 +2,8 @@
 
 > **全栈旅行住宿街区推荐平台** | Next.js · TypeScript · Supabase · Redis
 
+**语言 / Language:** **中文** | [English](README.en.md)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-teal.svg)](LICENSE)
 
 ## Live Demo

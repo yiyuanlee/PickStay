@@ -4,6 +4,7 @@
 
 ```
 PickStay/
+├── README.md / README.en.md   # 中英 README（顶部可切换语言）
 ├── src/                 # 应用代码（日常开发几乎只改这里）
 ├── tests/               # E2E（Playwright）
 ├── fixtures/            # 离线回归基线（ranking Top-3）
@@ -17,7 +18,7 @@ PickStay/
 ├── next.config.ts       # Next 必需根配置
 ├── tsconfig.json
 ├── postcss.config.mjs   # Tailwind/PostCSS（Next 默认从根读取）
-├── README.md / LICENSE
+├── LICENSE
 └── AGENTS.md / CLAUDE.md  # 指向 docs/AGENTS.md 的薄入口
 ```
 
