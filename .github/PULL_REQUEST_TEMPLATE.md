@@ -37,7 +37,7 @@
 - [ ] 改动最小化（只改必要的文件）
 - [ ] 添加了新城市 / 街区 → 同步更新 `index.html` 的 `.city-card`
 - [ ] 如果改动 `data.js`，坐标使用 `{ lat, lng }` 格式
-- [ ] README / CONTRIBUTING 在必要时同步更新
+- [ ] README / docs/CONTRIBUTING 在必要时同步更新
 
 ## 🔍 备注 / Notes
 

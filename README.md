@@ -57,16 +57,15 @@ flowchart TB
 ### 仓库目录（简图）
 
 ```
-src/app + src/components   # 页面与 UI
-src/lib/*                  # 引擎 / Maps / Redis / Supabase / Actions
-src/data                   # 本地 cities.json（无 DB 也可跑）
-supabase/                  # migrations + seed（无 _payloads 临时目录）
-docs/                      # 求职与生产文档
-legacy/                    # v1 静态站归档
-tests/ + fixtures/         # E2E 与排序回归基线
+src/           # 应用（页面 / 组件 / lib）
+config/        # ESLint · Vitest · Playwright
+docs/          # 结构说明 · 贡献 · Case Study · ADR
+supabase/      # migrations + seed
+tests/         # E2E
+legacy/        # v1 归档
 ```
 
-完整说明见 [docs/STRUCTURE.md](docs/STRUCTURE.md)。
+完整说明见 [docs/STRUCTURE.md](docs/STRUCTURE.md)。贡献见 [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)。
 
 ### 覆盖城市 (8 城 57 街区)
 

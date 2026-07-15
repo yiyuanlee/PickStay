@@ -4,16 +4,25 @@
 
 ```
 PickStay/
-├── src/                     # 应用代码（日常开发几乎只改这里）
-├── tests/                   # E2E（Playwright）
-├── fixtures/                # 离线回归基线（ranking Top-3）
-├── supabase/                # Schema + 正式 seed（无临时垃圾）
-├── scripts/                 # 数据提取 / 排序回归
-├── docs/                    # 产品与面试文档
-├── legacy/                  # v1 静态站归档（只读参考）
-├── public/                  # 静态资源
-└── …配置文件（Next / ESLint / Vitest / Playwright / Vercel）
+├── src/                 # 应用代码（日常开发几乎只改这里）
+├── tests/               # E2E（Playwright）
+├── fixtures/            # 离线回归基线（ranking Top-3）
+├── supabase/            # Schema + 正式 seed
+├── scripts/             # 数据提取 / 排序回归
+├── docs/                # 产品、贡献、面试与 ADR
+├── config/              # ESLint / Vitest / Playwright（不堆在根目录）
+├── legacy/              # v1 静态站归档（只读参考）
+├── public/              # 静态资源
+├── package.json         # 依赖与 npm scripts
+├── next.config.ts       # Next 必需根配置
+├── tsconfig.json
+├── postcss.config.mjs   # Tailwind/PostCSS（Next 默认从根读取）
+├── README.md / LICENSE
+└── AGENTS.md / CLAUDE.md  # 指向 docs/AGENTS.md 的薄入口
 ```
+
+**根目录刻意保留的：** Next / TypeScript / PostCSS / npm 清单（工具约定必须在根）。
+**已收进子目录的：** 测试与 lint 配置 → `config/`；贡献与长文档 → `docs/`。
 
 ---
 
@@ -38,48 +47,51 @@ PickStay/
 
 ---
 
-## `supabase/` — 数据库（已清理）
+## `config/` — 工具配置
 
-正式保留：
-
-```
-supabase/
-├── migrations/001_initial_schema.sql   # Schema + RLS
-├── seed.sql                            # 一键全量 seed
-└── seed-chunks/*.sql                     # 按城拆分（SQL Editor / MCP 分批执行）
-```
-
-**已删除、不要再提交：**
-
-- `_exec/`、`_payloads/` — 一次性 MCP/导入残骸（曾占约 15MB）
-- `_*.sql.txt`、`seed-chunks/_tmp_*.sql` — 临时导出
-
-`.gitignore` 已忽略 `supabase/_exec/`、`supabase/_payloads/`、`supabase/_*.sql.txt`。
+| 文件 | 对应脚本 |
+|------|----------|
+| `eslint.config.mjs` | `npm run lint` |
+| `vitest.config.ts` | `npm run test` |
+| `playwright.config.ts` | `npm run test:e2e` |
 
 ---
 
-## `docs/` — 求职与运维
+## `supabase/` — 数据库
+
+```
+supabase/
+├── migrations/001_initial_schema.sql
+├── seed.sql
+└── seed-chunks/*.sql
+```
+
+临时 `_payloads/` / `_exec/` 已删除且被 `.gitignore` 忽略。
+
+---
+
+## `docs/` — 文档
 
 | 文件 | 用途 |
 |------|------|
-| `CASE_STUDY.md` | 作品集一页纸 + 简历 bullet |
-| `INTERVIEW_QA.md` | 面试口述题卡 |
-| `DEMO_SCRIPT.md` | 90 秒 Demo 脚本 |
-| `PRODUCTION.md` | 环境变量与上线检查 |
-| `adr/` | 架构决策记录 |
+| `STRUCTURE.md` | 本文件 |
+| `CONTRIBUTING.md` | 贡献指南（根目录不再堆全文） |
+| `CASE_STUDY.md` | 作品集一页纸 |
+| `INTERVIEW_QA.md` / `DEMO_SCRIPT.md` | 面试口述 |
+| `PRODUCTION.md` | 上线检查 |
+| `AGENTS.md` | Agent 说明（CLAUDE.md / AGENTS.md 入口指向这里） |
+| `adr/` | 架构决策 |
 
 ---
 
 ## `legacy/` / `scripts/` / `fixtures/`
 
-- **`legacy/`** — GitHub Pages v1；行为用 Vitest 快照锁在引擎测试里，一般不用改
-- **`scripts/extract-legacy-data.mjs`** — 从数据源再生 seed
-- **`scripts/ranking-regression.mts`** — `npm run test:ranking`
-- **`scripts/seed-remote-chunks.mjs`** — 提示按城执行 seed-chunks
-- **`fixtures/ranking-baseline.json`** — 归一化排序 Top-3 基线
+- **`legacy/`** — GitHub Pages v1
+- **`scripts/`** — seed 提取、排序回归
+- **`fixtures/ranking-baseline.json`** — Top-3 基线
 
 ---
 
 ## 刻意不做的事
 
-没有把 `src/` 拆成 `features/*` 或 monorepo：当前规模单层 `lib` + `app` 更易讲清。等模块再涨一倍再考虑按领域切开。
+没有强行把 `next.config.ts` / `postcss.config.mjs` 塞进 `config/`（Next 默认从仓库根解析）。也没有把 `src/` 拆成 monorepo——当前规模单层 `lib` + `app` 更清晰。
