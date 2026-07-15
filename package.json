@@ -11,6 +11,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:ranking": "tsx scripts/ranking-regression.mts",
     "seed:extract": "node scripts/extract-legacy-data.mjs",
     "seed:sql": "node scripts/extract-legacy-data.mjs"
   },

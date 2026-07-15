@@ -41,9 +41,20 @@ export interface Neighborhood {
   detailText: string;
 }
 
+export type ScoreSource = "static" | "poi";
+
 export interface ScoredNeighborhood extends Neighborhood {
   computedScores: Scores;
   matchScore: number;
+  /** Top dimensions driving the match score (for UI explanation). */
+  matchDrivers?: DimensionKey[];
+  /** Whether cafe/transit/shopping came from live POI enrichment. */
+  scoreSource?: ScoreSource;
+}
+
+export interface RankOptions {
+  /** When true (default), min-max normalize scores within the city first. */
+  normalize?: boolean;
 }
 
 export interface City {

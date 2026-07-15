@@ -59,11 +59,12 @@ export async function toggleFavorite(neighborhoodId: string) {
     .single();
 
   if (existing) {
-    await supabase
+    const { error } = await supabase
       .from("favorites")
       .delete()
       .eq("user_id", user.id)
       .eq("neighborhood_id", neighborhoodId);
+    if (error) return { error: error.message };
     revalidatePath("/dashboard");
     return { favorited: false };
   }

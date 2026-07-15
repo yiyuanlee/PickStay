@@ -1,0 +1,218 @@
+{
+  "tokyo": {
+    "firstTime": [
+      "ginza",
+      "shimokitazawa",
+      "nakameguro"
+    ],
+    "backpacker": [
+      "shimokitazawa",
+      "koenji",
+      "shibuya"
+    ],
+    "family": [
+      "nakameguro",
+      "ginza",
+      "shimokitazawa"
+    ],
+    "chill": [
+      "nakameguro",
+      "shimokitazawa",
+      "ginza"
+    ],
+    "nightOwl": [
+      "shibuya",
+      "shimokitazawa",
+      "koenji"
+    ]
+  },
+  "beijing": {
+    "firstTime": [
+      "wangfujing",
+      "guomao",
+      "sanlitun"
+    ],
+    "backpacker": [
+      "wangfujing",
+      "guomao",
+      "sanlitun"
+    ],
+    "family": [
+      "wangfujing",
+      "guomao",
+      "qianmen"
+    ],
+    "chill": [
+      "wangfujing",
+      "guomao",
+      "sanlitun"
+    ],
+    "nightOwl": [
+      "guomao",
+      "sanlitun",
+      "wangfujing"
+    ]
+  },
+  "paris": {
+    "firstTime": [
+      "stgermain",
+      "marais",
+      "champs"
+    ],
+    "backpacker": [
+      "marais",
+      "stgermain",
+      "latinquarter"
+    ],
+    "family": [
+      "stgermain",
+      "marais",
+      "latinquarter"
+    ],
+    "chill": [
+      "stgermain",
+      "marais",
+      "latinquarter"
+    ],
+    "nightOwl": [
+      "marais",
+      "stgermain",
+      "canal"
+    ]
+  },
+  "melbourne": {
+    "firstTime": [
+      "cbd",
+      "carlton",
+      "southyarra"
+    ],
+    "backpacker": [
+      "brunswick",
+      "cbd",
+      "fitzroy"
+    ],
+    "family": [
+      "carlton",
+      "southyarra",
+      "fitzroy"
+    ],
+    "chill": [
+      "carlton",
+      "fitzroy",
+      "southyarra"
+    ],
+    "nightOwl": [
+      "cbd",
+      "fitzroy",
+      "brunswick"
+    ]
+  },
+  "queenstown": {
+    "firstTime": [
+      "arrowtown",
+      "queenstown-central",
+      "frankton"
+    ],
+    "backpacker": [
+      "arrowtown",
+      "queenstown-central",
+      "frankton"
+    ],
+    "family": [
+      "arrowtown",
+      "fernhill",
+      "kelvin-heights"
+    ],
+    "chill": [
+      "arrowtown",
+      "queenstown-central",
+      "fernhill"
+    ],
+    "nightOwl": [
+      "queenstown-central",
+      "arrowtown",
+      "frankton"
+    ]
+  },
+  "sydney": {
+    "firstTime": [
+      "paddington",
+      "surry-hills",
+      "newtown"
+    ],
+    "backpacker": [
+      "newtown",
+      "surry-hills",
+      "paddington"
+    ],
+    "family": [
+      "paddington",
+      "surry-hills",
+      "newtown"
+    ],
+    "chill": [
+      "paddington",
+      "surry-hills",
+      "newtown"
+    ],
+    "nightOwl": [
+      "surry-hills",
+      "newtown",
+      "paddington"
+    ]
+  },
+  "guangzhou": {
+    "firstTime": [
+      "zhujiang-new-town",
+      "tianhe",
+      "beijing-road"
+    ],
+    "backpacker": [
+      "zhujiang-new-town",
+      "tianhe",
+      "beijing-road"
+    ],
+    "family": [
+      "zhujiang-new-town",
+      "dongshankou",
+      "shamian-liwan"
+    ],
+    "chill": [
+      "zhujiang-new-town",
+      "dongshankou",
+      "tianhe"
+    ],
+    "nightOwl": [
+      "zhujiang-new-town",
+      "tianhe",
+      "beijing-road"
+    ]
+  },
+  "osaka": {
+    "firstTime": [
+      "umeda",
+      "shinsaibashi",
+      "namba"
+    ],
+    "backpacker": [
+      "umeda",
+      "namba",
+      "amerikamura"
+    ],
+    "family": [
+      "umeda",
+      "amerikamura",
+      "tennoji"
+    ],
+    "chill": [
+      "umeda",
+      "amerikamura",
+      "shinsaibashi"
+    ],
+    "nightOwl": [
+      "umeda",
+      "namba",
+      "amerikamura"
+    ]
+  }
+}

@@ -11,7 +11,7 @@ interface PreferenceSlidersProps {
 }
 
 export function PreferenceSliders({ weights, onChange }: PreferenceSlidersProps) {
-  const { locale, t } = useI18n();
+  const { locale } = useI18n();
   const dimensionList = getDimensionList(locale);
 
   return (
@@ -32,6 +32,7 @@ export function PreferenceSliders({ weights, onChange }: PreferenceSlidersProps)
             min={0}
             max={10}
             step={1}
+            data-testid={`weight-slider-${key}`}
             onValueChange={([val]) =>
               onChange({ ...weights, [key]: val })
             }

@@ -62,10 +62,17 @@ export type Messages = {
     recommended: string;
     enriching: string;
     enrichDone: string;
+    enrichDoneMeta: string;
     enrichMock: string;
     enrichFailed: string;
+    enrichRateLimited: string;
     polygonCaption: string;
     matchScore: string;
+    matchBecause: string;
+    scoreSourcePoi: string;
+    scoreSourceStatic: string;
+    sharePreferences: string;
+    shareCopied: string;
     advantages: string;
     added: string;
     addCompare: string;
@@ -133,6 +140,7 @@ export type Messages = {
   admin: {
     title: string;
     clearCache: string;
+    warmCache: string;
     saveCity: string;
     deleteCity: string;
     delete: string;

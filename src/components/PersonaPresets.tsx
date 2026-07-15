@@ -21,6 +21,7 @@ export function PersonaPresets({ activePreset, onSelect }: PersonaPresetsProps) 
         <button
           key={id}
           type="button"
+          data-testid={`persona-${id}`}
           onClick={() => onSelect(id, PERSONA_PRESETS[id])}
           className={cn(
             "rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-300 active:scale-[0.97]",

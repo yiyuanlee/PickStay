@@ -28,6 +28,9 @@ jobs:
       - name: Unit tests
         run: npm run test
 
+      - name: Ranking regression
+        run: npm run test:ranking
+
       - name: Build
         run: npm run build
 
